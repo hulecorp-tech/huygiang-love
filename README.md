@@ -8,8 +8,8 @@ và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-invitat
 | Đường dẫn | Nội dung |
 |---|---|
 | `/` | thiệp chính |
-| `/nhatrai` | thiệp cho khách nhà trai — chỉ Lễ Thành Hôn |
-| `/nhagai` | thiệp cho khách nhà gái — chỉ Lễ Vu Quy |
+| `/nhatrai` | bản cho khách nhà trai |
+| `/nhagai` | bản cho khách nhà gái |
 | `/ae` | thiệp riêng nhóm bạn thân |
 | `/hong` | bản màu hồng |
 | `/tao-link.html` | công cụ tạo link mời riêng từng khách |

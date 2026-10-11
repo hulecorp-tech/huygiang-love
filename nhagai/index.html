@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="vi">
+<!-- ===== BẢN DÀNH CHO KHÁCH NHÀ GÁI ===== -->
 <head>
   <meta charset="utf-8">
   <title>Ngọc Huy & Hương Giang</title>
@@ -472,8 +473,6 @@
       .giftbtn.opening .gbody,.giftdlg[open],.giftdlg[open]::backdrop{animation:none;}
       .giftbtn:hover{transform:none;}
     }
-    /* chỉ còn một buổi lễ -> thu thẻ lại cho khỏi trống trải */
-    .cards.one{max-width:min(420px,100%);margin-inline:auto;}
   </style>
 </head>
 <body>
@@ -736,12 +735,24 @@
   <section id="events">
     <div class="eyebrow reveal">Trân trọng kính mời</div>
     <h2 class="h-serif reveal d1">Sự Kiện Cưới</h2>
-    <p class="lead reveal d1">Chúng mình hân hạnh được đón tiếp bạn tại tư gia nhà gái.</p>
-    <div class="cards one">
-<div class="card reveal d2">
+    <p class="lead reveal d1">Chúng mình hân hạnh được đón tiếp bạn trong hai buổi lễ dưới đây.</p>
+    <div class="cards">
+      <div class="card reveal d1">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" stroke-linejoin="round"/></svg>
+        <h3>Lễ Thành Hôn</h3>
+        <div class="when">9:00 sáng · Chủ Nhật, 29.11.2026</div>
+        <div class="rule"></div>
+        <div class="where">Tư gia nhà trai</div>
+        <div class="addr">Thôn An Lập (Năng An cũ), Xã Thư Vũ, Tỉnh Thái Bình</div>
+        <a class="btn" data-map="groom" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          Chỉ đường
+        </a>
+      </div>
+      <div class="card reveal d2">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><path d="M5 11h14l-1 9H6l-1-9Z" stroke-linejoin="round"/><path d="M9 15h6"/></svg>
         <h3>Lễ Vu Quy</h3>
-        <div class="when">6:30 sáng · Chủ Nhật, 29.11.2026</div>
+        <div class="when">15:00 · Chủ Nhật, 29.11.2026</div>
         <div class="rule"></div>
         <div class="where">Tư gia nhà gái</div>
         <div class="addr">62 Nguyễn Xiển, Thanh Xuân, Hà Nội</div>
@@ -758,10 +769,13 @@
     <div class="eyebrow reveal">Chương trình</div>
     <h2 class="h-script reveal d1">Trong ngày trọng đại</h2>
     <div class="program reveal d1">
+      <div class="prow"><span class="t">04:15</span><span class="a">Đoàn nhà trai khởi hành đón dâu</span></div>
       <div class="prow"><span class="t">06:15</span><span class="a">Đoàn nhà trai tới nhà gái</span></div>
       <div class="prow"><span class="t">06:30</span><span class="a">Lễ ăn hỏi &middot; trao tráp</span></div>
       <div class="prow"><span class="t">07:15</span><span class="a">Lễ xin dâu</span></div>
       <div class="prow"><span class="t">07:45</span><span class="a">Khởi hành rước dâu về Thái Bình</span></div>
+      <div class="prow"><span class="t">10:30</span><span class="a">Nghi lễ gia tiên tại nhà trai</span></div>
+      <div class="prow"><span class="t">11:00</span><span class="a">Tiệc thân mật</span></div>
     </div>
     <svg class="sprig reveal"><use href="#sprig-h"/></svg>
   </section>
@@ -976,8 +990,8 @@ const XUNGHO = {
   than:    { goi:"cậu",      tu:"bọn tớ",     moi:"Nhất định phải có mặt nhé",
     cau:{
       "Trân trọng kính mời": "Thân gửi",
-      "Chúng mình hân hạnh được đón tiếp bạn tại tư gia nhà gái.":
-        "Chúng mình mong được đón bạn ở tư gia nhà gái.",
+      "Chúng mình hân hạnh được đón tiếp bạn trong hai buổi lễ dưới đây.":
+        "Chúng mình mong được đón bạn ở cả hai buổi lễ dưới đây.",
       "Bạn sẽ đến chứ?": "Bạn đến nhé?",
       "Sự hiện diện của bạn là niềm vinh hạnh lớn lao của chúng mình. Bạn xác nhận giúp chúng mình một tiếng nhé!":
         "Có bạn ở đó thì chúng mình vui lắm. Bạn nhắn cho chúng mình một tiếng nhé!",
