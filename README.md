@@ -5,13 +5,18 @@ Thiệp cưới Ngọc Huy & Hương Giang — 29.11.2026.
 Trang tĩnh, chạy trên GitHub Pages. Mã nguồn đầy đủ (gồm các bản màu khác
 và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-invitation`.
 
-| Đường dẫn | Nội dung |
-|---|---|
-| `/` | thiệp chính |
-| `/nhatrai` | bản cho khách nhà trai |
-| `/nhagai` | bản cho khách nhà gái |
-| `/ae` | thiệp riêng nhóm bạn thân |
-| `/hong` | bản màu hồng |
-| `/tao-link.html` | công cụ tạo link mời riêng từng khách |
+| Đường dẫn | Nội dung | Xác nhận ghi vào tab |
+|---|---|---|
+| `/` | thiệp chính | RSVP |
+| `/nhatrai` | bản cho khách nhà trai | Nhà trai |
+| `/nhagai` | bản cho khách nhà gái | Nhà gái |
+| `/ng` | bản chữ to cho người lớn tuổi nhà gái | Nhà gái |
+| `/ae` | thiệp riêng nhóm bạn thân | RSVP |
+| `/hong` | bản màu hồng | RSVP |
+
+Công cụ tạo link mời riêng từng khách nằm trong từng bản:
+`/tao-link.html`, `/nhatrai/tao-link.html`, `/nhagai/tao-link.html`,
+`/ng/tao-link.html` — bốn file giống hệt nhau, tự nhận ra mình đang ở bản
+nào theo tên thư mục.
 
 Thiệp nhận tham số `?g=<tên khách>` và `?x=<mức xưng hô>`.

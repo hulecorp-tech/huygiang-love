@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Tạo link thiệp mời riêng</title>
+<style>
+  :root{
+    --paper:#fdf7f4; --card:#fff; --ink:#4a3548; --body:#5b4a56;
+    --line:#ecdcd6; --rose:#9a4f6b; --rose-soft:#f7e6e6; --gold:#8f6a28;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:clamp(16px,4vw,36px);
+    background:var(--paper);color:var(--body);
+    font:16px/1.55 "Cormorant Garamond",Georgia,serif;
+  }
+  .wrap{max-width:900px;margin:0 auto}
+  h1{
+    margin:0 0 .15em;font-size:clamp(24px,5.5vw,34px);font-weight:600;
+    color:var(--ink);letter-spacing:.01em;
+  }
+  .sub{margin:0 0 1.6em;font-size:clamp(14px,3.4vw,17px)}
+  .eyebrow{
+    font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);text-indent:.34em;margin-bottom:.5em;
+  }
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:clamp(14px,3.4vw,22px);margin-bottom:18px;
+  }
+  label{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+        color:var(--rose);margin-bottom:.5em}
+  select{
+    font:inherit;font-size:15px;padding:.42em .6em;border-radius:8px;
+    border:1px solid var(--line);background:#fffdfc;color:var(--ink);cursor:pointer;
+  }
+  select:focus{outline:2px solid var(--rose-soft);border-color:var(--rose)}
+  .row label{margin:0;font-size:12px}
+  input,textarea{
+    width:100%;padding:.7em .85em;border:1px solid var(--line);border-radius:9px;
+    background:#fffdfc;color:var(--ink);font-family:inherit;font-size:16px;
+  }
+  input:focus,textarea:focus{outline:2px solid var(--rose-soft);border-color:var(--rose)}
+  textarea{min-height:190px;resize:vertical;line-height:1.7}
+  .hint{font-size:13.5px;color:#8a7680;margin-top:.55em}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+  button{
+    font:inherit;font-size:15px;cursor:pointer;border-radius:999px;
+    padding:.6em 1.25em;border:1px solid var(--rose);
+    background:#fff;color:var(--rose);transition:.16s;
+  }
+  button:hover{background:var(--rose);color:#fff}
+  button.solid{background:var(--rose);color:#fff}
+  button.solid:hover{filter:brightness(1.12)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .count{margin-left:auto;font-size:14px;color:#8a7680}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{text-align:left;padding:.62em .6em;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);font-weight:600}
+  td.nm{white-space:nowrap;color:var(--ink)}
+  td select{max-width:190px}
+  td.lk{word-break:break-all;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+  td.ac{white-space:nowrap;text-align:right}
+  td.ac button{padding:.34em .8em;font-size:13px}
+  .scroll{max-height:46vh;overflow:auto;margin-top:6px}
+  .empty{padding:2em 0;text-align:center;color:#a2909a;font-style:italic}
+  .toast{
+    position:fixed;left:50%;bottom:26px;translate:-50% 0;
+    background:var(--ink);color:#fff;padding:.7em 1.3em;border-radius:999px;
+    font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .22s;
+  }
+  .toast.on{opacity:.96}
+  .ban{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1.1em}
+  .ban a{
+    font-size:14.5px;text-decoration:none;color:var(--rose);border:1px solid var(--line);
+    background:var(--card);border-radius:999px;padding:.38em 1em;
+  }
+  .ban a:hover{border-color:var(--rose)}
+  .ban a[aria-current]{background:var(--rose);border-color:var(--rose);color:#fff}
+  .dich{
+    background:var(--rose-soft);border-radius:10px;padding:.6em .9em;margin:0 0 1.6em;
+    color:var(--ink);font-size:clamp(14.5px,3.5vw,16.5px)
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Ngọc Huy &amp; Hương Giang</div>
+  <h1 id="tieude">Tạo link thiệp mời riêng</h1>
+  <nav class="ban" id="ban" aria-label="Chọn bản thiệp" hidden></nav>
+  <p class="dich" id="dich" hidden></p>
+  <p class="sub">
+    Dán danh sách khách vào ô bên dưới, mỗi người một dòng. Mỗi người sẽ có một
+    link riêng — mở ra thiệp có tên họ trên bìa và tên được điền sẵn vào ô xác nhận.
+  </p>
+
+  <div class="card">
+    <label for="base">Địa chỉ thiệp</label>
+    <input id="base" type="text" value="https://huygiang.love" spellcheck="false">
+    <p class="hint">Tự lấy theo bản đang chọn ở trên. Muốn link tới bản hồng thì sửa thành <code>https://huygiang.love/hong</code>.</p>
+  </div>
+
+  <div class="card">
+    <label for="names">Danh sách khách — mỗi người một dòng</label>
+    <textarea id="names" spellcheck="false" placeholder="Ông bà Nguyễn Văn Bảy
+Bác Trần Thu Hà
+Anh Nguyễn Văn An
+Gia đình chú Minh
+Linh"></textarea>
+    <p class="hint">
+      Nên ghi cả cách xưng hô (Anh / Chị / Cô / Bác / Ông bà / Gia đình…) vì phần này
+      hiện nguyên văn trên thiệp — và công cụ cũng dựa vào đó để đoán mức xưng hô.
+      Dòng trống và tên trùng sẽ được bỏ qua.
+    </p>
+    <div class="row" style="margin-bottom:2px">
+      <label for="dfXh" style="margin:0 .4em 0 0">Mặc định khi không đoán được</label>
+      <select id="dfXh"></select>
+    </div>
+    <div class="row">
+      <button class="solid" id="copyAll">Chép tất cả (tên + xưng hô + link)</button>
+      <button id="csv">Tải file CSV</button>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Khách mời</th><th>Xưng hô</th><th>Link riêng</th><th></th></tr></thead>
+        <tbody id="out"></tbody>
+      </table>
+      <div class="empty" id="empty">Chưa có tên nào — dán danh sách vào ô phía trên.</div>
+    </div>
+  </div>
+
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const baseEl = $("#base"), namesEl = $("#names"), outEl = $("#out"),
+      emptyEl = $("#empty"), countEl = $("#count"), toastEl = $("#toast"),
+      dfEl = $("#dfXh");
+
+let rows = [];
+
+/* Phải khớp bảng XUNGHO trong thiệp. Nhãn ở đây là để người dùng chọn. */
+const XH = [
+  ["ban",     "Bạn bè ngang tuổi",      "gọi “bạn” · xưng “chúng mình”"],
+  ["than",    "Bạn thân, anh em thân",  "gọi “cậu” · xưng “bọn tớ” · lời văn thân mật"],
+  ["anhchi",  "Anh chị lớn hơn ít",     "gọi “anh chị” · xưng “chúng em”"],
+  ["cochu",   "Cô chú, bác",            "gọi “cô chú” · xưng “chúng cháu”"],
+  ["ongba",   "Ông bà, bậc cao niên",   "gọi “ông bà” · xưng “chúng cháu”"],
+  ["giadinh", "Cả gia đình",            "gọi “gia đình” · xưng “chúng cháu”"],
+  ["quyvi",   "Trang trọng chung",      "gọi “quý vị” · xưng “chúng tôi”"],
+];
+const nhan = Object.fromEntries(XH.map(([k, l]) => [k, l]));
+
+/* Đoán mức xưng hô từ chữ mở đầu của tên. Đoán sai thì sửa ở ô bên cạnh. */
+function doan(name){
+  const t = " " + name.toLowerCase().trim() + " ";
+  if(/^\s*(gia đình|vợ chồng|hai bác|nhà |cả nhà)/.test(t)) return "giadinh";
+  if(/^\s*(ông|bà|cụ)\b/.test(t))                          return "ongba";
+  if(/^\s*(cô|chú|bác|dì|cậu|mợ|thím|dượng|thầy)\b/.test(t))return "cochu";
+  if(/^\s*(anh|chị)\b/.test(t))                            return "anhchi";
+  return "";                                               // để rơi về mặc định
+}
+
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add("on");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toastEl.classList.remove("on"), 1800);
+}
+
+/* Mã hoá gọn: dấu cách thành "+", chữ tiếng Việt để nguyên cho link ngắn và
+   đọc được. Chỉ giải mã lại các chuỗi UTF-8 nhiều byte (byte dẫn C0-FF kèm
+   byte nối 80-BF) — nhờ vậy %26 (&), %23 (#), %25 (%), %2B (+) vẫn được
+   giữ mã hoá, không thì tên có mấy ký tự đó sẽ làm gãy link. */
+function enc(s){
+  return encodeURIComponent(s)
+    .replace(/%20/g, "+")
+    .replace(/%[C-F][0-9A-F](?:%[89AB][0-9A-F])+/gi, m => decodeURIComponent(m));
+}
+
+function linkFor(name, xh){
+  const base = baseEl.value.trim().replace(/[?&#].*$/, "").replace(/\/+$/, "");
+  let u = base + "?g=" + enc(name);
+  // Trùng xưng hô mặc định của bản đó thì khỏi ghi &x= cho link gọn
+  // (bản thường mặc định "ban", bản chữ to /ng mặc định "cochu").
+  const k = (base.match(/\/([^\/]+)$/) || [])[1] || "";
+  const macDinh = Object.prototype.hasOwnProperty.call(BAN, k) ? BAN[k].xh : "ban";
+  if(xh && xh !== macDinh) u += "&x=" + xh;
+  return u;
+}
+
+function selectXH(value, onChange){
+  const s = document.createElement("select");
+  for(const [k, l, mo] of XH){
+    const o = document.createElement("option");
+    o.value = k; o.textContent = l; o.title = mo;
+    s.appendChild(o);
+  }
+  s.value = value;
+  if(onChange) s.addEventListener("change", () => onChange(s.value));
+  return s;
+}
+
+function build(){
+  const seen = new Set();
+  const df = dfEl.value;
+  rows = namesEl.value.split("\n")
+    .map(s => s.replace(/\s+/g, " ").trim())
+    .filter(s => {
+      if(!s) return false;
+      const k = s.toLowerCase();
+      if(seen.has(k)) return false;      // bỏ tên trùng
+      seen.add(k);
+      return true;
+    })
+    .map(name => {
+      const xh = doan(name) || df;
+      return { name, xh, url: linkFor(name, xh) };
+    });
+
+  outEl.textContent = "";
+  for(const r of rows){
+    const tr = document.createElement("tr");
+
+    const td1 = document.createElement("td"); td1.className = "nm"; td1.textContent = r.name;
+
+    const td2 = document.createElement("td");
+    const tdUrl = document.createElement("td"); tdUrl.className = "lk"; tdUrl.textContent = r.url;
+    td2.appendChild(selectXH(r.xh, v => {           // đổi tay thì link cập nhật ngay
+      r.xh = v; r.url = linkFor(r.name, v); tdUrl.textContent = r.url;
+    }));
+
+    const td4 = document.createElement("td"); td4.className = "ac";
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = "Chép";
+    b.addEventListener("click", () => copy(r.url, "Đã chép link của " + r.name));
+    td4.appendChild(b);
+
+    tr.append(td1, td2, tdUrl, td4);
+    outEl.appendChild(tr);
+  }
+  emptyEl.hidden = rows.length > 0;
+  countEl.textContent = rows.length ? rows.length + " khách" : "";
+  $("#copyAll").disabled = $("#csv").disabled = rows.length === 0;
+}
+
+async function copy(text, msg){
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(e){
+    // clipboard API cần HTTPS; mở bằng file:// thì rơi vào nhánh này
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); }catch(_){ toast("Trình duyệt không cho chép tự động"); ta.remove(); return; }
+    ta.remove();
+  }
+  toast(msg);
+}
+
+$("#copyAll").addEventListener("click", () => {
+  // ngăn cách bằng Tab -> dán thẳng vào Google Sheet ra đúng 3 cột
+  copy(rows.map(r => r.name + "\t" + nhan[r.xh] + "\t" + r.url).join("\n"),
+       "Đã chép " + rows.length + " dòng — dán thẳng vào Google Sheet được");
+});
+
+$("#csv").addEventListener("click", () => {
+  const esc = v => '"' + String(v).replace(/"/g, '""') + '"';
+  const csv = "﻿" + ["Khách mời,Xưng hô,Link riêng"]   // BOM để Excel đọc đúng tiếng Việt
+    .concat(rows.map(r => [r.name, nhan[r.xh], r.url].map(esc).join(","))).join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"}));
+  a.download = "link-thiep-" + (BAN_NAY || "chung") + ".csv";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  toast("Đã tải " + rows.length + " link");
+});
+
+dfEl.appendChild(document.createDocumentFragment());
+for(const [k, l] of XH){
+  const o = document.createElement("option");
+  o.value = k; o.textContent = l; dfEl.appendChild(o);
+}
+dfEl.value = "ban";
+
+/* Cùng một file này được đặt ở gốc trang và trong từng thư mục nhatrai/,
+   nhagai/, ng/. Nó nhìn tên thư mục đang chứa mình để biết đang tạo link
+   cho bản nào — link trỏ về đúng thư mục đó, và vì trang thiệp ở đó tự gửi
+   kèm CONFIG.ben nên xác nhận của khách rơi đúng tab trong Google Sheet.
+   Thêm bản mới thì thêm một dòng vào đây rồi chép file này vào thư mục ấy. */
+const BAN = {
+  "":      { ten:"Thiệp chung",         tab:"RSVP",     xh:"ban"   },
+  nhatrai: { ten:"Khách nhà trai",      tab:"Nhà trai", xh:"ban"   },
+  nhagai:  { ten:"Khách nhà gái",       tab:"Nhà gái",  xh:"ban"   },
+  ng:      { ten:"Nhà gái · chữ to",    tab:"Nhà gái",  xh:"cochu" },
+};
+const _thuMuc = (location.pathname.match(/\/([^\/]+)\/[^\/]*$/) || [])[1] || "";
+const BAN_NAY = Object.prototype.hasOwnProperty.call(BAN, _thuMuc) ? _thuMuc : "";
+
+/* Lấy luôn địa chỉ đang mở làm mặc định, nhờ vậy đổi tên miền thì công cụ
+   tự đúng theo, không phải sửa lại. Mở bằng file:// thì giữ giá trị mẫu. */
+if(location.protocol === "http:" || location.protocol === "https:"){
+  baseEl.value = location.origin + location.pathname.replace(/\/[^\/]*$/, "");
+
+  // Thanh chọn bản: gốc trang = đường dẫn hiện tại bỏ "<thư mục>/tao-link.html"
+  const goc = location.pathname.replace(/[^\/]*$/, "")
+                               .replace(new RegExp((BAN_NAY ? BAN_NAY + "/" : "") + "$"), "");
+  const nav = $("#ban");
+  for(const [k, b] of Object.entries(BAN)){
+    const a = document.createElement("a");
+    a.href = goc + (k ? k + "/" : "") + "tao-link.html";
+    a.textContent = b.ten;
+    if(k === BAN_NAY) a.setAttribute("aria-current", "page");
+    nav.appendChild(a);
+  }
+  nav.hidden = false;
+}
+{
+  const b = BAN[BAN_NAY], d = $("#dich");
+  d.textContent = "";
+  d.append("Đang tạo link cho: ");
+  const t = document.createElement("b"); t.textContent = b.ten; d.append(t);
+  d.append(" — khách bấm xác nhận sẽ ghi vào tab ");
+  const g = document.createElement("b"); g.textContent = b.tab; d.append(g);
+  d.append(" trong Google Sheet.");
+  d.hidden = false;
+  if(BAN_NAY) document.title = "Tạo link · " + b.ten;
+  dfEl.value = b.xh;
+}
+
+namesEl.addEventListener("input", build);
+baseEl.addEventListener("input", build);
+dfEl.addEventListener("change", build);
+build();
+</script>
+</body>
+</html>

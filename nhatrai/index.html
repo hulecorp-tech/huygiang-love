@@ -963,6 +963,11 @@ const CONFIG = {
      nhóm được bằng ?g=Tên. Để null nếu đây là thiệp chung.                */
   moiSan: null,
 
+  /* Xác nhận tham dự của khách mở trang này ghi vào tab nào trong Google
+     Sheet: "nhatrai" -> tab Nhà trai, "nhagai" -> tab Nhà gái, "chung" ->
+     tab RSVP. Giá trị lạ cũng rơi về RSVP (bảng BEN trong rsvp-sheet.gs). */
+  ben: "nhatrai",
+
   /* Logo ở đầu trang. Đặt file cùng thư mục với trang này rồi ghi tên vào.
      Không có file thì khối logo tự ẩn, trang không hiện ô ảnh vỡ.
      Nên dùng PNG nền trong suốt, bề ngang khoảng 400px là đủ nét.       */
@@ -1114,6 +1119,7 @@ function rsvpPayload(){
     token:  CONFIG.rsvpToken,
     guest:  GUEST,                    // tên trên thiệp, để đối chiếu danh sách mời
     xh:     XH.goi,                   // xưng hô đã dùng trên thiệp
+    ben:    CONFIG.ben,               // tab nhận: Nhà trai / Nhà gái / RSVP
     source: "thiepcuoi"
   };
 }

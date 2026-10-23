@@ -72,13 +72,26 @@
     font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .22s;
   }
   .toast.on{opacity:.96}
+  .ban{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1.1em}
+  .ban a{
+    font-size:14.5px;text-decoration:none;color:var(--rose);border:1px solid var(--line);
+    background:var(--card);border-radius:999px;padding:.38em 1em;
+  }
+  .ban a:hover{border-color:var(--rose)}
+  .ban a[aria-current]{background:var(--rose);border-color:var(--rose);color:#fff}
+  .dich{
+    background:var(--rose-soft);border-radius:10px;padding:.6em .9em;margin:0 0 1.6em;
+    color:var(--ink);font-size:clamp(14.5px,3.5vw,16.5px)
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="eyebrow">Ngọc Huy &amp; Hương Giang</div>
-  <h1>Tạo link thiệp mời riêng</h1>
+  <h1 id="tieude">Tạo link thiệp mời riêng</h1>
+  <nav class="ban" id="ban" aria-label="Chọn bản thiệp" hidden></nav>
+  <p class="dich" id="dich" hidden></p>
   <p class="sub">
     Dán danh sách khách vào ô bên dưới, mỗi người một dòng. Mỗi người sẽ có một
     link riêng — mở ra thiệp có tên họ trên bìa và tên được điền sẵn vào ô xác nhận.
@@ -86,8 +99,8 @@
 
   <div class="card">
     <label for="base">Địa chỉ thiệp</label>
-    <input id="base" type="text" value="https://huyle.io.vn/thiepcuoi" spellcheck="false">
-    <p class="hint">Đổi thành <code>.../thiepcuoi/hong</code> nếu muốn dùng bản hồng.</p>
+    <input id="base" type="text" value="https://huygiang.love" spellcheck="false">
+    <p class="hint">Tự lấy theo bản đang chọn ở trên. Muốn link tới bản hồng thì sửa thành <code>https://huygiang.love/hong</code>.</p>
   </div>
 
   <div class="card">
@@ -176,7 +189,11 @@ function enc(s){
 function linkFor(name, xh){
   const base = baseEl.value.trim().replace(/[?&#].*$/, "").replace(/\/+$/, "");
   let u = base + "?g=" + enc(name);
-  if(xh && xh !== "ban") u += "&x=" + xh;     // "ban" là mặc định, khỏi ghi cho link gọn
+  // Trùng xưng hô mặc định của bản đó thì khỏi ghi &x= cho link gọn
+  // (bản thường mặc định "ban", bản chữ to /ng mặc định "cochu").
+  const k = (base.match(/\/([^\/]+)$/) || [])[1] || "";
+  const macDinh = Object.prototype.hasOwnProperty.call(BAN, k) ? BAN[k].xh : "ban";
+  if(xh && xh !== macDinh) u += "&x=" + xh;
   return u;
 }
 
@@ -261,7 +278,7 @@ $("#csv").addEventListener("click", () => {
     .concat(rows.map(r => [r.name, nhan[r.xh], r.url].map(esc).join(","))).join("\r\n");
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"}));
-  a.download = "link-thiep-moi.csv";
+  a.download = "link-thiep-" + (BAN_NAY || "chung") + ".csv";
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   toast("Đã tải " + rows.length + " link");
@@ -274,11 +291,49 @@ for(const [k, l] of XH){
 }
 dfEl.value = "ban";
 
+/* Cùng một file này được đặt ở gốc trang và trong từng thư mục nhatrai/,
+   nhagai/, ng/. Nó nhìn tên thư mục đang chứa mình để biết đang tạo link
+   cho bản nào — link trỏ về đúng thư mục đó, và vì trang thiệp ở đó tự gửi
+   kèm CONFIG.ben nên xác nhận của khách rơi đúng tab trong Google Sheet.
+   Thêm bản mới thì thêm một dòng vào đây rồi chép file này vào thư mục ấy. */
+const BAN = {
+  "":      { ten:"Thiệp chung",         tab:"RSVP",     xh:"ban"   },
+  nhatrai: { ten:"Khách nhà trai",      tab:"Nhà trai", xh:"ban"   },
+  nhagai:  { ten:"Khách nhà gái",       tab:"Nhà gái",  xh:"ban"   },
+  ng:      { ten:"Nhà gái · chữ to",    tab:"Nhà gái",  xh:"cochu" },
+};
+const _thuMuc = (location.pathname.match(/\/([^\/]+)\/[^\/]*$/) || [])[1] || "";
+const BAN_NAY = Object.prototype.hasOwnProperty.call(BAN, _thuMuc) ? _thuMuc : "";
+
 /* Lấy luôn địa chỉ đang mở làm mặc định, nhờ vậy đổi tên miền thì công cụ
    tự đúng theo, không phải sửa lại. Mở bằng file:// thì giữ giá trị mẫu. */
 if(location.protocol === "http:" || location.protocol === "https:"){
   baseEl.value = location.origin + location.pathname.replace(/\/[^\/]*$/, "");
-  build();
+
+  // Thanh chọn bản: gốc trang = đường dẫn hiện tại bỏ "<thư mục>/tao-link.html"
+  const goc = location.pathname.replace(/[^\/]*$/, "")
+                               .replace(new RegExp((BAN_NAY ? BAN_NAY + "/" : "") + "$"), "");
+  const nav = $("#ban");
+  for(const [k, b] of Object.entries(BAN)){
+    const a = document.createElement("a");
+    a.href = goc + (k ? k + "/" : "") + "tao-link.html";
+    a.textContent = b.ten;
+    if(k === BAN_NAY) a.setAttribute("aria-current", "page");
+    nav.appendChild(a);
+  }
+  nav.hidden = false;
+}
+{
+  const b = BAN[BAN_NAY], d = $("#dich");
+  d.textContent = "";
+  d.append("Đang tạo link cho: ");
+  const t = document.createElement("b"); t.textContent = b.ten; d.append(t);
+  d.append(" — khách bấm xác nhận sẽ ghi vào tab ");
+  const g = document.createElement("b"); g.textContent = b.tab; d.append(g);
+  d.append(" trong Google Sheet.");
+  d.hidden = false;
+  if(BAN_NAY) document.title = "Tạo link · " + b.ten;
+  dfEl.value = b.xh;
 }
 
 namesEl.addEventListener("input", build);
