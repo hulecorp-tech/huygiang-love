@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&subset=vietnamese,latin&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 
   <style>
     /* Script face embedded so Vietnamese diacritics always render */
@@ -59,15 +60,15 @@
       .invite{border-radius:30px;}
     }
 
-    /* ---------------- thiệp gấp ở màn đầu ---------------- */
+    /* ---------------- thiệp gấp ở màn đầu: đỏ cam, nhũ vàng ---------------- */
     .seal{
-      position:fixed;inset:0;z-index:60;display:none;
-      flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,4vh,30px);
+      position:fixed;inset:0;z-index:60;display:none;overflow:hidden;
+      flex-direction:column;align-items:center;justify-content:center;gap:clamp(20px,4.5vh,34px);
       padding:24px 16px;overscroll-behavior:contain;cursor:pointer;
       background:
-        radial-gradient(60% 45% at 50% 46%, rgba(255,255,255,.55), transparent 70%),
-        radial-gradient(120% 80% at 50% 0%, var(--stage-a), var(--stage-b));
-      transition:opacity .8s ease;
+        radial-gradient(55% 40% at 50% 46%, rgba(255,251,243,.95), rgba(255,251,243,0) 75%),
+        radial-gradient(130% 95% at 50% 40%, #fbf0e2 0%, #f3dcc4 58%, #e6c3a3 100%);
+      transition:opacity 1s ease .15s;
     }
     html.sealed .seal,.seal.leaving{display:flex;}
     html.sealed,html.sealed body{overflow:hidden;}
@@ -75,93 +76,134 @@
     html.sealed .cover,html.sealed .cover *{animation-play-state:paused !important;}
     .seal.leaving{opacity:0;pointer-events:none;}
 
+    /* lấp lánh nhũ vàng quanh thiệp */
+    .sp{
+      position:absolute;left:var(--x);top:var(--y);width:var(--s);aspect-ratio:1;opacity:0;pointer-events:none;
+      background:radial-gradient(circle,#fffbe8 0 16%,#f2c95f 42%,rgba(242,201,95,0) 72%);
+      clip-path:polygon(50% 0,59% 41%,100% 50%,59% 59%,50% 100%,41% 59%,0 50%,41% 41%);
+      animation:lapla var(--t) ease-in-out var(--d) infinite;
+    }
+    @keyframes lapla{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1) rotate(60deg)}}
+
+    /* thiệp bồng bềnh nhẹ trong lúc chờ */
+    .fold-wrap{animation:bong 5.6s ease-in-out infinite;}
+    @keyframes bong{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .seal.opening .fold-wrap{animation-play-state:paused;}
+
     .fold{
       position:relative;display:block;padding:0;border:0;background:none;cursor:pointer;
-      width:min(76vw,340px,calc((100vh - 150px) * .714));aspect-ratio:5/7;
-      container-type:inline-size;perspective:1700px;font:inherit;color:inherit;
+      width:min(76vw,340px,calc((100vh - 160px) * .714));aspect-ratio:5/7;
+      container-type:inline-size;perspective:1800px;font:inherit;color:inherit;
       -webkit-tap-highlight-color:transparent;
-      transition:transform 1.1s cubic-bezier(.3,.7,.2,1);
+      transition:transform 1.4s cubic-bezier(.45,0,.2,1);
     }
-    .fold:focus-visible{outline:2px solid var(--sage-deep);outline-offset:8px;border-radius:6px;}
+    .fold:focus-visible{outline:2px solid #b8321e;outline-offset:8px;border-radius:6px;}
     .fold-in,.door{position:absolute;top:0;bottom:0;}
+
+    /* lòng thiệp: màu của bản, hiện ra khi hai cánh mở */
     .fold-in{
-      left:0;right:0;border-radius:4px;background:var(--paper-2);
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3cqw;
-      box-shadow:0 40px 70px -36px rgba(60,40,30,.6),0 10px 24px -14px rgba(60,40,30,.35),
-                 inset 0 0 0 1px var(--line);
+      left:0;right:0;border-radius:5px;background:linear-gradient(180deg,var(--paper),var(--paper-2));
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.6cqw;
+      box-shadow:0 46px 80px -40px rgba(120,30,10,.65),0 14px 30px -18px rgba(120,30,10,.45),
+                 inset 0 0 0 4cqw var(--paper),inset 0 0 0 calc(4cqw + 1px) #d9a441;
     }
-    .fi-moi{font-size:3.6cqw;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+    .fold-in>*{opacity:0;transform:translateY(3cqw);
+      transition:opacity .9s ease .75s,transform 1.1s cubic-bezier(.2,.7,.2,1) .75s;}
+    .seal.opening .fold-in>*{opacity:1;transform:none;}
+    .fi-hy{width:12cqw;height:12cqw;fill:#c93a22;}
+    .fi-moi{font-size:3.6cqw;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
     .fi-mono{font-family:"VLGreatVibes","Parisienne",cursive;font-size:19cqw;line-height:1;color:var(--ink);}
     .fi-date{font-size:4.4cqw;letter-spacing:.2em;text-indent:.2em;color:var(--ink-soft);font-weight:600;}
 
-    .door{width:50%;transform-style:preserve-3d;transition:transform 1.3s cubic-bezier(.6,.04,.22,1) .22s;}
+    /* hai cánh */
+    .door{width:50%;transform-style:preserve-3d;will-change:transform;
+      transition:transform 1.6s cubic-bezier(.65,0,.25,1) .3s;}
     .door.l{left:0;transform-origin:left center;}
     .door.r{right:0;transform-origin:right center;}
     .door-face,.door-back{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
-    .door.l .door-face{border-radius:4px 0 0 4px;box-shadow:inset -1px 0 0 rgba(90,70,40,.14);}
-    .door.r .door-face{border-radius:0 4px 4px 0;box-shadow:inset 1px 0 0 rgba(255,255,255,.7);}
-    .door-face::after{content:"";position:absolute;top:0;bottom:0;width:9%;pointer-events:none;}
-    .door.l .door-face::after{right:0;background:linear-gradient(90deg,transparent,rgba(90,70,40,.06));}
-    .door.r .door-face::after{left:0;background:linear-gradient(270deg,transparent,rgba(90,70,40,.035));}
-    .door-back{transform:rotateY(180deg);background:linear-gradient(90deg,var(--paper),var(--paper-2));}
-    .seal.opening .door.l{transform:rotateY(-118deg);}
-    .seal.opening .door.r{transform:rotateY(118deg);}
+    .door.l .door-face{border-radius:5px 0 0 5px;}
+    .door.r .door-face{border-radius:0 5px 5px 0;}
+    /* nếp gấp giữa: cánh trái tối dần về mép, cánh phải hắt sáng nhẹ */
+    .door-face::after{content:"";position:absolute;top:0;bottom:0;width:7%;pointer-events:none;z-index:2;}
+    .door.l .door-face::after{right:0;background:linear-gradient(90deg,rgba(70,8,0,0),rgba(70,8,0,.24));}
+    .door.r .door-face::after{left:0;background:linear-gradient(270deg,rgba(255,210,170,0),rgba(255,210,170,.13));}
+    /* cánh quay ra thì tối dần như khuất sáng */
+    .door-face::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+      background:rgba(60,6,0,.45);opacity:0;transition:opacity 1.6s cubic-bezier(.65,0,.25,1) .3s;}
+    .seal.opening .door-face::before{opacity:1;}
+    .door-back{transform:rotateY(180deg);background:linear-gradient(90deg,var(--paper-2),var(--paper));
+      box-shadow:inset 0 0 0 2.6cqw var(--paper),inset 0 0 0 calc(2.6cqw + 1px) #d9a441;}
+    .seal.opening .door.l{transform:rotateY(-112deg);}
+    .seal.opening .door.r{transform:rotateY(112deg);}
 
-    /* mặt trước thiệp: rộng bằng cả tấm, mỗi cánh lộ một nửa */
+    /* mặt trước: giấy đỏ cam vân lụa, rộng bằng cả tấm, mỗi cánh lộ một nửa */
     .art{
-      position:absolute;top:0;bottom:0;width:200%;left:0;color:var(--ink);text-align:center;
+      position:absolute;top:0;bottom:0;left:0;width:200%;text-align:center;color:#f6dc95;
       background:
-        radial-gradient(90% 60% at 50% 40%, rgba(255,255,255,.75), transparent 70%),
-        linear-gradient(180deg,var(--paper),var(--paper-2));
+        repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 1px,transparent 1px 5px),
+        repeating-linear-gradient(-45deg,rgba(80,0,0,.05) 0 1px,transparent 1px 5px),
+        radial-gradient(110% 80% at 50% 38%,#d6472a 0%,#c4361f 48%,#9f2619 100%);
     }
     .door.r .art{left:-100%;}
-    .art::before,.art::after{content:"";position:absolute;pointer-events:none;border:1px solid var(--gold);}
-    .art::before{inset:3.2cqw;opacity:.55;border-radius:2px;}
-    .art::after{inset:4.6cqw;opacity:.3;}
     .art>*{position:absolute;left:0;right:0;margin-inline:auto;}
-    .art-sprig{top:7.5cqw;width:46cqw;height:11.5cqw;}
-    .art-sprig.duoi{top:auto;bottom:5.5cqw;width:40cqw;height:10cqw;transform:scaleY(-1);opacity:.85;}
-    .seal.ten-dai .art-sprig.duoi{display:none;}
-    .art-eye{top:25cqw;font-size:3.5cqw;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;}
-    .art-names{top:31cqw;display:flex;flex-direction:column;align-items:center;
-      font-family:"VLGreatVibes","Parisienne",cursive;font-size:11.5cqw;line-height:1.08;}
-    .art-names i{font-style:normal;font-size:.6em;color:var(--ink-soft);line-height:1.2;}
-    .art-date{top:65cqw;font-size:4.4cqw;letter-spacing:.24em;text-indent:.24em;font-weight:600;color:var(--ink-soft);}
-    .art-to{top:104.5cqw;width:74cqw;display:flex;flex-direction:column;align-items:center;gap:.6cqw;}
-    .art-tol{font-size:3.2cqw;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;}
-    .art-ton{font-family:"VLGreatVibes","Parisienne",cursive;font-size:6.6cqw;line-height:1.12;
-      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:break-word;}
-
-    /* con dấu tròn đè lên đường gấp, có logo */
-    .wax{
-      position:absolute;left:50%;top:61%;translate:-50% -50%;z-index:2;
-      width:25cqw;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
-      background:radial-gradient(circle at 34% 28%,#fff,var(--paper) 58%,var(--paper-2));
-      box-shadow:0 0 0 1.3cqw rgba(255,255,255,.85),0 0 0 calc(1.3cqw + 1px) var(--gold),
-                 0 8px 18px -6px rgba(60,40,30,.5);
-      animation:waxpulse 2.6s ease-in-out infinite;
-      transition:opacity .35s ease,transform .5s cubic-bezier(.3,.7,.2,1);
+    .art-frame{top:0;width:100%;height:100%;}
+    /* vệt sáng nhũ lướt qua mặt thiệp */
+    .art::after{
+      content:"";position:absolute;top:-10%;bottom:-10%;left:0;width:26%;pointer-events:none;
+      background:linear-gradient(100deg,rgba(255,236,190,0),rgba(255,236,190,.13) 50%,rgba(255,236,190,0));
+      transform:translateX(-140%) skewX(-14deg);animation:nhu 5.2s ease-in-out 1.4s infinite;
     }
-    .wax img{width:78%;height:auto;display:block;grid-area:1/1;}
-    .wax b{grid-area:1/1;font-family:"VLGreatVibes","Parisienne",cursive;font-weight:400;font-size:8.5cqw;color:var(--ink);}
-    .wax img+b{display:none;}
-    .seal.opening .wax{animation:none;opacity:0;transform:scale(1.35);}
-    @keyframes waxpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    @keyframes nhu{0%{transform:translateX(-140%) skewX(-14deg)}55%,100%{transform:translateX(420%) skewX(-14deg)}}
+    .seal.opening .art::after{animation:none;opacity:0;}
+    .foil{color:#f6dc95;}
+    @supports ((-webkit-background-clip:text) or (background-clip:text)){
+      .foil{
+        background:linear-gradient(100deg,#f3d17e 0%,#fff3c8 24%,#dca546 46%,#fbe5a6 64%,#c9923a 84%,#f5d78c 100%);
+        -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+      }
+    }
+    .art-eye{top:15.5cqw;font-size:3.6cqw;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;font-weight:600;}
+    .art-names{top:21.5cqw;display:flex;flex-direction:column;align-items:center;
+      font-family:"VLGreatVibes","Parisienne",cursive;font-size:12cqw;line-height:1.1;}
+    .art-names i{font-style:normal;font-size:.55em;line-height:1.3;}
+    .art-date{top:58.5cqw;font-size:4.6cqw;letter-spacing:.26em;text-indent:.26em;font-weight:600;}
+    .art-am{top:65.5cqw;font-size:3.1cqw;letter-spacing:.04em;font-style:italic;color:#f9e6c0;}
+    /* dải nơ vàng ngang thân thiệp, con dấu đè lên */
+    .art-band{top:86cqw;height:4cqw;width:100%;
+      background:linear-gradient(180deg,#fbe6a8 0%,#d9a441 38%,#fff0c0 55%,#b98330 100%);
+      box-shadow:0 1px 3px rgba(70,10,0,.4),inset 0 1px 0 rgba(255,255,255,.5);}
+    .art-to{top:106cqw;width:76cqw;display:flex;flex-direction:column;align-items:center;gap:.8cqw;}
+    .art-tol{font-size:3.2cqw;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:#fbe9c6;font-weight:600;}
+    .art-ton{font-family:"VLGreatVibes","Parisienne",cursive;font-size:7cqw;line-height:1.15;padding:0 .15em;
+      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:break-word;}
+    .art-orn{top:125.5cqw;width:40cqw;height:4cqw;}
+    .seal.ten-dai .art-orn{display:none;}
+
+    /* con dấu chữ Hỷ */
+    .wax{
+      position:absolute;left:50%;top:62.86%;translate:-50% -50%;z-index:4;width:28cqw;aspect-ratio:1;
+      filter:drop-shadow(0 6px 10px rgba(90,15,5,.45));
+      animation:dau 3.2s ease-in-out infinite;
+      transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s ease .1s;
+    }
+    .wax svg{display:block;width:100%;height:100%;}
+    @keyframes dau{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+    .seal.opening .wax{animation:none;transform:scale(1.3);opacity:0;}
 
     .seal-hint{
-      margin:0;display:flex;align-items:center;gap:.5em;
+      margin:0;display:flex;align-items:center;gap:.55em;
       font-size:clamp(13px,3.6vw,16px);letter-spacing:.22em;text-transform:uppercase;
-      color:var(--ink-soft);font-weight:600;animation:hintfade 2.4s ease-in-out infinite;
+      color:#9b3420;font-weight:600;animation:goiy 2.6s ease-in-out infinite;
     }
     .seal-hint svg{width:1.5em;height:1.5em;flex:none;}
-    .seal.opening .seal-hint{animation:none;opacity:0;transition:opacity .3s;}
-    @keyframes hintfade{0%,100%{opacity:.55}50%{opacity:1}}
-    /* cánh đã mở -> phóng vào trong thiệp rồi mờ dần, lộ ra thiệp chính */
-    .seal.leaving .fold{transform:scale(1.45);}
+    .seal.opening .seal-hint{animation:none;opacity:0;transition:opacity .35s;}
+    @keyframes goiy{0%,100%{opacity:.55;transform:translateY(0)}50%{opacity:1;transform:translateY(-2px)}}
+    /* cánh đã mở -> phóng vào lòng thiệp rồi mờ dần, lộ ra thiệp chính */
+    .seal.leaving .fold{transform:scale(1.7);}
     @media (prefers-reduced-motion:reduce){
-      .door,.fold,.wax{transition:none;}
-      .wax,.seal-hint{animation:none;}
-      .seal{transition:opacity .35s ease;}
+      .door,.fold,.wax,.door-face::before,.fold-in>*{transition:none;}
+      .wax,.seal-hint,.fold-wrap,.sp,.art::after{animation:none;}
+      .seal{transition:opacity .4s ease;}
       .seal.leaving .fold{transform:none;}
     }
 
@@ -379,52 +421,60 @@
     .card .addr{font-size:clamp(14px,3.9cqw,17px);color:var(--body);}
     .rule{width:44px;height:1px;background:var(--line);margin:1.1em auto;}
     .nw{white-space:nowrap;}
+    /* chữ thông tin trong thẻ lễ: Lora — nét dày, chữ cao, dễ đọc hơn Cormorant ở cỡ nhỏ */
+    .card .when,.card .lunar,.card .where,.card .addr,.noi-lab{font-family:"Lora",Georgia,serif;}
+    .card .when{font-size:clamp(14px,3.9cqw,17px);}
     .card .when .gio{white-space:nowrap;}
-    .card .lunar{margin-top:.2em;font-size:clamp(13px,3.6cqw,16px);font-style:italic;color:var(--body);}
-    /* bản nhà trai / nhà gái: lễ của bên mình to và lên đầu, lễ bên kia gọn lại */
-    .card.chinh{padding:clamp(30px,9cqw,44px) clamp(22px,7cqw,34px);border:1.5px solid var(--sage);
+    .card .lunar{margin-top:.25em;font-size:clamp(12.5px,3.4cqw,15px);font-style:italic;color:var(--body);}
+    .noi .where{margin:0 0 .1em;font-size:clamp(15px,4.1cqw,18px);font-weight:700;}
+    .noi .addr{font-size:clamp(13.5px,3.7cqw,16px);line-height:1.5;}
+    .noi::before{content:"";display:block;width:44px;height:1px;background:var(--line);margin:1.1em auto;}
+    .noi-lab{display:none;}
+    /* bản nhà trai / nhà gái: lễ của bên mình to, lên đầu, địa điểm tổ chức nổi bật */
+    .card.chinh{padding:clamp(28px,8cqw,40px) clamp(18px,6cqw,30px);border:1.5px solid var(--sage);
       box-shadow:0 24px 46px -26px rgba(70,60,40,.6);}
     .card.chinh .ic{width:42px;height:42px;}
     .card.chinh h3{font-size:clamp(36px,11.5cqw,48px);}
-    .card.chinh .when{font-size:clamp(18px,5.3cqw,23px);color:var(--ink);}
-    .card.chinh .when .gio{display:block;font-size:1.45em;line-height:1.2;}
+    .card.chinh .when{font-size:clamp(16px,4.6cqw,20px);color:var(--ink);font-weight:600;}
+    .card.chinh .when .gio{display:block;font-size:1.5em;font-weight:700;line-height:1.25;}
     .card.chinh .when .sep{display:none;}
-    .card.chinh .lunar{font-size:clamp(15px,4.1cqw,18px);}
-    .card.chinh .where{font-size:clamp(18px,5.3cqw,23px);}
-    .card.chinh .addr{font-size:clamp(16px,4.5cqw,19px);}
+    .card.chinh .lunar{font-size:clamp(13.5px,3.8cqw,16px);}
+    .card.chinh .noi{margin-top:1.3em;padding:clamp(16px,5cqw,24px) clamp(12px,4cqw,20px);
+      background:var(--paper-2);border:1px solid var(--line);border-radius:16px;}
+    .card.chinh .noi::before{display:none;}
+    .card.chinh .noi-lab{display:flex;align-items:center;justify-content:center;gap:.35em;margin-bottom:.45em;
+      font-size:clamp(11px,3.1cqw,13px);letter-spacing:.16em;text-indent:.16em;text-transform:uppercase;
+      color:var(--ink-soft);font-weight:600;}
+    .noi-lab svg{width:1.35em;height:1.35em;flex:none;}
+    .card.chinh .where{font-size:clamp(22px,6.4cqw,28px);color:var(--ink);line-height:1.25;}
+    .card.chinh .addr{margin-top:.3em;font-size:clamp(17px,4.9cqw,21px);color:var(--ink);font-weight:500;}
+    .card.chinh .btn{background:var(--sage-deep);color:#fff;border-color:var(--sage-deep);margin-top:1em;}
+    .card.chinh .btn:hover{background:var(--ink);border-color:var(--ink);}
     .card.phu{padding:clamp(18px,5.5cqw,26px);box-shadow:none;}
     .card.phu .ic{width:26px;height:26px;margin-bottom:.3em;}
     .card.phu h3{font-size:clamp(24px,7.4cqw,32px);}
-    .card.phu .when{font-size:clamp(14px,3.9cqw,17px);}
-    .card.phu .lunar{font-size:clamp(12px,3.4cqw,14px);}
-    .card.phu .rule{margin:.8em auto;}
-    .card.phu .where{font-size:clamp(15px,4.1cqw,18px);margin-top:.4em;}
-    .card.phu .addr{font-size:clamp(13px,3.7cqw,16px);}
+    .card.phu .noi::before{margin:.8em auto;}
     .card.phu .btn{margin-top:.8em;padding:.55em 1.2em;}
 
-    /* ---------------- hai bên gia đình ---------------- */
-    .bao-sub{text-align:center;font-style:italic;color:var(--body);font-size:clamp(16px,4.4cqw,20px);margin:-.35em 0 0;}
-    .couple{display:flex;flex-direction:column;align-items:center;margin:1.5em 0 0;text-align:center;}
-    .cp{display:flex;flex-direction:column;align-items:center;gap:.1em;}
-    .cp-role{font-size:clamp(11px,3.3cqw,14px);letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;}
-    .cp-name{font-size:clamp(19px,5.6cqw,27px);letter-spacing:.07em;text-transform:uppercase;color:var(--ink);
-      font-weight:600;line-height:1.25;text-wrap:balance;}
-    .cp-amp{font-family:"VLGreatVibes","Parisienne",cursive;font-size:clamp(34px,10cqw,46px);color:var(--ink-soft);line-height:1;margin:.2em 0 .1em;}
-    .fam{margin:2.4em auto 0;max-width:40ch;text-align:center;}
-    .fam-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,5cqw,28px);align-items:start;}
-    .fam-lab{font-size:clamp(11px,3.3cqw,14px);letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.5em;}
-    .fam-p{font-size:clamp(16px,4.4cqw,20px);color:var(--ink);font-weight:600;line-height:1.35;text-wrap:balance;}
-    .fam-p span{font-weight:500;color:var(--body);}
+    /* ---------------- hai bên gia đình: nhỏ gọn, chữ Lora dễ đọc ---------------- */
+    .bao-sub{text-align:center;font-family:"Lora",Georgia,serif;font-style:italic;color:var(--body);
+      font-size:clamp(14px,3.9cqw,17px);margin:-.35em 0 0;}
+    .couple,.fam{font-family:"Lora",Georgia,serif;text-align:center;}
+    .couple{display:flex;flex-direction:column;align-items:center;margin:1.3em 0 0;}
+    .cp{display:flex;flex-direction:column;align-items:center;gap:.05em;}
+    .cp-role,.fam-lab{font-size:clamp(10.5px,3cqw,12.5px);letter-spacing:.2em;text-indent:.2em;
+      text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+    .cp-name{font-size:clamp(16px,4.6cqw,20px);color:var(--ink);font-weight:600;line-height:1.3;text-wrap:balance;}
+    .cp-amp{font-family:"VLGreatVibes","Parisienne",cursive;font-size:clamp(26px,7.5cqw,34px);color:var(--ink-soft);line-height:1;margin:.15em 0 .05em;}
+    .fam{margin:1.6em auto 0;max-width:40ch;}
+    .fam::before{content:"";display:block;width:44px;height:1px;background:var(--line);margin:0 auto 1.4em;}
+    .fam-two{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(12px,4cqw,24px);align-items:start;}
+    .fam-two::before{grid-column:1/-1;}
+    .fam-lab{margin-bottom:.45em;}
+    .fam-p{font-size:clamp(13px,3.5cqw,15.5px);color:var(--ink);font-weight:600;line-height:1.5;}
+    .fam-p span{font-weight:400;color:var(--body);}
     .fam-p b{font-weight:inherit;white-space:nowrap;}
-    .fam-two .fam-p{font-size:clamp(14px,4cqw,19px);}
-    .fam-addr{margin-top:.5em;font-size:clamp(13px,3.7cqw,16px);color:var(--body);line-height:1.45;text-wrap:balance;}
-    .fam-side.chinh{background:var(--paper-2);border:1px solid var(--line);border-radius:18px;
-      padding:clamp(20px,6cqw,30px) clamp(16px,5cqw,26px);}
-    .fam-side.chinh .fam-lab{font-size:clamp(13px,3.9cqw,16px);}
-    .fam-side.chinh .fam-p{font-size:clamp(22px,6.6cqw,30px);}
-    .fam-side.chinh .fam-addr{font-size:clamp(16px,4.5cqw,20px);}
-    .fam-side.phu{margin-top:1.5em;}
-    .fam-side.phu .fam-p{font-size:clamp(15px,4.2cqw,18px);}
+    .fam-addr{margin-top:.4em;font-size:clamp(12.5px,3.3cqw,14.5px);color:var(--body);line-height:1.5;}
 
     .btn{
       display:inline-flex;align-items:center;gap:.55em;margin-top:1.1em;
@@ -439,8 +489,8 @@
     .btn svg{width:16px;height:16px;}
     .btn.solid{background:var(--sage-deep);color:#fff;}
     .btn.solid:hover{background:var(--ink);border-color:var(--ink);}
-    .btn.za{border-color:#1a73c7;color:#1666b3;}
-    .btn.za:hover{background:#1666b3;color:#fff;}
+    .btn.za{border-color:var(--sage-deep);color:var(--sage-deep);}
+    .btn.za:hover{background:var(--sage-deep);color:#fff;}
 
     /* program */
     .program{margin:2.2em auto 0;max-width:34ch;}
@@ -803,34 +853,108 @@
 </svg>
 
 <!-- ============ THIỆP GẤP — hiện trước, khách chạm vào mới mở ra thiệp chính ============
-     Hai cánh thiệp cùng vẽ một mặt trước (.art rộng gấp đôi cánh), mỗi cánh
-     chỉ lộ một nửa, nên lúc đóng nhìn như một tấm liền; mở ra thì tách đôi.
+     Thiệp đỏ cam nhũ vàng, hai cánh, con dấu chữ Hỷ (囍) ở giữa.
+     Hai cánh cùng vẽ một mặt trước (.art rộng gấp đôi cánh), mỗi cánh chỉ lộ
+     một nửa, nên lúc đóng nhìn như một tấm liền; mở ra thì tách đôi. Lòng
+     thiệp dùng màu của bản (xanh / hồng) để chuyển êm sang thiệp chính.
      Không có JavaScript thì lớp này không hiện, khách vẫn xem được thiệp.  -->
 <div class="seal" id="seal">
-  <button class="fold" id="fold" type="button" aria-label="Mở thiệp mời">
-    <span class="fold-in" aria-hidden="true">
-      <span class="fi-moi">Trân trọng kính mời</span>
-      <span class="fi-mono">H &amp; G</span>
-      <span class="fi-date">29 · 11 · 2026</span>
-    </span>
-    <span class="door l" aria-hidden="true"><span class="door-face"><span class="art">
-          <svg class="art-sprig"><use href="#sprig-h"/></svg>
-          <span class="art-eye">Thiệp mời cưới</span>
-          <span class="art-names"><span>Ngọc Huy</span><i>&amp;</i><span>Hương Giang</span></span>
-          <span class="art-date">29 · 11 · 2026</span>
-          <span class="art-to"><span class="art-tol">Trân trọng kính mời</span><span class="art-ton"></span></span>
-          <svg class="art-sprig duoi"><use href="#sprig-h"/></svg>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="vangA" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fff3c4"/><stop offset=".35" stop-color="#e2ae4f"/><stop offset=".55" stop-color="#fff0b8"/>
+        <stop offset=".8" stop-color="#c08a2e"/><stop offset="1" stop-color="#f1d184"/>
+      </linearGradient>
+      <radialGradient id="doAn" cx=".42" cy=".36" r=".72">
+        <stop offset="0" stop-color="#e2593a"/><stop offset=".68" stop-color="#b52c1b"/><stop offset="1" stop-color="#8c1e11"/>
+      </radialGradient>
+      <!-- chữ Song Hỷ, nét lấy từ phông Noto Serif SC (giấy phép SIL OFL) -->
+      <symbol id="hy" viewBox="20 0 965 947"><path transform="translate(0 855) scale(1 -1)" d="M479 730H818L877 808Q877 808 896 793Q914 778 940 758Q965 737 985 718Q981 702 958 702H487ZM512 615H809L868 692Q868 692 886 678Q905 663 930 642Q956 621 976 603Q972 587 949 587H520ZM489 231H823L880 307Q880 307 898 292Q915 278 938 258Q962 237 981 219Q977 203 954 203H497ZM593 374Q650 360 678 340Q706 320 712 299Q718 278 708 260Q698 243 678 234Q658 226 635 230Q612 235 592 258Q600 288 597 318Q594 349 584 370ZM653 855 824 841Q823 832 816 826Q810 819 792 816V607H653ZM751 372 899 337Q897 327 888 322Q880 316 863 316Q841 296 812 270Q782 244 754 222H740Q743 253 746 296Q750 339 751 372ZM575 408H859V380H575ZM583 1H862V-27H583ZM536 530V579L666 530H855V502H661V387Q661 382 644 374Q628 365 604 358Q579 351 553 351H536ZM807 530H798L854 588L969 504Q965 500 958 495Q951 490 939 488V390Q939 387 920 380Q902 373 877 367Q852 361 831 361H807ZM537 148V197L665 148H870V120H660V-55Q660 -60 644 -69Q628 -78 604 -85Q580 -92 554 -92H537ZM798 148H789L845 208L962 121Q958 116 950 110Q941 105 928 103V-51Q928 -54 910 -61Q891 -68 866 -74Q841 -80 821 -80H798ZM36 730H361L420 808Q420 808 438 793Q457 778 482 758Q508 737 528 718Q524 702 501 702H44ZM53 615H345L404 692Q404 692 422 678Q441 663 466 642Q492 621 512 603Q508 587 485 587H61ZM20 231H373L427 304Q427 304 444 290Q461 276 484 256Q506 237 524 219Q520 203 497 203H28ZM150 374Q207 360 235 340Q263 320 269 299Q275 278 265 260Q255 243 235 234Q215 226 192 230Q169 235 149 258Q157 288 154 318Q151 349 141 370ZM214 855 383 842Q382 832 376 826Q369 819 351 816V607H214ZM308 372 456 337Q454 327 446 322Q437 316 420 316Q398 296 368 270Q339 244 311 222H297Q300 253 304 296Q307 339 308 372ZM132 408H416V380H132ZM140 1H419V-27H140ZM93 530V579L221 530H411V502H216V387Q216 382 200 374Q184 365 160 358Q135 351 110 351H93ZM354 530H345L399 586L511 504Q508 500 500 495Q493 490 481 488V390Q481 386 463 379Q445 372 421 366Q397 361 377 361H354ZM94 148V197L220 148H426V120H215V-55Q215 -60 200 -69Q184 -78 160 -85Q136 -92 111 -92H94ZM355 148H346L401 207L516 121Q512 117 504 112Q496 106 482 103V-52Q482 -55 464 -62Q446 -69 422 -74Q397 -80 377 -80H355Z"/></symbol>
+      <symbol id="goc" viewBox="0 0 60 60">
+        <g fill="none" stroke="#efc977" stroke-linecap="round">
+          <path d="M2 58V15Q2 2 15 2H58" stroke-width="1.5"/>
+          <path d="M8 58V19Q8 8 19 8H58" stroke-width=".7" opacity=".75"/>
+          <path d="M13.5 37c-5.5.4-8.4-5.6-4.6-9.2 2.9-2.7 7.6-.9 7.2 3" stroke-width="1"/>
+          <path d="M37 13.5c.4-5.5-5.6-8.4-9.2-4.6-2.7 2.9-.9 7.6 3 7.2" stroke-width="1"/>
+        </g>
+        <path d="M19.5 13.5l6 6-6 6-6-6z" fill="#efc977"/>
+        <circle cx="44" cy="8" r="1.5" fill="#efc977"/><circle cx="8" cy="44" r="1.5" fill="#efc977"/>
+      </symbol>
+    </defs>
+  </svg>
+  <span class="sp" style="--x:7%;--y:11%;--s:18px;--d:0s;--t:3.4s"></span>
+  <span class="sp" style="--x:21%;--y:5%;--s:11px;--d:1.1s;--t:2.8s"></span>
+  <span class="sp" style="--x:83%;--y:8%;--s:16px;--d:0.6s;--t:3.6s"></span>
+  <span class="sp" style="--x:93%;--y:23%;--s:10px;--d:2.0s;--t:3.0s"></span>
+  <span class="sp" style="--x:4%;--y:37%;--s:13px;--d:1.6s;--t:3.2s"></span>
+  <span class="sp" style="--x:94%;--y:45%;--s:18px;--d:0.3s;--t:3.8s"></span>
+  <span class="sp" style="--x:6%;--y:69%;--s:15px;--d:2.4s;--t:3.4s"></span>
+  <span class="sp" style="--x:92%;--y:73%;--s:11px;--d:1.3s;--t:2.9s"></span>
+  <span class="sp" style="--x:14%;--y:90%;--s:18px;--d:0.9s;--t:3.6s"></span>
+  <span class="sp" style="--x:81%;--y:92%;--s:14px;--d:1.9s;--t:3.1s"></span>
+  <span class="sp" style="--x:50%;--y:3%;--s:12px;--d:2.7s;--t:3.3s"></span>
+  <span class="sp" style="--x:47%;--y:96%;--s:11px;--d:0.5s;--t:3.0s"></span>
+  <span class="sp" style="--x:29%;--y:95%;--s:9px;--d:3.0s;--t:2.7s"></span>
+  <span class="sp" style="--x:69%;--y:2%;--s:9px;--d:1.5s;--t:2.6s"></span>
+  <div class="fold-wrap">
+    <button class="fold" id="fold" type="button" aria-label="Mở thiệp mời">
+      <span class="fold-in" aria-hidden="true">
+        <svg class="fi-hy"><use href="#hy"/></svg>
+        <span class="fi-moi">Trân trọng kính mời</span>
+        <span class="fi-mono">H &amp; G</span>
+        <span class="fi-date">29 · 11 · 2026</span>
+      </span>
+      <span class="door l" aria-hidden="true"><span class="door-face"><span class="art">
+          <svg class="art-frame" viewBox="0 0 500 700" aria-hidden="true">
+            <rect x="18" y="18" width="464" height="664" rx="3" fill="none" stroke="#efc977" stroke-width="2.2" opacity=".9"/>
+            <rect x="29" y="29" width="442" height="642" rx="2" fill="none" stroke="#efc977" stroke-width="1" opacity=".5"/>
+            <use href="#goc" x="35" y="35" width="70" height="70"/>
+            <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(-1 0 0 1 500 0)"/>
+            <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(1 0 0 -1 0 700)"/>
+            <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(-1 0 0 -1 500 700)"/>
+            <path d="M176 66H232M268 66H324" fill="none" stroke="#efc977" stroke-width="1.2"/>
+            <path d="M250 56l10 10-10 10-10-10z" fill="#efc977"/>
+            <circle cx="168" cy="66" r="2.2" fill="#efc977"/><circle cx="332" cy="66" r="2.2" fill="#efc977"/>
+          </svg>
+          <span class="art-eye foil">Lễ Thành Hôn</span>
+          <span class="art-names foil"><span>Ngọc Huy</span><i>&amp;</i><span>Hương Giang</span></span>
+          <span class="art-date foil">29 · 11 · 2026</span>
+          <span class="art-am">Tức ngày 21 tháng 10 năm Bính Ngọ</span>
+          <span class="art-band"></span>
+          <span class="art-to"><span class="art-tol">Trân trọng kính mời</span><span class="art-ton foil"></span></span>
+          <svg class="art-orn" viewBox="0 0 200 20" aria-hidden="true"><g fill="none" stroke="#efc977" stroke-width="1.1"><path d="M8 10H78M122 10H192"/><path d="M78 10c5.5-7 13-7 22 0s16.5 7 22 0"/></g><circle cx="100" cy="10" r="2.4" fill="#efc977"/></svg>
         </span></span><span class="door-back"></span></span>
-    <span class="door r" aria-hidden="true"><span class="door-face"><span class="art">
-          <svg class="art-sprig"><use href="#sprig-h"/></svg>
-          <span class="art-eye">Thiệp mời cưới</span>
-          <span class="art-names"><span>Ngọc Huy</span><i>&amp;</i><span>Hương Giang</span></span>
-          <span class="art-date">29 · 11 · 2026</span>
-          <span class="art-to"><span class="art-tol">Trân trọng kính mời</span><span class="art-ton"></span></span>
-          <svg class="art-sprig duoi"><use href="#sprig-h"/></svg>
+      <span class="door r" aria-hidden="true"><span class="door-face"><span class="art">
+          <svg class="art-frame" viewBox="0 0 500 700" aria-hidden="true">
+            <rect x="18" y="18" width="464" height="664" rx="3" fill="none" stroke="#efc977" stroke-width="2.2" opacity=".9"/>
+            <rect x="29" y="29" width="442" height="642" rx="2" fill="none" stroke="#efc977" stroke-width="1" opacity=".5"/>
+            <use href="#goc" x="35" y="35" width="70" height="70"/>
+            <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(-1 0 0 1 500 0)"/>
+            <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(1 0 0 -1 0 700)"/>
+            <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(-1 0 0 -1 500 700)"/>
+            <path d="M176 66H232M268 66H324" fill="none" stroke="#efc977" stroke-width="1.2"/>
+            <path d="M250 56l10 10-10 10-10-10z" fill="#efc977"/>
+            <circle cx="168" cy="66" r="2.2" fill="#efc977"/><circle cx="332" cy="66" r="2.2" fill="#efc977"/>
+          </svg>
+          <span class="art-eye foil">Lễ Thành Hôn</span>
+          <span class="art-names foil"><span>Ngọc Huy</span><i>&amp;</i><span>Hương Giang</span></span>
+          <span class="art-date foil">29 · 11 · 2026</span>
+          <span class="art-am">Tức ngày 21 tháng 10 năm Bính Ngọ</span>
+          <span class="art-band"></span>
+          <span class="art-to"><span class="art-tol">Trân trọng kính mời</span><span class="art-ton foil"></span></span>
+          <svg class="art-orn" viewBox="0 0 200 20" aria-hidden="true"><g fill="none" stroke="#efc977" stroke-width="1.1"><path d="M8 10H78M122 10H192"/><path d="M78 10c5.5-7 13-7 22 0s16.5 7 22 0"/></g><circle cx="100" cy="10" r="2.4" fill="#efc977"/></svg>
         </span></span><span class="door-back"></span></span>
-    <span class="wax" aria-hidden="true"><img src="logo.png" alt="" onerror="this.remove()"><b>H&amp;G</b></span>
-  </button>
+      <span class="wax" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="49" fill="url(#vangA)"/>
+          <circle cx="50" cy="50" r="45.6" fill="none" stroke="#8a5a17" stroke-width=".6" opacity=".55"/>
+          <circle cx="50" cy="50" r="44" fill="url(#doAn)"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f3d27f" stroke-width="1.1" stroke-dasharray=".1 2.7" stroke-linecap="round"/>
+          <use href="#hy" x="25" y="25" width="50" height="50" fill="url(#vangA)"/>
+        </svg>
+      </span>
+    </button>
+  </div>
   <p class="seal-hint" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M12 10V8.5a1.5 1.5 0 0 1 3 0V11"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L4.4 15.8a1.6 1.6 0 0 1 2.4-2.1L9 15.5"/></svg>
     Chạm vào thiệp để mở
@@ -919,7 +1043,8 @@
 
 
   <!-- ============ HAI BÊN GIA ĐÌNH ============ -->
-  <!-- Bản nhà trai: nhà trai và Lễ Thành Hôn to, lên đầu (class chinh); bên kia gọn lại (class phu) -->
+  <!-- Bản nhà trai: thông tin gia đình nhỏ gọn, nhà trai đứng trước; thẻ Lễ Thành Hôn to và
+       lên đầu, địa điểm tổ chức nổi bật (class chinh); Lễ Vu Quy gọn lại (class phu) -->
   <section id="family">
     <div class="eyebrow reveal">Trân trọng báo tin</div>
     <h2 class="h-serif reveal d1">Lễ Thành Hôn</h2>
@@ -929,14 +1054,14 @@
       <div class="cp-amp" aria-hidden="true">&amp;</div>
       <div class="cp"><span class="cp-role">Cô dâu</span><span class="cp-name">Hoàng Thị Hương Giang</span></div>
     </div>
-    <div class="fam reveal d2">
-      <div class="fam-side chinh">
+    <div class="fam fam-two reveal d2">
+      <div class="fam-side">
         <div class="fam-lab">Nhà trai</div>
         <div class="fam-p"><span>Ông</span> <b>Lê Công Bồng</b></div>
         <div class="fam-p"><span>Bà</span> <b>Bùi Thị Tuyết</b></div>
         <div class="fam-addr"><span class="nw">Thôn An Lập,</span> <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></div>
       </div>
-      <div class="fam-side phu">
+      <div class="fam-side">
         <div class="fam-lab">Nhà gái</div>
         <div class="fam-p"><span>Ông</span> <b>Hoàng Văn Nguyên</b></div>
         <div class="fam-p"><span>Bà</span> <b>Đinh Thị Hương</b></div>
@@ -956,26 +1081,30 @@
         <h3>Lễ Thành Hôn</h3>
         <div class="when"><span class="gio">10:30 sáng</span><span class="sep"> · </span><span class="ngay"><span class="nw">Chủ Nhật,</span> <span class="nw">29.11.2026</span></span></div>
         <div class="lunar"><span class="nw">Tức ngày 21 tháng 10</span> <span class="nw">năm Bính Ngọ</span></div>
-        <div class="rule"></div>
-        <div class="where">Tư gia nhà trai</div>
-        <div class="addr"><span class="nw">Thôn An Lập,</span> <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></div>
-        <a class="btn" data-map="groom" href="#">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
-          Chỉ đường
-        </a>
+        <div class="noi">
+          <div class="noi-lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg> Địa điểm tổ chức</div>
+          <div class="where">Tư gia nhà trai</div>
+          <div class="addr"><span class="nw">Thôn An Lập,</span> <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></div>
+          <a class="btn" data-map="groom" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            Chỉ đường
+          </a>
+        </div>
       </div>
       <div class="card phu reveal d2">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="15" r="4.8"/><circle cx="15" cy="15" r="4.8"/><path d="M15 4.4 16.8 6.3 15 8.6 13.2 6.3Z" stroke-linejoin="round"/></svg>
         <h3>Lễ Vu Quy</h3>
         <div class="when"><span class="ngay"><span class="nw">Sáng Chủ Nhật,</span> <span class="nw">29.11.2026</span></span></div>
         <div class="lunar"><span class="nw">Tức ngày 21 tháng 10</span> <span class="nw">năm Bính Ngọ</span></div>
-        <div class="rule"></div>
-        <div class="where">Tư gia nhà gái</div>
-        <div class="addr"><span class="nw">62 Nguyễn Xiển,</span> <span class="nw">Phường Thanh Liệt,</span> <span class="nw">Thành phố Hà Nội</span></div>
-        <a class="btn" data-map="bride" href="#">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
-          Chỉ đường
-        </a>
+        <div class="noi">
+          <div class="noi-lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg> Địa điểm tổ chức</div>
+          <div class="where">Tư gia nhà gái</div>
+          <div class="addr"><span class="nw">62 Nguyễn Xiển,</span> <span class="nw">Phường Thanh Liệt,</span> <span class="nw">Thành phố Hà Nội</span></div>
+          <a class="btn" data-map="bride" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            Chỉ đường
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1300,7 +1429,7 @@ const GUEST = (function(){
   if(GUEST){
     for(const el of seal.querySelectorAll(".art-tol")) el.textContent = XH.cau ? "Gửi" : "Kính gửi";
     for(const el of seal.querySelectorAll(".art-ton")) el.textContent = GUEST;
-    if(GUEST.length > 24) seal.classList.add("ten-dai");   // tên 2 dòng: bỏ cụm hoa dưới cho thoáng
+    if(GUEST.length > 24) seal.classList.add("ten-dai");   // tên 2 dòng: bỏ hoạ tiết dưới cho thoáng
   }
   // Tải lại trang thì trình duyệt hay nhảy về chỗ đang đọc dở — sau lớp thiệp
   // gấp thì vô nghĩa, nên lần nào cũng mở ra ở bìa.
@@ -1309,13 +1438,13 @@ const GUEST = (function(){
   seal.addEventListener("click", () => {
     if(mo) return;
     mo = true;
-    seal.classList.add("opening");               // con dấu bật ra, hai cánh mở
+    seal.classList.add("opening");               // con dấu bật ra, hai cánh mở, lòng thiệp hiện chữ
     setTimeout(() => {
       scrollTo(0, 0);
-      seal.classList.add("leaving");             // phóng vào trong thiệp và mờ dần
+      seal.classList.add("leaving");             // phóng vào lòng thiệp và mờ dần
       document.documentElement.classList.remove("sealed");   // bìa thiệp chính bắt đầu chạy
-      setTimeout(() => seal.remove(), reduce ? 400 : 900);
-    }, reduce ? 0 : 1350);
+      setTimeout(() => seal.remove(), reduce ? 450 : 1300);
+    }, reduce ? 0 : 1500);
   });
 })();
 
