@@ -8,11 +8,11 @@ và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-invitat
 | Đường dẫn | Nội dung | Xác nhận ghi vào tab |
 |---|---|---|
 | `/` | thiệp chính | RSVP |
-| `/nhatrai` | bản cho khách nhà trai | Nhà trai |
-| `/nhagai` | bản cho khách nhà gái | Nhà gái |
-| `/ng` | bản chữ to cho người lớn tuổi nhà gái | Nhà gái |
+| `/nhatrai` | bản cho khách nhà trai (có khung ảnh) | Nhà trai |
+| `/nhagai` | bản cho khách nhà gái (chỉ Lễ Vu Quy, có khung ảnh) | Nhà gái |
+| `/ng` | bản chữ to cho người lớn tuổi nhà gái (chỉ Lễ Vu Quy) | Nhà gái |
 | `/ae` | thiệp riêng nhóm bạn thân | RSVP |
-| `/hong` | bản màu hồng | RSVP |
+| `/hong` | bản màu hồng, phía nhà gái (chỉ Lễ Vu Quy) | RSVP |
 
 Công cụ tạo link mời riêng từng khách nằm trong từng bản:
 `/tao-link.html`, `/nhatrai/tao-link.html`, `/nhagai/tao-link.html`,

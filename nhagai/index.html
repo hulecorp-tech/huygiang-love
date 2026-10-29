@@ -97,12 +97,12 @@
       -webkit-tap-highlight-color:transparent;
       transition:transform 1.4s cubic-bezier(.45,0,.2,1);
     }
-    .fold:focus-visible{outline:2px solid #b8321e;outline-offset:8px;border-radius:6px;}
+    .fold:focus-visible{outline:2px solid #b8321e;outline-offset:8px;border-radius:9cqw;}
     .fold-in,.door{position:absolute;top:0;bottom:0;}
 
     /* lòng thiệp: màu của bản, hiện ra khi hai cánh mở */
     .fold-in{
-      left:0;right:0;border-radius:5px;background:linear-gradient(180deg,var(--paper),var(--paper-2));
+      left:0;right:0;border-radius:8cqw;background:linear-gradient(180deg,var(--paper),var(--paper-2));
       display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.6cqw;
       box-shadow:0 46px 80px -40px rgba(120,30,10,.65),0 14px 30px -18px rgba(120,30,10,.45),
                  inset 0 0 0 4cqw var(--paper),inset 0 0 0 calc(4cqw + 1px) #d9a441;
@@ -121,8 +121,9 @@
     .door.l{left:0;transform-origin:left center;}
     .door.r{right:0;transform-origin:right center;}
     .door-face,.door-back{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
-    .door.l .door-face{border-radius:5px 0 0 5px;}
-    .door.r .door-face{border-radius:0 5px 5px 0;}
+    /* góc bo tròn ở mép ngoài; mặt sau xoay 180° nên góc bo nằm ở phía ngược lại */
+    .door.l .door-face,.door.r .door-back{border-radius:8cqw 0 0 8cqw;}
+    .door.r .door-face,.door.l .door-back{border-radius:0 8cqw 8cqw 0;}
     /* nếp gấp giữa: cánh trái tối dần về mép, cánh phải hắt sáng nhẹ */
     .door-face::after{content:"";position:absolute;top:0;bottom:0;width:7%;pointer-events:none;z-index:2;}
     .door.l .door-face::after{right:0;background:linear-gradient(90deg,rgba(70,8,0,0),rgba(70,8,0,.24));}
@@ -475,6 +476,22 @@
     .fam-p span{font-weight:400;color:var(--body);}
     .fam-p b{font-weight:inherit;white-space:nowrap;}
     .fam-addr{margin-top:.4em;font-size:clamp(12.5px,3.3cqw,14.5px);color:var(--body);line-height:1.5;}
+
+    /* ảnh cô dâu chú rể (bản nhà trai / nhà gái): khung vòm viền vàng, chưa có ảnh thì hiện khung chờ */
+    .couple.co-anh{--w:min(36cqw,178px);flex-direction:row;align-items:flex-start;justify-content:center;
+      gap:3.4cqw;margin-top:1.7em;}
+    /* "&" nằm giữa hai khung, ngang tầm giữa ảnh (khung cao = rộng × 4/3) */
+    .co-anh .cp-amp{flex:none;margin:calc(var(--w) * .667 - .5em) 0 0;}
+    .pt{margin:0;width:var(--w);flex:none;display:flex;flex-direction:column;align-items:center;gap:.9em;}
+    .pt-khung{position:relative;width:100%;aspect-ratio:3/4;border-radius:999px 999px 20px 20px;overflow:hidden;
+      background:radial-gradient(120% 80% at 50% 20%,var(--paper),var(--paper-2));
+      box-shadow:0 0 0 1px var(--line),0 0 0 5px var(--paper),0 0 0 6px var(--sage),0 20px 32px -20px rgba(70,60,40,.55);}
+    .pt-khung img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    .pt-cho{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6em;
+      color:var(--ink-soft);font-size:clamp(10.5px,2.9cqw,12.5px);letter-spacing:.14em;text-indent:.14em;
+      text-transform:uppercase;font-weight:600;}
+    .pt-cho svg{width:36%;height:auto;opacity:.45;}
+    .pt figcaption{display:flex;flex-direction:column;align-items:center;gap:.05em;}
 
     .btn{
       display:inline-flex;align-items:center;gap:.55em;margin-top:1.1em;
@@ -872,12 +889,12 @@
       <symbol id="hy" viewBox="20 0 965 947"><path transform="translate(0 855) scale(1 -1)" d="M479 730H818L877 808Q877 808 896 793Q914 778 940 758Q965 737 985 718Q981 702 958 702H487ZM512 615H809L868 692Q868 692 886 678Q905 663 930 642Q956 621 976 603Q972 587 949 587H520ZM489 231H823L880 307Q880 307 898 292Q915 278 938 258Q962 237 981 219Q977 203 954 203H497ZM593 374Q650 360 678 340Q706 320 712 299Q718 278 708 260Q698 243 678 234Q658 226 635 230Q612 235 592 258Q600 288 597 318Q594 349 584 370ZM653 855 824 841Q823 832 816 826Q810 819 792 816V607H653ZM751 372 899 337Q897 327 888 322Q880 316 863 316Q841 296 812 270Q782 244 754 222H740Q743 253 746 296Q750 339 751 372ZM575 408H859V380H575ZM583 1H862V-27H583ZM536 530V579L666 530H855V502H661V387Q661 382 644 374Q628 365 604 358Q579 351 553 351H536ZM807 530H798L854 588L969 504Q965 500 958 495Q951 490 939 488V390Q939 387 920 380Q902 373 877 367Q852 361 831 361H807ZM537 148V197L665 148H870V120H660V-55Q660 -60 644 -69Q628 -78 604 -85Q580 -92 554 -92H537ZM798 148H789L845 208L962 121Q958 116 950 110Q941 105 928 103V-51Q928 -54 910 -61Q891 -68 866 -74Q841 -80 821 -80H798ZM36 730H361L420 808Q420 808 438 793Q457 778 482 758Q508 737 528 718Q524 702 501 702H44ZM53 615H345L404 692Q404 692 422 678Q441 663 466 642Q492 621 512 603Q508 587 485 587H61ZM20 231H373L427 304Q427 304 444 290Q461 276 484 256Q506 237 524 219Q520 203 497 203H28ZM150 374Q207 360 235 340Q263 320 269 299Q275 278 265 260Q255 243 235 234Q215 226 192 230Q169 235 149 258Q157 288 154 318Q151 349 141 370ZM214 855 383 842Q382 832 376 826Q369 819 351 816V607H214ZM308 372 456 337Q454 327 446 322Q437 316 420 316Q398 296 368 270Q339 244 311 222H297Q300 253 304 296Q307 339 308 372ZM132 408H416V380H132ZM140 1H419V-27H140ZM93 530V579L221 530H411V502H216V387Q216 382 200 374Q184 365 160 358Q135 351 110 351H93ZM354 530H345L399 586L511 504Q508 500 500 495Q493 490 481 488V390Q481 386 463 379Q445 372 421 366Q397 361 377 361H354ZM94 148V197L220 148H426V120H215V-55Q215 -60 200 -69Q184 -78 160 -85Q136 -92 111 -92H94ZM355 148H346L401 207L516 121Q512 117 504 112Q496 106 482 103V-52Q482 -55 464 -62Q446 -69 422 -74Q397 -80 377 -80H355Z"/></symbol>
       <symbol id="goc" viewBox="0 0 60 60">
         <g fill="none" stroke="#efc977" stroke-linecap="round">
-          <path d="M2 58V15Q2 2 15 2H58" stroke-width="1.5"/>
-          <path d="M8 58V19Q8 8 19 8H58" stroke-width=".7" opacity=".75"/>
+          <path d="M2 58V30Q2 2 30 2H58" stroke-width="1.5"/>
+          <path d="M8 58V32Q8 8 32 8H58" stroke-width=".7" opacity=".75"/>
           <path d="M13.5 37c-5.5.4-8.4-5.6-4.6-9.2 2.9-2.7 7.6-.9 7.2 3" stroke-width="1"/>
           <path d="M37 13.5c.4-5.5-5.6-8.4-9.2-4.6-2.7 2.9-.9 7.6 3 7.2" stroke-width="1"/>
         </g>
-        <path d="M19.5 13.5l6 6-6 6-6-6z" fill="#efc977"/>
+        <path d="M22 16l5 5-5 5-5-5z" fill="#efc977"/>
         <circle cx="44" cy="8" r="1.5" fill="#efc977"/><circle cx="8" cy="44" r="1.5" fill="#efc977"/>
       </symbol>
     </defs>
@@ -906,8 +923,8 @@
       </span>
       <span class="door l" aria-hidden="true"><span class="door-face"><span class="art">
           <svg class="art-frame" viewBox="0 0 500 700" aria-hidden="true">
-            <rect x="18" y="18" width="464" height="664" rx="3" fill="none" stroke="#efc977" stroke-width="2.2" opacity=".9"/>
-            <rect x="29" y="29" width="442" height="642" rx="2" fill="none" stroke="#efc977" stroke-width="1" opacity=".5"/>
+            <rect x="18" y="18" width="464" height="664" rx="27" fill="none" stroke="#efc977" stroke-width="2.2" opacity=".9"/>
+            <rect x="29" y="29" width="442" height="642" rx="19" fill="none" stroke="#efc977" stroke-width="1" opacity=".5"/>
             <use href="#goc" x="35" y="35" width="70" height="70"/>
             <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(-1 0 0 1 500 0)"/>
             <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(1 0 0 -1 0 700)"/>
@@ -926,8 +943,8 @@
         </span></span><span class="door-back"></span></span>
       <span class="door r" aria-hidden="true"><span class="door-face"><span class="art">
           <svg class="art-frame" viewBox="0 0 500 700" aria-hidden="true">
-            <rect x="18" y="18" width="464" height="664" rx="3" fill="none" stroke="#efc977" stroke-width="2.2" opacity=".9"/>
-            <rect x="29" y="29" width="442" height="642" rx="2" fill="none" stroke="#efc977" stroke-width="1" opacity=".5"/>
+            <rect x="18" y="18" width="464" height="664" rx="27" fill="none" stroke="#efc977" stroke-width="2.2" opacity=".9"/>
+            <rect x="29" y="29" width="442" height="642" rx="19" fill="none" stroke="#efc977" stroke-width="1" opacity=".5"/>
             <use href="#goc" x="35" y="35" width="70" height="70"/>
             <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(-1 0 0 1 500 0)"/>
             <use href="#goc" x="35" y="35" width="70" height="70" transform="matrix(1 0 0 -1 0 700)"/>
@@ -1021,13 +1038,13 @@
       <rect width="400" height="800" fill="url(#gVig)"/>
     </svg>
     <div class="cover-content">
-      <div class="cv-eyebrow">We&rsquo;re getting married</div>
+      <div class="cv-eyebrow">Trân trọng kính mời</div>
       <div class="cv-names">
         <span class="n">Ngọc Huy</span>
         <span class="amp">&amp;</span>
         <span class="n">Hương Giang</span>
       </div>
-      <div class="cv-date"><span>29</span><span>Nov</span><span class="yr">2026</span></div>
+      <div class="cv-date"><span>29</span><span>Tháng 11</span><span class="yr">2026</span></div>
       <div class="cv-lunar reveal">Tức ngày 21 tháng 10 năm Bính Ngọ</div>
       <div class="cv-guest" hidden>
         <span class="gl">Thân mời</span>
@@ -1035,7 +1052,7 @@
       </div>
     </div>
     <a class="discover" href="#events">
-      <span>Discover</span>
+      <span>Xem thiệp</span>
       <svg viewBox="0 0 24 14" fill="none" aria-hidden="true"><path d="M2 2 L12 11 L22 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </section>
@@ -1043,16 +1060,28 @@
 
 
   <!-- ============ HAI BÊN GIA ĐÌNH ============ -->
-  <!-- Bản nhà gái: thông tin gia đình nhỏ gọn, nhà gái đứng trước; thẻ Lễ Vu Quy to và
-       lên đầu, địa điểm tổ chức nổi bật (class chinh); Lễ Thành Hôn gọn lại (class phu) -->
+  <!-- Bản nhà gái: thông tin gia đình nhỏ gọn, nhà gái đứng trước, không ghi địa chỉ nhà trai;
+       chỉ có thẻ Lễ Vu Quy, địa điểm tổ chức nổi bật (class chinh) -->
   <section id="family">
     <div class="eyebrow reveal">Trân trọng báo tin</div>
     <h2 class="h-serif reveal d1">Lễ Vu Quy</h2>
     <p class="bao-sub reveal d1">của con chúng tôi</p>
-    <div class="couple reveal d1">
-      <div class="cp"><span class="cp-role">Cô dâu</span><span class="cp-name">Hoàng Thị Hương Giang</span></div>
+    <div class="couple co-anh reveal d1">
+      <figure class="pt">
+        <div class="pt-khung">
+          <img data-anh="coDau" alt="Cô dâu Hoàng Thị Hương Giang" hidden>
+          <span class="pt-cho" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="24" cy="17" r="8"/><path d="M8.5 43c1.7-8.6 7.8-13.4 15.5-13.4S37.8 34.4 39.5 43"/></svg> Ảnh cô dâu</span>
+        </div>
+        <figcaption><span class="cp-role">Cô dâu</span><span class="cp-name">Hoàng Thị Hương Giang</span></figcaption>
+      </figure>
       <div class="cp-amp" aria-hidden="true">&amp;</div>
-      <div class="cp"><span class="cp-role">Chú rể</span><span class="cp-name">Lê Ngọc Huy</span></div>
+      <figure class="pt">
+        <div class="pt-khung">
+          <img data-anh="chuRe" alt="Chú rể Lê Ngọc Huy" hidden>
+          <span class="pt-cho" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="24" cy="17" r="8"/><path d="M8.5 43c1.7-8.6 7.8-13.4 15.5-13.4S37.8 34.4 39.5 43"/></svg> Ảnh chú rể</span>
+        </div>
+        <figcaption><span class="cp-role">Chú rể</span><span class="cp-name">Lê Ngọc Huy</span></figcaption>
+      </figure>
     </div>
     <div class="fam fam-two reveal d2">
       <div class="fam-side">
@@ -1065,7 +1094,6 @@
         <div class="fam-lab">Nhà trai</div>
         <div class="fam-p"><span>Ông</span> <b>Lê Công Bồng</b></div>
         <div class="fam-p"><span>Bà</span> <b>Bùi Thị Tuyết</b></div>
-        <div class="fam-addr"><span class="nw">Thôn An Lập,</span> <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></div>
       </div>
     </div>
   </section>
@@ -1074,33 +1102,18 @@
   <section class="alt" id="events">
     <div class="eyebrow reveal">Trân trọng kính mời</div>
     <h2 class="h-serif reveal d1">Sự Kiện Cưới</h2>
-    <p class="lead reveal d1">Chúng mình hân hạnh được đón tiếp bạn trong hai buổi lễ dưới đây.</p>
+    <p class="lead reveal d1">Chúng mình hân hạnh được đón tiếp bạn trong buổi lễ dưới đây.</p>
     <div class="cards">
       <div class="card chinh reveal d1">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="15" r="4.8"/><circle cx="15" cy="15" r="4.8"/><path d="M15 4.4 16.8 6.3 15 8.6 13.2 6.3Z" stroke-linejoin="round"/></svg>
         <h3>Lễ Vu Quy</h3>
-        <div class="when"><span class="ngay"><span class="nw">Sáng Chủ Nhật,</span> <span class="nw">29.11.2026</span></span></div>
+        <div class="when"><span class="gio">7:00 sáng</span><span class="sep"> · </span><span class="ngay"><span class="nw">Chủ Nhật,</span> <span class="nw">29.11.2026</span></span></div>
         <div class="lunar"><span class="nw">Tức ngày 21 tháng 10</span> <span class="nw">năm Bính Ngọ</span></div>
         <div class="noi">
           <div class="noi-lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg> Địa điểm tổ chức</div>
           <div class="where">Tư gia nhà gái</div>
           <div class="addr"><span class="nw">62 Nguyễn Xiển,</span> <span class="nw">Phường Thanh Liệt,</span> <span class="nw">Thành phố Hà Nội</span></div>
           <a class="btn" data-map="bride" href="#">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
-            Chỉ đường
-          </a>
-        </div>
-      </div>
-      <div class="card phu reveal d2">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" stroke-linejoin="round"/></svg>
-        <h3>Lễ Thành Hôn</h3>
-        <div class="when"><span class="gio">10:30 sáng</span><span class="sep"> · </span><span class="ngay"><span class="nw">Chủ Nhật,</span> <span class="nw">29.11.2026</span></span></div>
-        <div class="lunar"><span class="nw">Tức ngày 21 tháng 10</span> <span class="nw">năm Bính Ngọ</span></div>
-        <div class="noi">
-          <div class="noi-lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg> Địa điểm tổ chức</div>
-          <div class="where">Tư gia nhà trai</div>
-          <div class="addr"><span class="nw">Thôn An Lập,</span> <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></div>
-          <a class="btn" data-map="groom" href="#">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
             Chỉ đường
           </a>
@@ -1185,20 +1198,6 @@
             <dt>Số TK</dt><dd class="acct">0408 2002 999</dd>
           </dl>
           <button class="btn qcopy" type="button" data-copy-btn="04082002999">Sao chép số TK</button>
-        </figure>
-        <figure class="qcard">
-          <figcaption>
-            <span class="qwho">Ngọc Huy</span>
-            <span class="qrole">Chú rể</span>
-          </figcaption>
-          <div class="qrbox">
-            <svg class="qr" viewBox="0 0 45 45" role="img" aria-label="Mã QR chuyển khoản tới Ngọc Huy"><rect width="45" height="45" fill="#fff"/><path d="M0 0h7v1h-7zM9 0h3v1h-3zM16 0h2v1h-2zM21 0h1v1h-1zM23 0h1v1h-1zM25 0h1v1h-1zM27 0h2v1h-2zM30 0h1v1h-1zM33 0h1v1h-1zM36 0h1v1h-1zM38 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h5v1h-5zM16 1h1v1h-1zM18 1h1v1h-1zM22 1h1v1h-1zM24 1h2v1h-2zM27 1h1v1h-1zM29 1h1v1h-1zM32 1h2v1h-2zM35 1h1v1h-1zM38 1h1v1h-1zM44 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h2v1h-2zM13 2h1v1h-1zM15 2h1v1h-1zM17 2h2v1h-2zM21 2h1v1h-1zM24 2h1v1h-1zM28 2h1v1h-1zM30 2h4v1h-4zM35 2h1v1h-1zM38 2h1v1h-1zM40 2h3v1h-3zM44 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM11 3h3v1h-3zM15 3h1v1h-1zM18 3h3v1h-3zM22 3h1v1h-1zM24 3h4v1h-4zM30 3h2v1h-2zM35 3h2v1h-2zM38 3h1v1h-1zM40 3h3v1h-3zM44 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM14 4h2v1h-2zM17 4h1v1h-1zM20 4h5v1h-5zM27 4h2v1h-2zM30 4h1v1h-1zM34 4h3v1h-3zM38 4h1v1h-1zM40 4h3v1h-3zM44 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h5v1h-5zM16 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM24 5h3v1h-3zM29 5h1v1h-1zM33 5h1v1h-1zM38 5h1v1h-1zM44 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM38 6h7v1h-7zM8 7h1v1h-1zM11 7h1v1h-1zM16 7h5v1h-5zM24 7h1v1h-1zM28 7h1v1h-1zM30 7h4v1h-4zM36 7h1v1h-1zM0 8h1v1h-1zM2 8h5v1h-5zM9 8h1v1h-1zM11 8h1v1h-1zM14 8h3v1h-3zM18 8h7v1h-7zM27 8h1v1h-1zM30 8h1v1h-1zM33 8h1v1h-1zM35 8h1v1h-1zM38 8h5v1h-5zM5 9h1v1h-1zM7 9h3v1h-3zM11 9h2v1h-2zM15 9h5v1h-5zM21 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM30 9h4v1h-4zM36 9h1v1h-1zM39 9h1v1h-1zM42 9h3v1h-3zM0 10h1v1h-1zM3 10h2v1h-2zM6 10h1v1h-1zM9 10h1v1h-1zM11 10h1v1h-1zM15 10h1v1h-1zM18 10h1v1h-1zM21 10h2v1h-2zM24 10h1v1h-1zM27 10h1v1h-1zM29 10h1v1h-1zM31 10h1v1h-1zM34 10h6v1h-6zM41 10h2v1h-2zM0 11h4v1h-4zM8 11h1v1h-1zM11 11h2v1h-2zM14 11h3v1h-3zM19 11h3v1h-3zM26 11h1v1h-1zM28 11h1v1h-1zM30 11h3v1h-3zM36 11h1v1h-1zM40 11h1v1h-1zM42 11h1v1h-1zM0 12h1v1h-1zM2 12h3v1h-3zM6 12h2v1h-2zM10 12h1v1h-1zM13 12h3v1h-3zM18 12h1v1h-1zM20 12h1v1h-1zM22 12h3v1h-3zM27 12h1v1h-1zM30 12h1v1h-1zM34 12h2v1h-2zM41 12h1v1h-1zM4 13h2v1h-2zM7 13h1v1h-1zM10 13h1v1h-1zM14 13h4v1h-4zM19 13h5v1h-5zM27 13h7v1h-7zM36 13h1v1h-1zM42 13h3v1h-3zM0 14h1v1h-1zM3 14h1v1h-1zM6 14h2v1h-2zM9 14h3v1h-3zM13 14h1v1h-1zM15 14h2v1h-2zM18 14h3v1h-3zM24 14h3v1h-3zM31 14h1v1h-1zM34 14h5v1h-5zM40 14h4v1h-4zM0 15h4v1h-4zM5 15h1v1h-1zM8 15h3v1h-3zM12 15h2v1h-2zM15 15h2v1h-2zM21 15h1v1h-1zM25 15h1v1h-1zM28 15h5v1h-5zM37 15h1v1h-1zM39 15h1v1h-1zM41 15h2v1h-2zM0 16h2v1h-2zM4 16h1v1h-1zM6 16h2v1h-2zM11 16h1v1h-1zM15 16h1v1h-1zM18 16h1v1h-1zM22 16h1v1h-1zM24 16h1v1h-1zM26 16h2v1h-2zM29 16h2v1h-2zM35 16h1v1h-1zM38 16h1v1h-1zM41 16h2v1h-2zM44 16h1v1h-1zM0 17h1v1h-1zM2 17h2v1h-2zM5 17h1v1h-1zM8 17h2v1h-2zM12 17h2v1h-2zM15 17h1v1h-1zM17 17h1v1h-1zM20 17h2v1h-2zM23 17h1v1h-1zM25 17h1v1h-1zM27 17h1v1h-1zM30 17h4v1h-4zM36 17h2v1h-2zM39 17h5v1h-5zM0 18h1v1h-1zM3 18h1v1h-1zM6 18h2v1h-2zM12 18h2v1h-2zM19 18h3v1h-3zM24 18h1v1h-1zM27 18h1v1h-1zM29 18h1v1h-1zM34 18h4v1h-4zM39 18h1v1h-1zM41 18h3v1h-3zM4 19h1v1h-1zM9 19h1v1h-1zM14 19h1v1h-1zM16 19h3v1h-3zM21 19h1v1h-1zM28 19h1v1h-1zM30 19h1v1h-1zM32 19h3v1h-3zM36 19h2v1h-2zM40 19h3v1h-3zM0 20h2v1h-2zM4 20h9v1h-9zM16 20h3v1h-3zM20 20h5v1h-5zM27 20h1v1h-1zM29 20h2v1h-2zM33 20h1v1h-1zM36 20h5v1h-5zM44 20h1v1h-1zM2 21h3v1h-3zM8 21h1v1h-1zM12 21h3v1h-3zM18 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h2v1h-2zM30 21h1v1h-1zM35 21h2v1h-2zM40 21h1v1h-1zM42 21h3v1h-3zM2 22h3v1h-3zM6 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM14 22h4v1h-4zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h3v1h-3zM29 22h1v1h-1zM32 22h3v1h-3zM36 22h1v1h-1zM38 22h1v1h-1zM40 22h1v1h-1zM42 22h1v1h-1zM3 23h2v1h-2zM8 23h3v1h-3zM12 23h2v1h-2zM15 23h1v1h-1zM19 23h2v1h-2zM24 23h1v1h-1zM28 23h6v1h-6zM36 23h1v1h-1zM40 23h1v1h-1zM42 23h1v1h-1zM1 24h1v1h-1zM4 24h5v1h-5zM10 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM19 24h7v1h-7zM27 24h1v1h-1zM30 24h1v1h-1zM33 24h9v1h-9zM1 25h3v1h-3zM5 25h1v1h-1zM7 25h2v1h-2zM10 25h1v1h-1zM14 25h1v1h-1zM18 25h2v1h-2zM22 25h3v1h-3zM27 25h1v1h-1zM30 25h4v1h-4zM35 25h1v1h-1zM37 25h1v1h-1zM39 25h1v1h-1zM42 25h3v1h-3zM1 26h1v1h-1zM3 26h1v1h-1zM5 26h3v1h-3zM9 26h1v1h-1zM11 26h2v1h-2zM15 26h1v1h-1zM17 26h1v1h-1zM21 26h1v1h-1zM23 26h1v1h-1zM25 26h3v1h-3zM29 26h1v1h-1zM34 26h1v1h-1zM36 26h2v1h-2zM39 26h1v1h-1zM0 27h1v1h-1zM3 27h1v1h-1zM5 27h1v1h-1zM8 27h2v1h-2zM11 27h3v1h-3zM15 27h3v1h-3zM22 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM28 27h1v1h-1zM31 27h3v1h-3zM38 27h2v1h-2zM42 27h1v1h-1zM44 27h1v1h-1zM0 28h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM10 28h1v1h-1zM12 28h2v1h-2zM15 28h2v1h-2zM21 28h1v1h-1zM24 28h1v1h-1zM27 28h1v1h-1zM30 28h1v1h-1zM33 28h1v1h-1zM36 28h1v1h-1zM40 28h2v1h-2zM43 28h1v1h-1zM0 29h3v1h-3zM4 29h2v1h-2zM7 29h4v1h-4zM12 29h1v1h-1zM14 29h2v1h-2zM17 29h2v1h-2zM22 29h1v1h-1zM24 29h1v1h-1zM28 29h3v1h-3zM33 29h1v1h-1zM37 29h1v1h-1zM39 29h1v1h-1zM42 29h1v1h-1zM44 29h1v1h-1zM1 30h3v1h-3zM6 30h2v1h-2zM9 30h1v1h-1zM11 30h3v1h-3zM17 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM25 30h3v1h-3zM29 30h1v1h-1zM34 30h1v1h-1zM39 30h2v1h-2zM43 30h1v1h-1zM0 31h1v1h-1zM2 31h3v1h-3zM9 31h1v1h-1zM13 31h1v1h-1zM15 31h3v1h-3zM22 31h1v1h-1zM24 31h3v1h-3zM28 31h6v1h-6zM35 31h5v1h-5zM41 31h4v1h-4zM0 32h1v1h-1zM2 32h1v1h-1zM6 32h1v1h-1zM8 32h2v1h-2zM11 32h1v1h-1zM13 32h5v1h-5zM20 32h2v1h-2zM24 32h1v1h-1zM26 32h2v1h-2zM30 32h1v1h-1zM34 32h1v1h-1zM36 32h1v1h-1zM39 32h2v1h-2zM42 32h1v1h-1zM1 33h1v1h-1zM4 33h1v1h-1zM7 33h2v1h-2zM10 33h1v1h-1zM12 33h4v1h-4zM17 33h1v1h-1zM19 33h1v1h-1zM22 33h1v1h-1zM27 33h1v1h-1zM30 33h2v1h-2zM33 33h1v1h-1zM35 33h1v1h-1zM42 33h3v1h-3zM4 34h1v1h-1zM6 34h1v1h-1zM11 34h1v1h-1zM14 34h1v1h-1zM16 34h1v1h-1zM21 34h3v1h-3zM25 34h5v1h-5zM34 34h1v1h-1zM39 34h1v1h-1zM41 34h1v1h-1zM1 35h4v1h-4zM8 35h2v1h-2zM14 35h2v1h-2zM18 35h1v1h-1zM21 35h1v1h-1zM24 35h2v1h-2zM28 35h1v1h-1zM30 35h1v1h-1zM32 35h2v1h-2zM35 35h5v1h-5zM42 35h1v1h-1zM0 36h1v1h-1zM3 36h2v1h-2zM6 36h2v1h-2zM10 36h1v1h-1zM12 36h5v1h-5zM18 36h1v1h-1zM20 36h5v1h-5zM27 36h1v1h-1zM29 36h3v1h-3zM36 36h5v1h-5zM8 37h1v1h-1zM10 37h1v1h-1zM16 37h1v1h-1zM19 37h2v1h-2zM24 37h1v1h-1zM27 37h1v1h-1zM30 37h1v1h-1zM32 37h1v1h-1zM36 37h1v1h-1zM40 37h1v1h-1zM42 37h3v1h-3zM0 38h7v1h-7zM10 38h2v1h-2zM13 38h1v1h-1zM15 38h2v1h-2zM19 38h2v1h-2zM22 38h1v1h-1zM24 38h4v1h-4zM29 38h1v1h-1zM31 38h4v1h-4zM36 38h1v1h-1zM38 38h1v1h-1zM40 38h1v1h-1zM42 38h1v1h-1zM0 39h1v1h-1zM6 39h1v1h-1zM8 39h1v1h-1zM11 39h1v1h-1zM13 39h1v1h-1zM17 39h2v1h-2zM20 39h1v1h-1zM24 39h1v1h-1zM28 39h6v1h-6zM36 39h1v1h-1zM40 39h1v1h-1zM42 39h3v1h-3zM0 40h1v1h-1zM2 40h3v1h-3zM6 40h1v1h-1zM8 40h1v1h-1zM14 40h1v1h-1zM16 40h1v1h-1zM18 40h1v1h-1zM20 40h5v1h-5zM27 40h1v1h-1zM29 40h2v1h-2zM36 40h6v1h-6zM43 40h1v1h-1zM0 41h1v1h-1zM2 41h3v1h-3zM6 41h1v1h-1zM8 41h6v1h-6zM15 41h1v1h-1zM17 41h2v1h-2zM20 41h2v1h-2zM27 41h1v1h-1zM30 41h1v1h-1zM33 41h1v1h-1zM37 41h1v1h-1zM39 41h1v1h-1zM41 41h4v1h-4zM0 42h1v1h-1zM2 42h3v1h-3zM6 42h1v1h-1zM8 42h1v1h-1zM11 42h2v1h-2zM14 42h2v1h-2zM18 42h2v1h-2zM21 42h1v1h-1zM23 42h5v1h-5zM29 42h1v1h-1zM34 42h3v1h-3zM42 42h2v1h-2zM0 43h1v1h-1zM6 43h1v1h-1zM9 43h1v1h-1zM11 43h4v1h-4zM16 43h1v1h-1zM18 43h4v1h-4zM23 43h1v1h-1zM26 43h7v1h-7zM37 43h1v1h-1zM42 43h1v1h-1zM0 44h7v1h-7zM8 44h3v1h-3zM13 44h4v1h-4zM18 44h1v1h-1zM21 44h1v1h-1zM24 44h1v1h-1zM29 44h2v1h-2zM33 44h1v1h-1zM35 44h1v1h-1zM37 44h1v1h-1zM39 44h3v1h-3zM43 44h1v1h-1z" fill="#2b1b21"/></svg>
-          </div>
-          <dl class="qmeta">
-            <dt>Ngân hàng</dt><dd>Techcombank</dd>
-            <dt>Số TK</dt><dd class="acct">6688 8633 68</dd>
-          </dl>
-          <button class="btn qcopy" type="button" data-copy-btn="6688863368">Sao chép số TK</button>
         </figure>
         </div>
       </div>
@@ -1297,6 +1296,11 @@ const CONFIG = {
      Sheet: "nhatrai" -> tab Nhà trai, "nhagai" -> tab Nhà gái, "chung" ->
      tab RSVP. Giá trị lạ cũng rơi về RSVP (bảng BEN trong rsvp-sheet.gs). */
   ben: "nhagai",
+
+  /* Ảnh cô dâu, chú rể ở mục "Trân trọng báo tin". Đặt file ảnh cùng thư mục
+     với trang này rồi ghi tên file vào (ảnh dọc 3:4 là vừa khung nhất).
+     Để "" thì hiện khung chờ có chữ "Ảnh cô dâu" / "Ảnh chú rể".          */
+  anh: { chuRe: "", coDau: "" },
 
   /* Logo ở đầu trang. Đặt file cùng thư mục với trang này rồi ghi tên vào.
      Không có file thì khối logo tự ẩn, trang không hiện ô ảnh vỡ.
@@ -1410,7 +1414,8 @@ const GUEST = (function(){
   if(!GUEST) return;
   const box = $(".cv-guest");
   if(box){
-    box.querySelector(".gl").textContent = XH.moi;
+    // Đầu bìa đã ghi "Trân trọng kính mời" -> lời mời trang trọng đổi thành "Kính gửi" cho khỏi lặp
+    box.querySelector(".gl").textContent = /kính mời/i.test(XH.moi) ? "Kính gửi" : XH.moi;
     // textContent, không phải innerHTML: tên đến từ địa chỉ trang nên
     // phải coi là dữ liệu, chèn thẳng vào HTML là mở đường cho chèn mã.
     box.querySelector(".gn").textContent = GUEST;
@@ -1419,6 +1424,20 @@ const GUEST = (function(){
   const inp = $("#rv-name");
   if(inp && !inp.value) inp.value = GUEST;
   document.title = GUEST + " · " + CONFIG.coupleTag;
+})();
+
+/* ---------------- ảnh cô dâu chú rể ---------------- */
+(function(){
+  for(const img of $$("img[data-anh]")){
+    const f = (CONFIG.anh || {})[img.dataset.anh];
+    if(!f) continue;                                   // chưa có ảnh: giữ khung chờ
+    img.addEventListener("load", () => {
+      img.hidden = false;
+      const cho = img.parentNode.querySelector(".pt-cho");
+      if(cho) cho.remove();
+    });
+    img.src = f;                                       // file lỗi / chưa có thì vẫn giữ khung chờ
+  }
 })();
 
 /* ---------------- thiệp gấp ở màn đầu ---------------- */
