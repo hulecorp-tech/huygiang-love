@@ -58,6 +58,112 @@
       .invite{border-radius:30px;}
     }
 
+    /* ---------------- thiệp gấp ở màn đầu ---------------- */
+    .seal{
+      position:fixed;inset:0;z-index:60;display:none;
+      flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,4vh,30px);
+      padding:24px 16px;overscroll-behavior:contain;cursor:pointer;
+      background:
+        radial-gradient(60% 45% at 50% 46%, rgba(255,255,255,.55), transparent 70%),
+        radial-gradient(120% 80% at 50% 0%, var(--stage-a), var(--stage-b));
+      transition:opacity .8s ease;
+    }
+    html.sealed .seal,.seal.leaving{display:flex;}
+    html.sealed,html.sealed body{overflow:hidden;}
+    /* bìa thiệp chính đứng yên chờ, mở thiệp gấp xong mới chạy hiệu ứng */
+    html.sealed .cover,html.sealed .cover *{animation-play-state:paused !important;}
+    .seal.leaving{opacity:0;pointer-events:none;}
+
+    .fold{
+      position:relative;display:block;padding:0;border:0;background:none;cursor:pointer;
+      width:min(76vw,340px,calc((100vh - 150px) * .714));aspect-ratio:5/7;
+      container-type:inline-size;perspective:1700px;font:inherit;color:inherit;
+      -webkit-tap-highlight-color:transparent;
+      transition:transform 1.1s cubic-bezier(.3,.7,.2,1);
+    }
+    .fold:focus-visible{outline:2px solid var(--sage-deep);outline-offset:8px;border-radius:6px;}
+    .fold-in,.door{position:absolute;top:0;bottom:0;}
+    .fold-in{
+      left:0;right:0;border-radius:4px;background:var(--paper-2);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3cqw;
+      box-shadow:0 40px 70px -36px rgba(60,40,30,.6),0 10px 24px -14px rgba(60,40,30,.35),
+                 inset 0 0 0 1px var(--line);
+    }
+    .fi-moi{font-size:3.6cqw;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+    .fi-mono{font-family:"VLGreatVibes","Parisienne",cursive;font-size:19cqw;line-height:1;color:var(--ink);}
+    .fi-date{font-size:4.4cqw;letter-spacing:.2em;text-indent:.2em;color:var(--ink-soft);font-weight:600;}
+
+    .door{width:50%;transform-style:preserve-3d;transition:transform 1.3s cubic-bezier(.6,.04,.22,1) .22s;}
+    .door.l{left:0;transform-origin:left center;}
+    .door.r{right:0;transform-origin:right center;}
+    .door-face,.door-back{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+    .door.l .door-face{border-radius:4px 0 0 4px;box-shadow:inset -1px 0 0 rgba(90,70,40,.14);}
+    .door.r .door-face{border-radius:0 4px 4px 0;box-shadow:inset 1px 0 0 rgba(255,255,255,.7);}
+    .door-face::after{content:"";position:absolute;top:0;bottom:0;width:9%;pointer-events:none;}
+    .door.l .door-face::after{right:0;background:linear-gradient(90deg,transparent,rgba(90,70,40,.06));}
+    .door.r .door-face::after{left:0;background:linear-gradient(270deg,transparent,rgba(90,70,40,.035));}
+    .door-back{transform:rotateY(180deg);background:linear-gradient(90deg,var(--paper),var(--paper-2));}
+    .seal.opening .door.l{transform:rotateY(-118deg);}
+    .seal.opening .door.r{transform:rotateY(118deg);}
+
+    /* mặt trước thiệp: rộng bằng cả tấm, mỗi cánh lộ một nửa */
+    .art{
+      position:absolute;top:0;bottom:0;width:200%;left:0;color:var(--ink);text-align:center;
+      background:
+        radial-gradient(90% 60% at 50% 40%, rgba(255,255,255,.75), transparent 70%),
+        linear-gradient(180deg,var(--paper),var(--paper-2));
+    }
+    .door.r .art{left:-100%;}
+    .art::before,.art::after{content:"";position:absolute;pointer-events:none;border:1px solid var(--gold);}
+    .art::before{inset:3.2cqw;opacity:.55;border-radius:2px;}
+    .art::after{inset:4.6cqw;opacity:.3;}
+    .art>*{position:absolute;left:0;right:0;margin-inline:auto;}
+    .art-sprig{top:7.5cqw;width:46cqw;height:11.5cqw;}
+    .art-sprig.duoi{top:auto;bottom:5.5cqw;width:40cqw;height:10cqw;transform:scaleY(-1);opacity:.85;}
+    .seal.ten-dai .art-sprig.duoi{display:none;}
+    .art-eye{top:25cqw;font-size:3.5cqw;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+    .art-names{top:31cqw;display:flex;flex-direction:column;align-items:center;
+      font-family:"VLGreatVibes","Parisienne",cursive;font-size:11.5cqw;line-height:1.08;}
+    .art-names i{font-style:normal;font-size:.6em;color:var(--ink-soft);line-height:1.2;}
+    .art-date{top:65cqw;font-size:4.4cqw;letter-spacing:.24em;text-indent:.24em;font-weight:600;color:var(--ink-soft);}
+    .art-to{top:104.5cqw;width:74cqw;display:flex;flex-direction:column;align-items:center;gap:.6cqw;}
+    .art-tol{font-size:3.2cqw;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+    .art-ton{font-family:"VLGreatVibes","Parisienne",cursive;font-size:6.6cqw;line-height:1.12;
+      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:break-word;}
+
+    /* con dấu tròn đè lên đường gấp, có logo */
+    .wax{
+      position:absolute;left:50%;top:61%;translate:-50% -50%;z-index:2;
+      width:25cqw;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+      background:radial-gradient(circle at 34% 28%,#fff,var(--paper) 58%,var(--paper-2));
+      box-shadow:0 0 0 1.3cqw rgba(255,255,255,.85),0 0 0 calc(1.3cqw + 1px) var(--gold),
+                 0 8px 18px -6px rgba(60,40,30,.5);
+      animation:waxpulse 2.6s ease-in-out infinite;
+      transition:opacity .35s ease,transform .5s cubic-bezier(.3,.7,.2,1);
+    }
+    .wax img{width:78%;height:auto;display:block;grid-area:1/1;}
+    .wax b{grid-area:1/1;font-family:"VLGreatVibes","Parisienne",cursive;font-weight:400;font-size:8.5cqw;color:var(--ink);}
+    .wax img+b{display:none;}
+    .seal.opening .wax{animation:none;opacity:0;transform:scale(1.35);}
+    @keyframes waxpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+    .seal-hint{
+      margin:0;display:flex;align-items:center;gap:.5em;
+      font-size:clamp(13px,3.6vw,16px);letter-spacing:.22em;text-transform:uppercase;
+      color:var(--ink-soft);font-weight:600;animation:hintfade 2.4s ease-in-out infinite;
+    }
+    .seal-hint svg{width:1.5em;height:1.5em;flex:none;}
+    .seal.opening .seal-hint{animation:none;opacity:0;transition:opacity .3s;}
+    @keyframes hintfade{0%,100%{opacity:.55}50%{opacity:1}}
+    /* cánh đã mở -> phóng vào trong thiệp rồi mờ dần, lộ ra thiệp chính */
+    .seal.leaving .fold{transform:scale(1.45);}
+    @media (prefers-reduced-motion:reduce){
+      .door,.fold,.wax{transition:none;}
+      .wax,.seal-hint{animation:none;}
+      .seal{transition:opacity .35s ease;}
+      .seal.leaving .fold{transform:none;}
+    }
+
     /* ---------------- cover ---------------- */
     .cover{
       position:relative;
@@ -271,6 +377,53 @@
     .card .where{margin:.7em 0 .1em;font-size:clamp(16px,4.4cqw,20px);color:var(--ink);font-weight:600;}
     .card .addr{font-size:clamp(14px,3.9cqw,17px);color:var(--body);}
     .rule{width:44px;height:1px;background:var(--line);margin:1.1em auto;}
+    .nw{white-space:nowrap;}
+    .card .when .gio{white-space:nowrap;}
+    .card .lunar{margin-top:.2em;font-size:clamp(13px,3.6cqw,16px);font-style:italic;color:var(--body);}
+    /* bản nhà trai / nhà gái: lễ của bên mình to và lên đầu, lễ bên kia gọn lại */
+    .card.chinh{padding:clamp(30px,9cqw,44px) clamp(22px,7cqw,34px);border:1.5px solid var(--sage);
+      box-shadow:0 24px 46px -26px rgba(70,60,40,.6);}
+    .card.chinh .ic{width:42px;height:42px;}
+    .card.chinh h3{font-size:clamp(36px,11.5cqw,48px);}
+    .card.chinh .when{font-size:clamp(18px,5.3cqw,23px);color:var(--ink);}
+    .card.chinh .when .gio{display:block;font-size:1.45em;line-height:1.2;}
+    .card.chinh .when .sep{display:none;}
+    .card.chinh .lunar{font-size:clamp(15px,4.1cqw,18px);}
+    .card.chinh .where{font-size:clamp(18px,5.3cqw,23px);}
+    .card.chinh .addr{font-size:clamp(16px,4.5cqw,19px);}
+    .card.phu{padding:clamp(18px,5.5cqw,26px);box-shadow:none;}
+    .card.phu .ic{width:26px;height:26px;margin-bottom:.3em;}
+    .card.phu h3{font-size:clamp(24px,7.4cqw,32px);}
+    .card.phu .when{font-size:clamp(14px,3.9cqw,17px);}
+    .card.phu .lunar{font-size:clamp(12px,3.4cqw,14px);}
+    .card.phu .rule{margin:.8em auto;}
+    .card.phu .where{font-size:clamp(15px,4.1cqw,18px);margin-top:.4em;}
+    .card.phu .addr{font-size:clamp(13px,3.7cqw,16px);}
+    .card.phu .btn{margin-top:.8em;padding:.55em 1.2em;}
+
+    /* ---------------- hai bên gia đình ---------------- */
+    .bao-sub{text-align:center;font-style:italic;color:var(--body);font-size:clamp(16px,4.4cqw,20px);margin:-.35em 0 0;}
+    .couple{display:flex;flex-direction:column;align-items:center;margin:1.5em 0 0;text-align:center;}
+    .cp{display:flex;flex-direction:column;align-items:center;gap:.1em;}
+    .cp-role{font-size:clamp(11px,3.3cqw,14px);letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+    .cp-name{font-size:clamp(19px,5.6cqw,27px);letter-spacing:.07em;text-transform:uppercase;color:var(--ink);
+      font-weight:600;line-height:1.25;text-wrap:balance;}
+    .cp-amp{font-family:"VLGreatVibes","Parisienne",cursive;font-size:clamp(34px,10cqw,46px);color:var(--ink-soft);line-height:1;margin:.2em 0 .1em;}
+    .fam{margin:2.4em auto 0;max-width:40ch;text-align:center;}
+    .fam-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,5cqw,28px);align-items:start;}
+    .fam-lab{font-size:clamp(11px,3.3cqw,14px);letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.5em;}
+    .fam-p{font-size:clamp(16px,4.4cqw,20px);color:var(--ink);font-weight:600;line-height:1.35;text-wrap:balance;}
+    .fam-p span{font-weight:500;color:var(--body);}
+    .fam-p b{font-weight:inherit;white-space:nowrap;}
+    .fam-two .fam-p{font-size:clamp(14px,4cqw,19px);}
+    .fam-addr{margin-top:.5em;font-size:clamp(13px,3.7cqw,16px);color:var(--body);line-height:1.45;text-wrap:balance;}
+    .fam-side.chinh{background:var(--paper-2);border:1px solid var(--line);border-radius:18px;
+      padding:clamp(20px,6cqw,30px) clamp(16px,5cqw,26px);}
+    .fam-side.chinh .fam-lab{font-size:clamp(13px,3.9cqw,16px);}
+    .fam-side.chinh .fam-p{font-size:clamp(22px,6.6cqw,30px);}
+    .fam-side.chinh .fam-addr{font-size:clamp(16px,4.5cqw,20px);}
+    .fam-side.phu{margin-top:1.5em;}
+    .fam-side.phu .fam-p{font-size:clamp(15px,4.2cqw,18px);}
 
     .btn{
       display:inline-flex;align-items:center;gap:.55em;margin-top:1.1em;
@@ -474,7 +627,6 @@
   </style>
 </head>
 <body>
-</div>
 <!-- ============ BOTANICAL VECTOR LIBRARY ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
@@ -649,6 +801,42 @@
   </defs>
 </svg>
 
+<!-- ============ THIỆP GẤP — hiện trước, khách chạm vào mới mở ra thiệp chính ============
+     Hai cánh thiệp cùng vẽ một mặt trước (.art rộng gấp đôi cánh), mỗi cánh
+     chỉ lộ một nửa, nên lúc đóng nhìn như một tấm liền; mở ra thì tách đôi.
+     Không có JavaScript thì lớp này không hiện, khách vẫn xem được thiệp.  -->
+<div class="seal" id="seal">
+  <button class="fold" id="fold" type="button" aria-label="Mở thiệp mời">
+    <span class="fold-in" aria-hidden="true">
+      <span class="fi-moi">Trân trọng kính mời</span>
+      <span class="fi-mono">H &amp; G</span>
+      <span class="fi-date">29 · 11 · 2026</span>
+    </span>
+    <span class="door l" aria-hidden="true"><span class="door-face"><span class="art">
+          <svg class="art-sprig"><use href="#sprig-h"/></svg>
+          <span class="art-eye">Thiệp mời cưới</span>
+          <span class="art-names"><span>Ngọc Huy</span><i>&amp;</i><span>Hương Giang</span></span>
+          <span class="art-date">29 · 11 · 2026</span>
+          <span class="art-to"><span class="art-tol">Trân trọng kính mời</span><span class="art-ton"></span></span>
+          <svg class="art-sprig duoi"><use href="#sprig-h"/></svg>
+        </span></span><span class="door-back"></span></span>
+    <span class="door r" aria-hidden="true"><span class="door-face"><span class="art">
+          <svg class="art-sprig"><use href="#sprig-h"/></svg>
+          <span class="art-eye">Thiệp mời cưới</span>
+          <span class="art-names"><span>Ngọc Huy</span><i>&amp;</i><span>Hương Giang</span></span>
+          <span class="art-date">29 · 11 · 2026</span>
+          <span class="art-to"><span class="art-tol">Trân trọng kính mời</span><span class="art-ton"></span></span>
+          <svg class="art-sprig duoi"><use href="#sprig-h"/></svg>
+        </span></span><span class="door-back"></span></span>
+    <span class="wax" aria-hidden="true"><img src="logo.png" alt="" onerror="this.remove()"><b>H&amp;G</b></span>
+  </button>
+  <p class="seal-hint" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M12 10V8.5a1.5 1.5 0 0 1 3 0V11"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L4.4 15.8a1.6 1.6 0 0 1 2.4-2.1L9 15.5"/></svg>
+    Chạm vào thiệp để mở
+  </p>
+</div>
+<script>document.documentElement.classList.add("sealed");</script>
+
 <div class="invite">
 
   <!-- ============ COVER ============ -->
@@ -715,7 +903,7 @@
         <span class="n">Hương Giang</span>
       </div>
       <div class="cv-date"><span>29</span><span>Nov</span><span class="yr">2026</span></div>
-      <div class="cv-lunar reveal">Tức ngày 21 tháng 10 âm lịch</div>
+      <div class="cv-lunar reveal">Tức ngày 21 tháng 10 năm Bính Ngọ</div>
       <div class="cv-guest" hidden>
         <span class="gl">Thân mời</span>
         <span class="gn"></span>
@@ -729,8 +917,35 @@
 
 
 
+  <!-- ============ HAI BÊN GIA ĐÌNH ============ -->
+  <!-- Hai bên gia đình ngang nhau -->
+  <section id="family">
+    <div class="eyebrow reveal">Trân trọng báo tin</div>
+    <h2 class="h-serif reveal d1">Lễ Thành Hôn</h2>
+    <p class="bao-sub reveal d1">của con chúng tôi</p>
+    <div class="couple reveal d1">
+      <div class="cp"><span class="cp-role">Chú rể</span><span class="cp-name">Lê Ngọc Huy</span></div>
+      <div class="cp-amp" aria-hidden="true">&amp;</div>
+      <div class="cp"><span class="cp-role">Cô dâu</span><span class="cp-name">Hoàng Thị Hương Giang</span></div>
+    </div>
+    <div class="fam fam-two reveal d2">
+      <div class="fam-side">
+        <div class="fam-lab">Nhà trai</div>
+        <div class="fam-p"><span>Ông</span> <b>Lê Công Bồng</b></div>
+        <div class="fam-p"><span>Bà</span> <b>Bùi Thị Tuyết</b></div>
+        <div class="fam-addr"><span class="nw">Thôn An Lập,</span> <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></div>
+      </div>
+      <div class="fam-side">
+        <div class="fam-lab">Nhà gái</div>
+        <div class="fam-p"><span>Ông</span> <b>Hoàng Văn Nguyên</b></div>
+        <div class="fam-p"><span>Bà</span> <b>Đinh Thị Hương</b></div>
+        <div class="fam-addr"><span class="nw">62 Nguyễn Xiển,</span> <span class="nw">Phường Thanh Liệt,</span> <span class="nw">Thành phố Hà Nội</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ EVENTS ============ -->
-  <section id="events">
+  <section class="alt" id="events">
     <div class="eyebrow reveal">Trân trọng kính mời</div>
     <h2 class="h-serif reveal d1">Sự Kiện Cưới</h2>
     <p class="lead reveal d1">Chúng mình hân hạnh được đón tiếp bạn trong hai buổi lễ dưới đây.</p>
@@ -738,44 +953,30 @@
       <div class="card reveal d1">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" stroke-linejoin="round"/></svg>
         <h3>Lễ Thành Hôn</h3>
-        <div class="when">9:00 sáng · Chủ Nhật, 29.11.2026</div>
+        <div class="when"><span class="gio">10:30 sáng</span><span class="sep"> · </span><span class="ngay"><span class="nw">Chủ Nhật,</span> <span class="nw">29.11.2026</span></span></div>
+        <div class="lunar"><span class="nw">Tức ngày 21 tháng 10</span> <span class="nw">năm Bính Ngọ</span></div>
         <div class="rule"></div>
         <div class="where">Tư gia nhà trai</div>
-        <div class="addr">Thôn An Lập (Năng An cũ), Xã Thư Vũ, Tỉnh Thái Bình</div>
+        <div class="addr"><span class="nw">Thôn An Lập,</span> <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></div>
         <a class="btn" data-map="groom" href="#">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
           Chỉ đường
         </a>
       </div>
       <div class="card reveal d2">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><path d="M5 11h14l-1 9H6l-1-9Z" stroke-linejoin="round"/><path d="M9 15h6"/></svg>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="15" r="4.8"/><circle cx="15" cy="15" r="4.8"/><path d="M15 4.4 16.8 6.3 15 8.6 13.2 6.3Z" stroke-linejoin="round"/></svg>
         <h3>Lễ Vu Quy</h3>
-        <div class="when">15:00 · Chủ Nhật, 29.11.2026</div>
+        <div class="when"><span class="ngay"><span class="nw">Sáng Chủ Nhật,</span> <span class="nw">29.11.2026</span></span></div>
+        <div class="lunar"><span class="nw">Tức ngày 21 tháng 10</span> <span class="nw">năm Bính Ngọ</span></div>
         <div class="rule"></div>
         <div class="where">Tư gia nhà gái</div>
-        <div class="addr">62 Nguyễn Xiển, Thanh Xuân, Hà Nội</div>
+        <div class="addr"><span class="nw">62 Nguyễn Xiển,</span> <span class="nw">Phường Thanh Liệt,</span> <span class="nw">Thành phố Hà Nội</span></div>
         <a class="btn" data-map="bride" href="#">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
           Chỉ đường
         </a>
       </div>
     </div>
-  </section>
-
-  <!-- ============ PROGRAM ============ -->
-  <section class="alt" id="program">
-    <div class="eyebrow reveal">Chương trình</div>
-    <h2 class="h-script reveal d1">Trong ngày trọng đại</h2>
-    <div class="program reveal d1">
-      <div class="prow"><span class="t">04:15</span><span class="a">Đoàn nhà trai khởi hành đón dâu</span></div>
-      <div class="prow"><span class="t">06:15</span><span class="a">Đoàn nhà trai tới nhà gái</span></div>
-      <div class="prow"><span class="t">06:30</span><span class="a">Lễ ăn hỏi &middot; trao tráp</span></div>
-      <div class="prow"><span class="t">07:15</span><span class="a">Lễ xin dâu</span></div>
-      <div class="prow"><span class="t">07:45</span><span class="a">Khởi hành rước dâu về Thái Bình</span></div>
-      <div class="prow"><span class="t">10:30</span><span class="a">Nghi lễ gia tiên tại nhà trai</span></div>
-      <div class="prow"><span class="t">11:00</span><span class="a">Tiệc thân mật</span></div>
-    </div>
-    <svg class="sprig reveal"><use href="#sprig-h"/></svg>
   </section>
 
 
@@ -1088,6 +1289,33 @@ const GUEST = (function(){
   const inp = $("#rv-name");
   if(inp && !inp.value) inp.value = GUEST;
   document.title = GUEST + " · " + CONFIG.coupleTag;
+})();
+
+/* ---------------- thiệp gấp ở màn đầu ---------------- */
+(function(){
+  const seal = $("#seal");
+  if(!seal) return;
+  // Mặt thiệp ghi tên khách như phong bì. textContent: tên lấy từ địa chỉ trang.
+  if(GUEST){
+    for(const el of seal.querySelectorAll(".art-tol")) el.textContent = XH.cau ? "Gửi" : "Kính gửi";
+    for(const el of seal.querySelectorAll(".art-ton")) el.textContent = GUEST;
+    if(GUEST.length > 24) seal.classList.add("ten-dai");   // tên 2 dòng: bỏ cụm hoa dưới cho thoáng
+  }
+  // Tải lại trang thì trình duyệt hay nhảy về chỗ đang đọc dở — sau lớp thiệp
+  // gấp thì vô nghĩa, nên lần nào cũng mở ra ở bìa.
+  if("scrollRestoration" in history) history.scrollRestoration = "manual";
+  let mo = false;
+  seal.addEventListener("click", () => {
+    if(mo) return;
+    mo = true;
+    seal.classList.add("opening");               // con dấu bật ra, hai cánh mở
+    setTimeout(() => {
+      scrollTo(0, 0);
+      seal.classList.add("leaving");             // phóng vào trong thiệp và mờ dần
+      document.documentElement.classList.remove("sealed");   // bìa thiệp chính bắt đầu chạy
+      setTimeout(() => seal.remove(), reduce ? 400 : 900);
+    }, reduce ? 0 : 1350);
+  });
 })();
 
 /* ---------------- logo đầu trang ---------------- */
