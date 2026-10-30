@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&subset=vietnamese,latin&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 
   <style>
@@ -753,6 +754,25 @@
       .giftbtn.opening .gbody,.giftdlg[open],.giftdlg[open]::backdrop{animation:none;}
       .giftbtn:hover{transform:none;}
     }
+
+    /* ================= CHỮ NHỎ: KIỂU KHÔNG CHÂN =================
+       Chữ to (tên, tiêu đề, chữ viết tay, giờ và nơi tổ chức ở thẻ lễ chính) giữ
+       kiểu chữ cũ; chữ nhỏ (lời mời, ngày giờ, địa chỉ, nhãn, nút, form, chân
+       trang, chữ nhỏ trên thiệp gấp) dùng Be Vietnam Pro — phông làm riêng cho
+       tiếng Việt. Đặt cuối cùng để thắng mọi chỉnh sửa cỡ chữ phía trên.      */
+    body,.cv-eyebrow,.cv-date,.cv-lunar,.cv-guest .gl,.discover span,
+    .lead,.eyebrow,.couple,.fam,.cp-role,.cp-name,.pt-cho,
+    .card .when,.card .lunar,.card .where,.card .addr,.noi-lab,
+    .btn,.giftlabel,.gifthint,.dlgnote,.qrole,.qmeta,.qcopy,.bank dl,
+    .field label,.field input,.field select,.field textarea,.attend label,.send-note,
+    .foot .thanks,.foot .fnames,.foot .hash,.toast,
+    .seal-hint,.fi-moi,.fi-date,.art-eye,.art-date,.art-am,.art-tol{
+      font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;font-size-adjust:.47;
+    }
+    /* chữ to: giữ nguyên kiểu và cỡ như cũ */
+    .h-serif,.h-script,.card h3,.cv-names,.cv-guest .gn,.mono,.qwho,.bank .who,
+    .fi-mono,.art-names,.art-ton,.cp-amp{font-size-adjust:none;}
+    .card.chinh .when .gio,.card.chinh .where{font-family:"Lora",Georgia,serif;font-size-adjust:none;}
   </style>
 </head>
 <body>
