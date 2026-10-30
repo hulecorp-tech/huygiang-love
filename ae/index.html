@@ -506,6 +506,54 @@
     .pt-cho svg{width:36%;height:auto;opacity:.45;}
     .pt figcaption{display:flex;flex-direction:column;align-items:center;gap:.05em;}
 
+    /* ---------------- hộp quà kính hoa ---------------- */
+    .giftbtn .giftart{width:clamp(190px,58cqw,250px);}
+    .giftbtn .gbody{transform-origin:108px 172px;}
+    .giftbtn .glid{transform-origin:108px 80px;}
+    .giftbtn .gshadow{transform-origin:108px 178px;}
+    /* hộp quà nhỏ bay lơ lửng quanh hộp lớn */
+    .mini{transform-box:fill-box;transform-origin:center;
+      animation:qbay var(--t,3.6s) ease-in-out var(--d,0s) infinite;}
+    @keyframes qbay{0%,100%{transform:translateY(0) rotate(var(--r0))}50%{transform:translateY(-7px) rotate(var(--r1))}}
+    .qsao{transform-box:fill-box;transform-origin:center;opacity:0;animation:qsao 2.8s ease-in-out var(--d,0s) infinite;}
+    @keyframes qsao{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:.9;transform:scale(1) rotate(45deg)}}
+    .giftbtn:hover .qsao{animation-duration:1.3s;}
+    /* vệt sáng lướt qua mặt kính */
+    .quet{animation:quet 4.6s ease-in-out 1.2s infinite;}
+    @keyframes quet{0%{transform:translateX(-60px)}55%,100%{transform:translateX(190px)}}
+    /* bấm: nắp bật lên (giữ rõ nửa đầu rồi mới mờ), hộp nhỏ bung ra, đốm sáng loé */
+    .giftbtn.opening .giftart .glid{animation:qpop .62s cubic-bezier(.2,.8,.3,1) forwards;}
+    @keyframes qpop{0%{transform:none;opacity:1}50%{transform:translateY(-40px) rotate(-12deg);opacity:1}
+      100%{transform:translateY(-66px) rotate(-20deg);opacity:0}}
+    .giftbtn.opening .qsao{animation:qsao .55s ease-out;}
+    .giftbtn.opening .mini{animation:qbung .5s cubic-bezier(.2,.7,.2,1) forwards;}
+    @keyframes qbung{to{transform:translateY(-16px) scale(1.3);opacity:0}}
+
+    /* ---------------- nút nhạc nền ---------------- */
+    .nhac{
+      position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:50;
+      width:46px;height:46px;padding:0;border-radius:50%;border:1px solid var(--line);
+      background:var(--paper);color:var(--sage-deep);display:grid;place-items:center;cursor:pointer;
+      box-shadow:0 10px 24px -12px rgba(60,40,30,.55);-webkit-tap-highlight-color:transparent;transition:transform .2s;
+    }
+    .nhac[hidden]{display:none;}
+    .nhac:active{transform:scale(.93);}
+    .nhac svg{width:22px;height:22px;overflow:visible;}
+    .nhac .not{transform-box:fill-box;transform-origin:center;}
+    .nhac.dang-phat .not{animation:nhun 1.8s ease-in-out infinite;}
+    @keyframes nhun{50%{transform:translateY(-1.5px) rotate(-7deg)}}
+    .nhac .gach{transition:opacity .2s;}
+    .nhac.dang-phat .gach{opacity:0;}
+    /* gợn sóng quanh nút khi đang phát */
+    .nhac::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1.5px solid var(--sage);opacity:0;pointer-events:none;}
+    .nhac.dang-phat::after{animation:song 2.4s ease-out infinite;}
+    @keyframes song{0%{opacity:.6;transform:scale(.88)}100%{opacity:0;transform:scale(1.32)}}
+    @media (prefers-reduced-motion:reduce){
+      .mini,.qsao,.quet,.giftbtn.opening .mini,.giftbtn.opening .giftart .glid,.giftbtn.opening .qsao,
+      .nhac.dang-phat .not,.nhac.dang-phat::after{animation:none;}
+      .qsao{opacity:.7;}
+    }
+
     .btn{
       display:inline-flex;align-items:center;gap:.55em;margin-top:1.1em;
       padding:.72em 1.5em;border-radius:999px;border:1.5px solid var(--sage-deep);
@@ -1127,42 +1175,155 @@
     <button class="giftbtn reveal d1" id="giftOpen" type="button"
             aria-haspopup="dialog" aria-controls="giftDialog">
       <span class="giftart" aria-hidden="true">
-        <span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span>
-        <svg viewBox="0 0 120 116">
+        <!-- hộp kính đựng hoa, thắt nơ satin trắng; màu kính theo màu của bản (--sage) -->
+        <svg viewBox="0 0 208 196">
           <defs>
-            <linearGradient id="gBox" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#f6f1e2"/><stop offset="55%" stop-color="#e9e0c9"/><stop offset="100%" stop-color="#d6cbb0"/>
+            <clipPath id="qKinh"><path d="M54 92H130V170H54ZM130 92L158 76V154L130 170Z"/></clipPath>
+            <linearGradient id="qRib" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#e6e9e6"/><stop offset=".45" stop-color="#ffffff"/><stop offset="1" stop-color="#d5d9d5"/>
             </linearGradient>
-            <linearGradient id="gLid" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#fffdf6"/><stop offset="60%" stop-color="#f2ecdb"/><stop offset="100%" stop-color="#ded3ba"/>
+            <linearGradient id="qBow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f3f4f2"/><stop offset="1" stop-color="#cdd2cd"/>
             </linearGradient>
-            <linearGradient id="gRib" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8fae6b"/><stop offset="100%" stop-color="#5f7a45"/>
+            <linearGradient id="qQuet" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
             </linearGradient>
+            <filter id="qMo" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="8"/></filter>
+            <symbol id="quaNho" viewBox="0 0 40 40" overflow="visible">
+              <path d="M6 17H26V37H6ZM26 17L34 12V32L26 37Z" style="fill:var(--than)"/>
+              <path d="M26 17L34 12V32L26 37Z" fill="#000" opacity=".13"/>
+              <path d="M5 13H27V18H5ZM5 13L13 8H35L27 13ZM27 13L35 8V13L27 18Z" style="fill:var(--than)"/>
+              <path d="M5 13L13 8H35L27 13Z" fill="#fff" opacity=".3"/>
+              <path d="M27 13L35 8V13L27 18Z" fill="#000" opacity=".16"/>
+              <path d="M5 18H27M27 18L35 13" fill="none" stroke="#000" stroke-opacity=".12" stroke-width=".6"/>
+              <path d="M14.5 13H17.5V37H14.5ZM29 15.5L31.5 14V34L29 35.5ZM14.5 13H17.5L25.5 8H22.5Z" style="fill:var(--no)"/>
+              <path d="M20 10.6C16.8 11.2 12.6 10.4 12.7 7.8 12.8 5.4 16.9 5.9 20 10.6ZM20 10.6C23.2 11.2 27.4 10.4 27.3 7.8 27.2 5.4 23.1 5.9 20 10.6Z" style="fill:var(--no)"/>
+              <circle cx="20" cy="10.5" r="1.4" style="fill:var(--no)"/>
+            </symbol>
           </defs>
-          <ellipse class="gshadow" cx="60" cy="109" rx="33" ry="4.5"/>
+          <g filter="url(#qMo)" style="fill:var(--sage)">
+            <circle cx="28" cy="70" r="22" opacity=".24"/><circle cx="184" cy="64" r="17" opacity=".2"/>
+            <circle cx="178" cy="156" r="24" opacity=".18"/><circle cx="104" cy="34" r="26" opacity=".12"/>
+            <circle cx="22" cy="156" r="15" opacity=".22"/>
+          </g>
+          <ellipse class="gshadow" cx="108" cy="178" rx="60" ry="7"/>
           <g class="gbody">
-            <rect x="25" y="52" width="70" height="52" rx="6"
-                  fill="url(#gBox)" stroke="#c8bda0" stroke-width="1"/>
-            <rect x="54" y="52" width="12" height="52" fill="#6f8c53"/>
-            <path d="M25 60 h70" stroke="#000" stroke-opacity=".05" stroke-width="4" fill="none"/>
+            <g clip-path="url(#qKinh)">
+              <rect x="50" y="70" width="112" height="106" style="fill:var(--paper-2)"/>
+              <use href="#eucSprig" transform="translate(60 176) rotate(-28) scale(1.05)"/>
+              <use href="#eucSprig" transform="translate(122 178) rotate(22) scale(1)"/>
+              <use href="#oliveSprig" transform="translate(92 182) rotate(-6) scale(1.15)"/>
+              <use href="#eucSprig" transform="translate(152 168) rotate(14) scale(0.85)"/>
+              <use href="#fern" transform="translate(66 132) rotate(-64) scale(0.7)"/>
+              <use href="#oliveSprig" transform="translate(146 124) rotate(38) scale(0.7)"/>
+              <use href="#eucSprig" transform="translate(104 140) rotate(70) scale(0.6)"/>
+              <use href="#floret" transform="translate(151.0 145.3) rotate(215) scale(0.41)"/>
+              <use href="#floret" transform="translate(79.1 164.7) rotate(35) scale(0.36)"/>
+              <use href="#floret" transform="translate(86.7 165.6) rotate(1) scale(0.36)"/>
+              <use href="#floret" transform="translate(147.1 113.1) rotate(15) scale(0.37)"/>
+              <use href="#floret" transform="translate(58.7 90.8) rotate(189) scale(0.37)"/>
+              <use href="#floret" transform="translate(107.4 134.7) rotate(43) scale(0.40)"/>
+              <use href="#floret" transform="translate(102.1 143.7) rotate(248) scale(0.35)"/>
+              <use href="#floret" transform="translate(67.2 138.6) rotate(242) scale(0.32)"/>
+              <use href="#floret" transform="translate(68.9 131.4) rotate(71) scale(0.41)"/>
+              <use href="#floret" transform="translate(138.4 89.1) rotate(31) scale(0.39)"/>
+              <use href="#floret" transform="translate(126.4 138.6) rotate(139) scale(0.41)"/>
+              <use href="#floret" transform="translate(153.1 104.6) rotate(67) scale(0.39)"/>
+              <use href="#floret" transform="translate(136.4 118.8) rotate(91) scale(0.40)"/>
+              <use href="#floret" transform="translate(128.6 91.0) rotate(318) scale(0.38)"/>
+              <use href="#floret" transform="translate(112.1 160.0) rotate(248) scale(0.38)"/>
+              <use href="#floret" transform="translate(56.2 90.8) rotate(270) scale(0.35)"/>
+              <use href="#floret" transform="translate(106.7 147.3) rotate(30) scale(0.37)"/>
+              <use href="#floret" transform="translate(76.6 166.5) rotate(206) scale(0.31)"/>
+              <use href="#floret" transform="translate(83.6 160.9) rotate(183) scale(0.34)"/>
+              <use href="#floret" transform="translate(142.9 150.1) rotate(70) scale(0.34)"/>
+              <use href="#floret" transform="translate(158.8 101.7) rotate(64) scale(0.42)"/>
+              <use href="#floret" transform="translate(88.5 84.8) rotate(207) scale(0.32)"/>
+              <use href="#floret" transform="translate(98.0 128.0) rotate(78) scale(0.34)"/>
+              <use href="#floret" transform="translate(133.5 89.4) rotate(308) scale(0.31)"/>
+              <use href="#floret" transform="translate(111.8 129.2) rotate(22) scale(0.33)"/>
+              <use href="#floret" transform="translate(138.2 115.4) rotate(0) scale(0.39)"/>
+              <use href="#floret" transform="translate(73.2 89.9) rotate(35) scale(0.34)"/>
+              <use href="#floret" transform="translate(104.9 94.6) rotate(180) scale(0.40)"/>
+              <use href="#floret" transform="translate(149.4 137.5) rotate(222) scale(0.40)"/>
+              <use href="#floret" transform="translate(80.5 95.2) rotate(219) scale(0.33)"/>
+              <use href="#floret" transform="translate(63.7 89.2) rotate(57) scale(0.35)"/>
+              <use href="#floret" transform="translate(141.4 151.6) rotate(343) scale(0.38)"/>
+              <use href="#floret" transform="translate(137.7 89.9) rotate(8) scale(0.39)"/>
+              <use href="#floret" transform="translate(109.9 124.7) rotate(211) scale(0.36)"/>
+              <use href="#floret" transform="translate(88.3 123.5) rotate(137) scale(0.36)"/>
+              <use href="#floret" transform="translate(54.3 100.0) rotate(275) scale(0.39)"/>
+              <use href="#floret" transform="translate(51.5 84.9) rotate(262) scale(0.32)"/>
+              <use href="#floret" transform="translate(88.1 90.8) rotate(43) scale(0.31)"/>
+              <use href="#floret" transform="translate(98.4 135.5) rotate(300) scale(0.35)"/>
+              <use href="#floret" transform="translate(62.9 108.3) rotate(318) scale(0.33)"/>
+              <use href="#floret" transform="translate(78.8 93.9) rotate(0) scale(0.31)"/>
+              <use href="#floret" transform="translate(79.4 127.8) rotate(121) scale(0.31)"/>
+              <use href="#floret" transform="translate(158.3 136.4) rotate(303) scale(0.32)"/>
+              <use href="#floret" transform="translate(133.4 154.7) rotate(332) scale(0.34)"/>
+              <use href="#floret" transform="translate(129.8 153.7) rotate(331) scale(0.41)"/>
+              <use href="#floret" transform="translate(90.2 143.2) rotate(349) scale(0.34)"/>
+              <use href="#floret" transform="translate(51.8 159.4) rotate(42) scale(0.36)"/>
+              <use href="#floret" transform="translate(68.6 152.8) rotate(307) scale(0.40)"/>
+              <use href="#floret" transform="translate(111.8 145.2) rotate(242) scale(0.31)"/>
+              <use href="#floret" transform="translate(72.0 136.1) rotate(135) scale(0.39)"/>
+              <use href="#floret" transform="translate(110.2 91.4) rotate(269) scale(0.39)"/>
+              <use href="#floret" transform="translate(159.8 94.4) rotate(104) scale(0.34)"/>
+              <use href="#floret" transform="translate(145.7 145.2) rotate(98) scale(0.39)"/>
+              <use href="#floret" transform="translate(120.7 162.0) rotate(125) scale(0.40)"/>
+              <use href="#floret" transform="translate(110.2 139.9) rotate(39) scale(0.41)"/>
+              <use href="#floret" transform="translate(138.6 129.6) rotate(0) scale(0.38)"/>
+              <use href="#floret" transform="translate(100.0 81.4) rotate(69) scale(0.36)"/>
+              <use href="#floret" transform="translate(84.7 100.3) rotate(69) scale(0.30)"/>
+              <use href="#floret" transform="translate(148.1 122.9) rotate(225) scale(0.41)"/>
+              <use href="#floret" transform="translate(81.4 129.2) rotate(309) scale(0.41)"/>
+              <use href="#floret" transform="translate(70.1 170.1) rotate(282) scale(0.37)"/>
+              <use href="#floret" transform="translate(136.6 131.3) rotate(316) scale(0.35)"/>
+              <use href="#orchid" transform="translate(70 104) rotate(20) scale(0.5)"/>
+              <use href="#orchid" transform="translate(124 104) rotate(-30) scale(0.46)"/>
+              <use href="#orchid" transform="translate(150 100) rotate(10) scale(0.42)"/>
+              <use href="#orchid" transform="translate(84 166) rotate(0) scale(0.48)"/>
+              <use href="#rose" transform="translate(74 142) rotate(10) scale(0.86)"/>
+              <use href="#rose" transform="translate(113 120) rotate(-15) scale(0.76)"/>
+              <use href="#rose" transform="translate(102 164) rotate(30) scale(0.66)"/>
+              <use href="#rose" transform="translate(64 108) rotate(0) scale(0.58)"/>
+              <use href="#rose" transform="translate(126 160) rotate(-20) scale(0.62)"/>
+              <use href="#rose" transform="translate(145 116) rotate(5) scale(0.54)"/>
+              <use href="#rose" transform="translate(148 146) rotate(40) scale(0.5)"/>
+              <g transform="skewX(-16)"><rect class="quet" x="40" y="60" width="28" height="130" fill="url(#qQuet)"/></g>
+            </g>
+            <path d="M54 92H130V170H54Z" style="fill:var(--sage)" opacity=".1"/>
+            <path d="M130 92L158 76V154L130 170Z" style="fill:var(--sage)" opacity=".24"/>
+            <path d="M54 92H130V170H54ZM130 92L158 76V154L130 170" fill="none" style="stroke:var(--sage)" stroke-width="2.8" stroke-linejoin="round" opacity=".78"/>
+            <path d="M56.5 95V167.5M133 92.5L155.5 79.5" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".75"/>
+            <path d="M86 92H98V170H86Z" fill="url(#qRib)"/>
+            <path d="M141 85.7L147 82.3V160.3L141 163.7Z" fill="url(#qRib)" opacity=".92"/>
           </g>
           <g class="glid">
-            <rect x="18" y="36" width="84" height="18" rx="5"
-                  fill="url(#gLid)" stroke="#c8bda0" stroke-width="1"/>
-            <rect x="54" y="36" width="12" height="18" fill="#7d9a5c"/>
-            <!-- ribbon tails -->
-            <path d="M57 37 C51 30 45 27 40 27" stroke="#6f8c53" stroke-width="3"
-                  fill="none" stroke-linecap="round"/>
-            <path d="M63 37 C69 30 75 27 80 27" stroke="#6f8c53" stroke-width="3"
-                  fill="none" stroke-linecap="round"/>
-            <!-- bow loops -->
-            <path class="bow" d="M60 36 C45 36 34 28 36 20 C38 12 51 15 57 25 C59 29 60 33 60 36 Z"
-                  fill="#7d9a5c" stroke="#5f7a45" stroke-width=".8" stroke-linejoin="round"/>
-            <path class="bow" d="M60 36 C75 36 86 28 84 20 C82 12 69 15 63 25 C61 29 60 33 60 36 Z"
-                  fill="#8fae6b" stroke="#5f7a45" stroke-width=".8" stroke-linejoin="round"/>
-            <circle cx="60" cy="33" r="4.6" fill="#6f8c53"/>
-            <circle cx="58.6" cy="31.6" r="1.5" fill="#a8c089" opacity=".8"/>
+            <path d="M50 80L80 63H164L134 80Z" style="fill:var(--sage)" opacity=".3"/>
+            <path d="M50 80H134V94H50Z" style="fill:var(--sage)" opacity=".22"/>
+            <path d="M134 80L164 63V77L134 94Z" style="fill:var(--sage)" opacity=".36"/>
+            <path d="M50 80L80 63H164L134 80ZM50 80H134V94H50ZM134 80L164 63V77L134 94" fill="none" style="stroke:var(--sage)" stroke-width="2.4" stroke-linejoin="round" opacity=".8"/>
+            <path d="M52 82.5H131M82 65.5H160" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round" opacity=".7"/>
+            <path d="M86 80H98V94H86ZM146 72.2L152 68.8V82.8L146 86.2ZM86 80H98L128 63H116ZM59.8 74.5H143.8L154.2 68.5H70.2Z" fill="url(#qRib)"/>
+            <path d="M104 72C98 80 93 89 89 98L95 99.5C98 91 102 83 107 74.5ZM110 72C116 80 123 87 130 93L125 96.5C120 89 115 82 108 74.5Z" fill="url(#qBow)" stroke="#c8cdc8" stroke-width=".6"/>
+            <path d="M107 70C96 72 78 70 74 60 71 51 84 46 94 54 100 59 104 64 107 70ZM107 70C118 72 136 70 140 60 143 51 130 46 120 54 114 59 110 64 107 70Z" fill="url(#qBow)" stroke="#c8cdc8" stroke-width=".7"/>
+            <path d="M104 67C97 63 89 59 84 57M110 67C117 63 125 59 130 57" fill="none" stroke="#c5cac5" stroke-width="1" stroke-linecap="round" opacity=".8"/>
+            <ellipse cx="107" cy="70" rx="6.4" ry="4.8" fill="url(#qBow)" stroke="#c8cdc8" stroke-width=".7"/>
+          </g>
+          <use class="mini" href="#quaNho" x="6" y="18" width="32" height="32" style="--than:#f7eedc;--no:#c9a24a;--t:3.8s;--d:-0.4s;--r0:-9deg;--r1:-2deg"/>
+          <use class="mini" href="#quaNho" x="166" y="8" width="30" height="30" style="--than:#fbf8f3;--no:#c69a44;--t:4.4s;--d:-1.6s;--r0:6deg;--r1:12deg"/>
+          <use class="mini" href="#quaNho" x="0" y="98" width="24" height="24" style="--than:#ead5ba;--no:#b4895a;--t:3.4s;--d:-2.2s;--r0:-6deg;--r1:4deg"/>
+          <use class="mini" href="#quaNho" x="178" y="94" width="24" height="24" style="--than:var(--paper-2);--no:var(--sage-deep);--t:4s;--d:-0.9s;--r0:8deg;--r1:-3deg"/>
+          <use class="mini" href="#quaNho" x="18" y="146" width="36" height="36" style="--than:#c8463a;--no:#ecc56c;--t:4.8s;--d:-2.8s;--r0:-4deg;--r1:6deg"/>
+          <use class="mini" href="#quaNho" x="158" y="146" width="30" height="30" style="--than:var(--sage);--no:#ffffff;--t:3.6s;--d:-1.2s;--r0:10deg;--r1:2deg"/>
+          <g style="fill:var(--ink-soft)">
+          <path class="qsao" style="--d:0s" transform="translate(40 16) scale(5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:0.8s" transform="translate(148 44) scale(4)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:1.6s" transform="translate(16 84) scale(4.5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:0.4s" transform="translate(196 136) scale(5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:2s" transform="translate(66 190) scale(4)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:1.2s" transform="translate(186 30) scale(3.5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
           </g>
         </svg>
       </span>
@@ -1273,6 +1434,13 @@
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<button class="nhac" id="nhacBtn" type="button" aria-label="Bật nhạc" aria-pressed="false" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <g class="not"><path d="M9 17V5.6l10-2.1V15"/><circle cx="6.6" cy="17" r="2.4"/><circle cx="16.6" cy="15" r="2.4"/></g>
+    <path class="gach" d="M4 4l16 16"/>
+  </svg>
+</button>
+<audio id="nhacNen" loop preload="none"></audio>
 
 <script>
 /* ---------------- CONFIG: sửa các giá trị này để cá nhân hoá ---------------- */
@@ -1308,6 +1476,10 @@ const CONFIG = {
      Sheet: "nhatrai" -> tab Nhà trai, "nhagai" -> tab Nhà gái, "chung" ->
      tab RSVP. Giá trị lạ cũng rơi về RSVP (bảng BEN trong rsvp-sheet.gs). */
   ben: "chung",
+
+  /* Nhạc nền, phát khi khách chạm mở thiệp gấp. Muốn đổi bài: chép file
+     mp3 vào thư mục gốc của trang rồi sửa tên ở đây. Để "" là không có nhạc. */
+  nhac: "../nhac.mp3",
 
   /* Logo ở đầu trang. Đặt file cùng thư mục với trang này rồi ghi tên vào.
      Không có file thì khối logo tự ẩn, trang không hiện ô ảnh vỡ.
@@ -1433,6 +1605,34 @@ const GUEST = (function(){
   document.title = GUEST + " · " + CONFIG.coupleTag;
 })();
 
+/* ---------------- nhạc nền ----------------
+   Trình duyệt chỉ cho phát tiếng khi khách vừa chạm vào trang, nên nhạc bắt
+   đầu đúng lúc khách chạm mở thiệp gấp. Nút tròn góc dưới để tắt / bật lại. */
+const NHAC = (function(){
+  const btn = $("#nhacBtn"), au = $("#nhacNen");
+  if(!btn || !au || !CONFIG.nhac) return null;
+  au.src = CONFIG.nhac;
+  au.volume = .7;                                   // iPhone bỏ qua volume, file đã để nhỏ sẵn
+  let muonNghe = false;                             // khách bấm tắt thì không tự phát lại
+  const capNhat = () => {
+    const on = !au.paused;
+    btn.classList.toggle("dang-phat", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.setAttribute("aria-label", on ? "Tắt nhạc" : "Bật nhạc");
+  };
+  au.addEventListener("play", capNhat);
+  au.addEventListener("pause", capNhat);
+  const phat = () => { muonNghe = true; const p = au.play(); if(p && p.catch) p.catch(capNhat); };
+  btn.addEventListener("click", () => {
+    if(au.paused) phat(); else { muonNghe = false; au.pause(); }
+  });
+  // chuyển sang tab / ứng dụng khác thì tạm dừng, quay lại thì phát tiếp
+  document.addEventListener("visibilitychange", () => {
+    if(document.hidden) au.pause(); else if(muonNghe) phat();
+  });
+  return { batDau(){ btn.hidden = false; phat(); } };
+})();
+
 /* ---------------- thiệp gấp ở màn đầu ---------------- */
 (function(){
   const seal = $("#seal");
@@ -1450,6 +1650,7 @@ const GUEST = (function(){
   seal.addEventListener("click", () => {
     if(mo) return;
     mo = true;
+    if(NHAC) NHAC.batDau();                      // phải gọi ngay trong lúc chạm thì mới được phát tiếng
     seal.classList.add("opening");               // con dấu bật ra, hai cánh mở, lòng thiệp hiện chữ
     setTimeout(() => {
       scrollTo(0, 0);
