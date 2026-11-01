@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="vi">
+<!-- ===== BẢN "HÀN QUỐC PASTEL" — thiệp chung của cả hai nhà =====
+     Bố cục theo phong cách thiệp Hàn Quốc tông hồng pastel: thiệp mở đầu, vòm kính
+     ghi tên, thông tin lễ cưới, album ảnh trượt, thông tin tiệc (đếm ngược, lịch,
+     địa điểm, dress code, lịch trình), xác nhận tham dự, sổ lưu bút, hộp quà mừng.
+     Hoa lá đều là hình vector tự vẽ trong trang; ảnh cưới thêm ở CONFIG.album. -->
+<head>
+  <meta charset="utf-8">
+  <title>Ngọc Huy & Hương Giang · Thiệp cưới</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Thiệp cưới Ngọc Huy & Hương Giang — Chủ Nhật 29.11.2026.">
+  <meta property="og:title" content="Ngọc Huy & Hương Giang — Thiệp cưới">
+  <meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi — 29.11.2026.">
+  <meta name="theme-color" content="#fdeeec">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Alex+Brush&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+  <style>
+    :root{
+      --hong:#cb5d6c;        /* hồng đất: tên, tiêu đề, nút */
+      --ruou:#933845;        /* đỏ rượu: chữ phụ, đầu hộp QR */
+      --ngay:#a95e68;        /* chữ ngày tháng ở thiệp mở đầu */
+      --nen:#fdeeec;         /* nền trang */
+      --the:#fef7f6;         /* nền thẻ */
+      --o:#faeaea;           /* ô tên khách */
+      --vien:#f1d3d6;        /* viền ô nhập */
+      /* màu cho hộp quà kính (dùng chung hình với các bản khác) */
+      --sage:#e59aa8; --sage-deep:#cb5d6c; --paper:#fef7f6; --paper-2:#fbe3e6; --ink-soft:#933845;
+      --serif:"EB Garamond","Cormorant Garamond",Georgia,serif;
+      --sans:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    html.dong,html.dong body{overflow:hidden;}
+    body{
+      background:var(--nen);color:var(--ruou);font-family:var(--serif);font-size:15px;line-height:1.5;
+      -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    }
+    button{font:inherit;color:inherit;}
+    svg{overflow:visible;}
+    .an{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+    /* ---------- nền màu nước mờ, cố định sau trang ---------- */
+    .nen{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+      background:
+        radial-gradient(42% 26% at 8% 14%, rgba(240,170,182,.34), transparent 70%),
+        radial-gradient(36% 22% at 94% 34%, rgba(236,156,172,.28), transparent 70%),
+        radial-gradient(48% 30% at 16% 72%, rgba(246,192,201,.32), transparent 70%),
+        radial-gradient(40% 26% at 88% 90%, rgba(240,172,184,.3), transparent 70%),
+        radial-gradient(60% 40% at 50% 50%, #fff7f6, var(--nen));}
+    .nen i{position:absolute;border-radius:50%;filter:blur(30px);opacity:.45;background:#f4b9c4;}
+
+    /* ---------- cánh hoa rơi ---------- */
+    .roi{position:fixed;inset:0;z-index:62;pointer-events:none;overflow:hidden;}
+    .roi span{position:absolute;top:-6vh;left:var(--x);width:var(--s);height:calc(var(--s) * .62);
+      animation:roi var(--d) linear var(--tre) infinite;opacity:.8;}
+    .roi span.bong{height:var(--s);opacity:.9;}
+    .roi span svg{width:100%;height:100%;display:block;animation:lat calc(var(--d) / 4) ease-in-out infinite alternate;}
+    .roi span.bong svg{animation:xoay calc(var(--d) / 2) linear infinite;}
+    @keyframes roi{0%{transform:translate3d(0,0,0) rotate(0)}100%{transform:translate3d(var(--lac),112vh,0) rotate(400deg)}}
+    @keyframes lat{0%{transform:rotateX(0) rotateY(10deg)}100%{transform:rotateX(65deg) rotateY(-20deg)}}
+    @keyframes xoay{to{transform:rotate(360deg)}}
+
+    /* ---------- thiệp mở đầu ---------- */
+    .mo{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:24px;
+      background:rgba(252,234,234,.62);backdrop-filter:blur(14px) saturate(1.05);-webkit-backdrop-filter:blur(14px) saturate(1.05);
+      transition:opacity .9s ease;}
+    html.dong .mo,.mo.dang-mo{display:flex;}
+    .mo.dang-mo{opacity:0;pointer-events:none;}
+    .the-mo{position:relative;width:min(80vw,312px);background:var(--the);border-radius:12px;text-align:center;
+      padding:22px 16px 46px;box-shadow:0 34px 60px -24px rgba(110,40,55,.45),0 10px 22px -12px rgba(110,40,55,.25);
+      transition:transform .9s cubic-bezier(.3,.7,.2,1),opacity .7s ease;}
+    .mo.dang-mo .the-mo{transform:scale(1.08) translateY(-10px);opacity:0;}
+    .the-mo .canh-tl{position:absolute;left:-18px;top:-12px;width:132px;height:86px;}
+    .the-mo .canh-br{position:absolute;right:-18px;bottom:-12px;width:132px;height:86px;transform:rotate(180deg);}
+    .tim-tron{position:relative;width:59px;height:59px;margin:0 auto 36px;border-radius:50%;display:grid;place-items:center;
+      background:radial-gradient(circle at 35% 30%,#d57483,#c45a6a 72%);box-shadow:0 8px 16px -6px rgba(160,60,80,.55);}
+    .tim-tron svg{width:19px;height:17px;fill:#fff;}
+    .ten-mo{font-family:"Viaoda Libre",var(--serif);color:var(--hong);font-size:clamp(26px,7.8vw,31px);line-height:1.18;font-weight:400;margin:0;}
+    .ten-mo i{display:block;font-style:normal;font-size:.62em;line-height:1.35;}
+    .gach-hoa{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 16px;color:var(--hong);}
+    .gach-hoa::before,.gach-hoa::after{content:"";width:38px;height:1px;background:var(--hong);opacity:.7;}
+    .gach-hoa svg{width:11px;height:10px;fill:currentColor;opacity:.85;}
+    .ngay-mo{font-family:var(--sans);font-size:17.5px;font-weight:500;color:var(--ngay);letter-spacing:.02em;}
+    .loi-mo{font-family:var(--sans);font-size:15.5px;color:var(--ngay);margin:20px 0 6px;}
+    .khach-mo{display:inline-block;min-width:44%;max-width:100%;padding:9px 20px;border-radius:12px;background:var(--o);
+      font-family:var(--sans);font-weight:700;font-size:17px;color:var(--hong);overflow-wrap:anywhere;}
+    .du-mo{font-family:var(--sans);font-size:min(13px,3.55vw);color:var(--ngay);margin:10px 0 26px;text-wrap:balance;}
+    .nut-mo{position:relative;overflow:hidden;border:0;cursor:pointer;border-radius:999px;padding:12px 32px;
+      background:var(--hong);color:#fff;font-family:var(--sans);font-weight:700;font-size:17px;letter-spacing:.01em;
+      box-shadow:0 14px 22px -10px rgba(150,50,70,.7),inset 0 0 0 2px rgba(255,255,255,.22);-webkit-tap-highlight-color:transparent;}
+    .nut-mo::after{content:"";position:absolute;top:-20%;bottom:-20%;left:0;width:40%;
+      background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-160%) skewX(-18deg);
+      animation:loe 3.2s ease-in-out 1s infinite;}
+    @keyframes loe{0%{transform:translateX(-160%) skewX(-18deg)}55%,100%{transform:translateX(330%) skewX(-18deg)}}
+    .nut-mo:focus-visible,.noi button:focus-visible{outline:2px solid var(--ruou);outline-offset:4px;}
+
+    /* ---------- khung trang ---------- */
+    .trang{position:relative;z-index:1;width:min(480px,100%);margin:0 auto;overflow:hidden;padding-bottom:130px;}
+    .deco{position:absolute;pointer-events:none;z-index:2;}
+    .deco svg{width:100%;height:100%;display:block;overflow:visible;}
+    .deco.sau{z-index:0;}
+    .tam .deco{z-index:-1;}
+
+    /* vòm kính ghi tên */
+    .dau{position:relative;height:clamp(430px,122vw,500px);}
+    .vom{position:absolute;left:50%;top:4px;translate:-50% 0;width:min(62%,262px);height:clamp(300px,88.5vw,372px);
+      border-radius:56px 56px 50% 50% / 56px 56px 35% 35%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:linear-gradient(180deg,rgba(255,252,252,.66),rgba(255,244,245,.5));
+      border:1.5px solid rgba(255,255,255,.9);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+      box-shadow:inset 0 0 40px rgba(255,255,255,.5),0 22px 40px -30px rgba(150,60,80,.4);padding-bottom:9%;z-index:1;}
+    .vom h1{font-family:"Viaoda Libre",var(--serif);font-weight:400;color:var(--hong);margin:0;text-align:center;
+      font-size:clamp(26px,7.8vw,31px);line-height:1.25;}
+    .vom h1 i{display:block;font-family:"Alex Brush",cursive;font-style:normal;font-size:.66em;line-height:1;margin:14px 0 18px;}
+
+    /* tấm kính dài chứa nội dung */
+    .tam{position:relative;z-index:3;margin:0 24px;padding:42px 16px 52px;border-radius:28px 28px 20px 20px;
+      background:linear-gradient(180deg,rgba(255,246,246,.78),rgba(254,240,240,.7));
+      border:1px solid rgba(255,255,255,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+      box-shadow:0 30px 60px -40px rgba(150,60,80,.45);text-align:center;}
+    .muc{position:relative;margin-top:56px;}
+    .tam > section:first-of-type{margin-top:0;}
+    .muc.gan{margin-top:34px;}
+    .tde{font-family:var(--serif);font-weight:700;font-size:clamp(17.5px,5vw,20px);color:var(--hong);
+      text-transform:uppercase;letter-spacing:.01em;line-height:1.3;margin:0 0 18px;text-wrap:balance;}
+    .tde.nho{font-size:clamp(14px,4vw,15.5px);margin-bottom:12px;}
+
+    /* thông tin lễ cưới */
+    .bome{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 12px;align-items:stretch;}
+    .bome .vach{background:var(--hong);opacity:.6;margin:4px 0 6px;}
+    .bome p{margin:0;}
+    .ob{font-size:14px;color:var(--ruou);margin-bottom:4px !important;}
+    .bm{font-weight:700;font-size:clamp(13.5px,3.75vw,14.5px);color:var(--hong);line-height:1.75;}
+    .dc{font-size:clamp(11px,3vw,12px);color:var(--ruou);margin-top:6px !important;line-height:1.45;text-wrap:balance;}
+    .baotin{font-size:clamp(14px,4vw,15.5px);text-transform:uppercase;color:var(--hong);line-height:1.6;margin:24px 0 0;text-wrap:balance;}
+    .ten-lon{font-family:var(--serif);font-weight:500;font-size:clamp(23px,6.6vw,26px);color:var(--hong);line-height:1.2;margin:40px 0 0;}
+    .vai{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ruou);margin-top:14px;}
+    .va{font-family:"Alex Brush",cursive;font-size:28px;color:var(--hong);line-height:1;margin:14px 0 -12px;}
+    .le-tai{margin-top:32px;}
+    .le-tai + .le-tai{margin-top:24px;}
+    .le-tai .nhan{font-size:clamp(13px,3.6vw,14px);text-transform:uppercase;color:var(--ruou);letter-spacing:.01em;line-height:1.9;}
+    .le-tai .noi-le{font-style:italic;font-size:15px;color:var(--hong);margin:0 0 2px;}
+    .gio{font-size:clamp(17px,4.9vw,19px);color:var(--hong);margin-top:8px;font-variant-numeric:lining-nums;}
+    .ngay3{display:grid;grid-template-columns:1fr auto auto auto 1fr;align-items:center;gap:0 18px;margin:24px 0 0;}
+    .ngay3 span{font-size:10.5px;text-transform:uppercase;color:var(--ruou);letter-spacing:.02em;}
+    .ngay3 span:first-child{text-align:right;} .ngay3 span:last-child{text-align:left;}
+    .ngay3 b{font-weight:400;font-size:clamp(24px,6.8vw,27px);color:var(--hong);line-height:1;font-variant-numeric:lining-nums;}
+    .ngay3 i{width:1px;height:22px;background:var(--hong);opacity:.65;}
+    .ngay-so{font-size:clamp(15.5px,4.4vw,17px);color:var(--ruou);margin-top:18px;font-variant-numeric:lining-nums;}
+    .am{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ruou);margin-top:8px;}
+
+    /* album ảnh trượt */
+    .album{position:relative;aspect-ratio:1.04;perspective:1000px;margin:0 -16px;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
+    .anh{position:absolute;left:50%;top:2.5%;width:61%;aspect-ratio:2/3;margin:0 0 0 -30.5%;border-radius:11px;overflow:hidden;cursor:pointer;
+      box-shadow:0 18px 34px -18px rgba(110,40,55,.6);background:#e9a9b4;
+      transition:transform .65s cubic-bezier(.3,.7,.2,1),opacity .5s ease,filter .5s ease;will-change:transform;}
+    .anh:not(.giua){filter:saturate(.9) brightness(.97);}
+    .anh img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+    .anh-cho{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+      background:linear-gradient(160deg,#f6d2d8,#e8a2af 60%,#d98897);color:#fff;font-family:var(--sans);font-size:11.5px;
+      letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+    .anh-cho svg{width:36px;height:36px;opacity:.9;}
+    .cham{display:flex;justify-content:center;gap:5px;margin-top:10px;}
+    .cham button{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:#f3cdd2;cursor:pointer;transition:width .3s,background .3s;}
+    .cham button[aria-current="true"]{width:22px;background:#dc8f9b;}
+
+    /* thông tin tiệc */
+    .hai-cot{display:flex;justify-content:center;gap:40px;margin-top:26px;}
+    .hai-cot .nhan{font-size:10.5px;text-transform:uppercase;color:var(--ruou);letter-spacing:.04em;}
+    .hai-cot .gio{margin-top:4px;font-size:16px;}
+    .dem{font-size:12.5px;color:var(--ruou);font-variant-numeric:tabular-nums lining-nums;}
+    .lich{margin:26px auto 0;max-width:300px;border:1.2px solid rgba(203,93,108,.6);border-radius:22px;padding:22px 14px 14px;
+      font-family:var(--sans);}
+    .lich h4{margin:0 0 12px;font-size:12.5px;font-weight:600;color:var(--hong);}
+    .lich .thu,.lich .o-ngay{display:grid;grid-template-columns:repeat(7,1fr);}
+    .lich .thu{font-size:9.5px;color:var(--hong);padding:6px 0 7px;border-top:1px solid #f1cdd2;border-bottom:1.5px solid var(--hong);margin-bottom:10px;}
+    .lich .o-ngay span{height:31px;display:grid;place-items:center;font-size:11.5px;color:var(--ruou);position:relative;}
+    .lich .o-ngay span.cuoi{color:#fff;font-weight:700;}
+    .lich .o-ngay span.cuoi svg{position:absolute;width:27px;height:25px;fill:var(--hong);animation:dap 1.6s ease-in-out infinite;}
+    .lich .o-ngay span.cuoi b{position:relative;}
+    @keyframes dap{0%,100%{transform:scale(1)}15%{transform:scale(1.14)}30%{transform:scale(.98)}45%{transform:scale(1.08)}}
+    .them-lich{display:inline-block;margin-top:14px;font-size:12.5px;color:var(--ruou);text-underline-offset:3px;}
+    .noi-tiec{font-style:italic;font-size:15px;color:var(--hong);}
+    .dc-tiec{font-size:11.5px;color:var(--ruou);margin:4px auto 0;max-width:30ch;text-wrap:balance;}
+    .bando{display:block;margin:18px auto 0;max-width:300px;border-radius:16px;overflow:hidden;
+      box-shadow:0 14px 30px -20px rgba(150,60,80,.55),0 0 0 1px rgba(203,93,108,.2);text-decoration:none;color:inherit;}
+    .bando-ve{display:block;width:100%;height:auto;}
+    .bando-ve .ghim{animation:nay 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%;}
+    @keyframes nay{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+    .bando span{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:var(--hong);color:#fff;
+      font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+    .bando span svg{width:15px;height:15px;}
+    .mau-ao{display:flex;justify-content:center;gap:16px;}
+    .mau-ao i{width:39px;height:39px;border-radius:50%;box-shadow:0 6px 14px -6px rgba(120,40,60,.55);}
+    .lt{list-style:none;margin:0 auto;padding:0;max-width:310px;position:relative;}
+    .lt::before{content:"";position:absolute;left:50%;top:14px;bottom:14px;width:1.2px;background:var(--hong);opacity:.6;}
+    .lt li{display:grid;grid-template-columns:1fr 30px 1fr;align-items:center;min-height:62px;}
+    .lt .t{display:flex;align-items:center;justify-content:flex-end;gap:16px;font-size:15px;color:var(--hong);font-variant-numeric:lining-nums;}
+    .lt .t svg{width:24px;height:24px;fill:none;stroke:#cc9e58;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;}
+    .lt .d{width:9px;height:9px;border-radius:50%;background:var(--hong);margin:0 auto;box-shadow:0 0 0 4px rgba(255,246,246,.95);position:relative;}
+    .lt .v{text-align:left;font-size:14.5px;color:var(--ruou);line-height:1.35;}
+    .lt .v small{display:block;font-size:11.5px;opacity:.8;}
+
+    /* form: xác nhận tham dự, sổ lưu bút */
+    .form{display:flex;flex-direction:column;gap:10px;margin:0 auto;text-align:left;}
+    .form input[type=text],.form textarea,.form select{width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--vien);
+      background:rgba(255,255,255,.92);font-family:var(--serif);font-size:16px;color:var(--ruou);}
+    .form textarea{min-height:76px;resize:vertical;}
+    .form input:focus,.form textarea:focus,.form select:focus{outline:2px solid rgba(203,93,108,.3);border-color:var(--hong);}
+    .form ::placeholder{color:#b88a92;}
+    .form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+    .chon{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .chon label{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;border-radius:6px;border:1px solid var(--vien);
+      background:rgba(255,255,255,.8);cursor:pointer;font-size:14.5px;text-align:center;}
+    .chon input{accent-color:var(--hong);}
+    .chon label:has(input:checked){border-color:var(--hong);background:#fdecef;color:var(--hong);font-weight:600;}
+    .hai{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .nut{align-self:flex-end;border:0;cursor:pointer;border-radius:999px;padding:7px 15px;background:var(--hong);color:#fff;
+      font-family:var(--serif);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+      box-shadow:0 8px 16px -10px rgba(170,60,80,.8);}
+    .nut.rong{align-self:stretch;padding:11px;font-size:12px;}
+    .nut:disabled{opacity:.6;cursor:default;}
+    .ds-loi{display:flex;flex-direction:column;gap:10px;margin:18px auto 0;max-height:430px;overflow-y:auto;
+      padding:2px 2px 8px;text-align:left;overscroll-behavior:contain;}
+    .loi{background:rgba(255,255,255,.85);border:1px solid #f4dadd;border-radius:10px;padding:11px 13px;}
+    .loi header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+    .loi b{color:var(--hong);font-size:13px;overflow-wrap:anywhere;}
+    .loi time{font-size:10.5px;color:#9b6a72;white-space:nowrap;}
+    .loi p{margin:7px 0 0;font-size:13px;color:var(--ruou);line-height:1.6;overflow-wrap:anywhere;}
+    .loi.trong{text-align:center;font-style:italic;color:#9b6a72;}
+
+    /* hộp quà mừng */
+    .tde.qua{font-family:var(--sans);font-weight:700;color:var(--ruou);font-size:clamp(17px,4.9vw,19px);letter-spacing:.02em;}
+    .qua-btn{display:flex;flex-direction:column;align-items:center;gap:4px;margin:0 auto;padding:0;border:0;background:none;cursor:pointer;
+      -webkit-tap-highlight-color:transparent;}
+    .qua-btn .giftart{display:block;width:min(66vw,262px);}
+    .qua-btn .giftart svg{width:100%;height:auto;display:block;overflow:visible;}
+    .qua-btn .nhan-mo{font-family:var(--sans);font-size:11px;color:#b9868e;}
+    .gbody,.glid{animation:gfloat 2.6s ease-in-out infinite;}
+    .gbody{transform-origin:108px 172px;} .glid{transform-origin:108px 80px;}
+    .gshadow{fill:#c27f95;opacity:.22;transform-origin:108px 178px;animation:gshade 2.6s ease-in-out infinite;}
+    .mini{transform-box:fill-box;transform-origin:center;animation:qbay var(--t,3.6s) ease-in-out var(--d,0s) infinite;}
+    .qsao{transform-box:fill-box;transform-origin:center;opacity:0;animation:qsao 2.8s ease-in-out var(--d,0s) infinite;}
+    .quet{animation:quet 4.6s ease-in-out 1.2s infinite;}
+    .qua-btn:hover .glid{animation:glift .5s cubic-bezier(.3,1.5,.5,1) forwards;}
+    .qua-btn.opening .giftart .glid{animation:qpop .62s cubic-bezier(.2,.8,.3,1) forwards;}
+    .qua-btn.opening .mini{animation:qbung .5s cubic-bezier(.2,.7,.2,1) forwards;}
+    .qua-btn.opening .qsao{animation:qsao .55s ease-out;}
+    @keyframes gfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes gshade{0%,100%{transform:scaleX(1);opacity:.22}50%{transform:scaleX(.88);opacity:.14}}
+    @keyframes glift{to{transform:translateY(-11px) rotate(-5deg)}}
+    @keyframes qbay{0%,100%{transform:translateY(0) rotate(var(--r0))}50%{transform:translateY(-7px) rotate(var(--r1))}}
+    @keyframes qsao{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:.9;transform:scale(1) rotate(45deg)}}
+    @keyframes quet{0%{transform:translateX(-60px)}55%,100%{transform:translateX(190px)}}
+    @keyframes qpop{0%{transform:none;opacity:1}50%{transform:translateY(-40px) rotate(-12deg);opacity:1}100%{transform:translateY(-66px) rotate(-20deg);opacity:0}}
+    @keyframes qbung{to{transform:translateY(-16px) scale(1.3);opacity:0}}
+    .cam-on{font-size:13px;color:var(--hong);max-width:300px;margin:20px auto 0;line-height:1.55;text-wrap:balance;}
+    .ky{margin-top:16px;font-family:var(--sans);font-size:11px;color:var(--hong);opacity:.6;}
+    .chan{position:absolute;left:0;right:0;bottom:0;height:150px;pointer-events:none;z-index:2;}
+    .chan .deco{bottom:-30px;}
+
+    /* hộp QR */
+    .qr-dlg{width:min(94vw,400px);max-height:88vh;padding:0;border:0;border-radius:20px;overflow:hidden;background:#fdf6f8;
+      box-shadow:0 40px 80px -30px rgba(80,20,40,.6);}
+    .qr-dlg::backdrop{background:rgba(70,30,40,.45);backdrop-filter:blur(2px);}
+    .qr-dlg[open]{animation:hien .4s cubic-bezier(.2,.8,.3,1);}
+    @keyframes hien{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+    .qr-dau{position:relative;background:var(--ruou);color:#fff;text-align:center;padding:21px 50px;}
+    .qr-dau h3{margin:0;font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:.02em;text-transform:uppercase;}
+    .qr-dong{position:absolute;right:12px;top:50%;translate:0 -50%;width:38px;height:38px;border:0;border-radius:50%;
+      background:transparent;color:#fff;cursor:pointer;font-size:18px;line-height:1;}
+    .qr-than{overflow-y:auto;max-height:calc(88vh - 70px);padding:18px 20px 22px;display:flex;flex-direction:column;gap:26px;}
+    .qr-the{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--sans);color:var(--hong);}
+    .qr-hop{width:min(40vw,150px);padding:10px;background:#fff;border-radius:14px;box-shadow:0 0 0 1px #f3d3d8,0 10px 20px -14px rgba(150,60,80,.6);margin-bottom:8px;}
+    .qr-hop svg{display:block;width:100%;height:auto;shape-rendering:crispEdges;}
+    .qr-the .nh{font-size:11.5px;}
+    .qr-the .so{font-size:12.5px;letter-spacing:.04em;cursor:pointer;font-variant-numeric:tabular-nums;}
+    .qr-the .chu{font-weight:700;font-size:12px;letter-spacing:.02em;}
+    .qr-the .vai-qr{font-size:10.5px;color:#9b6a72;}
+    .luu{margin-top:6px;border:0;border-radius:999px;padding:5px 13px;background:#f8e2e6;color:var(--ruou);font-family:var(--sans);font-size:11.5px;cursor:pointer;}
+
+    /* nút nổi: tự cuộn, nhạc */
+    .noi{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:50;
+      display:flex;flex-direction:column;gap:12px;}
+    .noi button{width:48px;height:48px;border-radius:50%;border:0;padding:0;cursor:pointer;background:var(--hong);color:#fff;
+      display:grid;place-items:center;box-shadow:0 10px 22px -10px rgba(150,40,60,.75);-webkit-tap-highlight-color:transparent;}
+    .noi button[hidden]{display:none;}
+    .noi svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    #cuonBtn .tam-dung{display:none;} #cuonBtn.dang-chay .tam-dung{display:block;} #cuonBtn.dang-chay .xuong{display:none;}
+    #nhacBtn .song rect{transform-box:fill-box;transform-origin:center;}
+    #nhacBtn.dang-phat .song rect{animation:song 1s ease-in-out infinite;}
+    #nhacBtn.dang-phat .song rect:nth-child(2){animation-delay:-.3s;} #nhacBtn.dang-phat .song rect:nth-child(3){animation-delay:-.6s;}
+    #nhacBtn.dang-phat .song rect:nth-child(4){animation-delay:-.15s;} #nhacBtn.dang-phat .song rect:nth-child(5){animation-delay:-.45s;}
+    @keyframes song{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+    #nhacBtn:not(.dang-phat){opacity:.75;}
+
+    .toast{position:fixed;left:50%;bottom:90px;translate:-50% 0;z-index:70;background:var(--ruou);color:#fff;padding:.7em 1.3em;
+      border-radius:999px;font-family:var(--sans);font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s;max-width:90vw;text-align:center;}
+    .toast.on{opacity:.96;}
+
+    /* hiện dần khi cuộn tới */
+    .js .hd{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1);}
+    .js .hd.in{opacity:1;transform:none;}
+
+    @media (prefers-reduced-motion:reduce){
+      .roi{display:none;}
+      .nut-mo::after,.gbody,.glid,.gshadow,.mini,.qsao,.quet,.lich .o-ngay span.cuoi svg,.bando-ve .ghim,#nhacBtn .song rect{animation:none !important;}
+      .js .hd{opacity:1;transform:none;transition:none;}
+      .anh{transition:none;}
+    }
+  </style>
+</head>
+<body>
+<!-- ============ BOTANICAL VECTOR LIBRARY ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- ---- gradients: petals ---- -->
+    <radialGradient id="gPetalW" cx="38%" cy="22%" r="82%">
+      <stop offset="0%"   stop-color="#fffcfc"/>
+      <stop offset="58%"  stop-color="#fce4ea"/>
+      <stop offset="100%" stop-color="#eec3d0"/>
+    </radialGradient>
+    <radialGradient id="gPetalC" cx="38%" cy="22%" r="82%">
+      <stop offset="0%"   stop-color="#fffaf8"/>
+      <stop offset="55%"  stop-color="#fcd6e0"/>
+      <stop offset="100%" stop-color="#f0b3c4"/>
+    </radialGradient>
+    <radialGradient id="gPetalB" cx="38%" cy="22%" r="82%">
+      <stop offset="0%"   stop-color="#fffdfe"/>
+      <stop offset="55%"  stop-color="#f8d5e2"/>
+      <stop offset="100%" stop-color="#e5b3cb"/>
+    </radialGradient>
+    <radialGradient id="gPetalS" cx="38%" cy="22%" r="82%">
+      <stop offset="0%"   stop-color="#fdf6f7"/>
+      <stop offset="55%"  stop-color="#f6d2da"/>
+      <stop offset="100%" stop-color="#e3aebc"/>
+    </radialGradient>
+
+    <!-- ---- gradients: foliage ---- -->
+    <linearGradient id="gLeafDark" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%"   stop-color="#93405f"/>
+      <stop offset="55%"  stop-color="#ad5876"/>
+      <stop offset="100%" stop-color="#c4738f"/>
+    </linearGradient>
+    <linearGradient id="gLeafMid" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%"   stop-color="#a04a6a"/>
+      <stop offset="55%"  stop-color="#bb6684"/>
+      <stop offset="100%" stop-color="#d4879f"/>
+    </linearGradient>
+    <linearGradient id="gLeafSoft" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%"   stop-color="#c27a93"/>
+      <stop offset="55%"  stop-color="#d896ab"/>
+      <stop offset="100%" stop-color="#ebb8c7"/>
+    </linearGradient>
+    <linearGradient id="gEuc" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#d08fa4"/>
+      <stop offset="60%"  stop-color="#e2aabb"/>
+      <stop offset="100%" stop-color="#f2cbd6"/>
+    </linearGradient>
+
+    <!-- ---- soft blur for atmosphere ---- -->
+    <filter id="fSoft"  x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="fSoft2" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="fPetalShade" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.6" flood-color="#9c4566" flood-opacity=".28"/>
+    </filter>
+
+    <!-- ================= single shapes ================= -->
+
+    <!-- teardrop petal, base at origin, tip pointing up -->
+    <path id="petal" d="M0 0 C-4.6 -3.4 -6.8 -10.8 -2.6 -14.6 C-1.1 -15.9 1.1 -15.9 2.6 -14.6 C6.8 -10.8 4.6 -3.4 0 0 Z"/>
+
+    <!-- narrow orchid petal -->
+    <path id="opetal" d="M0 0 C-3.4 -4 -4.4 -12 -1.6 -16.4 C-.7 -17.8 .7 -17.8 1.6 -16.4 C4.4 -12 3.4 -4 0 0 Z"/>
+
+    <!-- rounded eucalyptus leaf -->
+    <path id="eucLeaf" d="M0 0 C-6.6 -2.2 -9 -9.4 -5.4 -14.4 C-2.8 -18 2.8 -18 5.4 -14.4 C9 -9.4 6.6 -2.2 0 0 Z"/>
+
+    <!-- slim olive leaf -->
+    <path id="oliveLeaf" d="M0 0 C-3 -4.6 -3.6 -13.6 -1.2 -18.4 C-.5 -19.8 .5 -19.8 1.2 -18.4 C3.6 -13.6 3 -4.6 0 0 Z"/>
+
+    <!-- long tapered blade (palm / fern) -->
+    <path id="blade" d="M0 0 C-4.2 -12 -3.4 -30 -.9 -43.4 C-.4 -46 .4 -46 .9 -43.4 C3.4 -30 4.2 -12 0 0 Z"/>
+
+    <!-- ================= composed elements ================= -->
+
+    <!-- hydrangea floret: 4 petals + tiny centre -->
+    <g id="floret">
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(0)   translate(0 1)"/>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(92)  translate(0 1)"/>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(183) translate(0 1)"/>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(273) translate(0 1)"/>
+      <circle r="1.9" fill="#e8d6a0"/>
+      <circle r=".8" fill="#cbae76"/>
+    </g>
+
+    <!-- five-petal orchid / stephanotis bloom -->
+    <g id="orchid">
+      <g filter="url(#fPetalShade)">
+        <use href="#opetal" fill="url(#gPetalW)" transform="rotate(0)"/>
+        <use href="#opetal" fill="url(#gPetalW)" transform="rotate(72)"/>
+        <use href="#opetal" fill="url(#gPetalW)" transform="rotate(144)"/>
+        <use href="#opetal" fill="url(#gPetalW)" transform="rotate(216)"/>
+        <use href="#opetal" fill="url(#gPetalW)" transform="rotate(288)"/>
+      </g>
+      <circle r="2.6" fill="#f0dcae"/>
+      <circle r="1.2" fill="#c9a866"/>
+    </g>
+
+    <!-- garden rose: three layered rings of petals -->
+    <g id="rose">
+      <g filter="url(#fPetalShade)">
+        <use href="#petal" fill="url(#gPetalC)" transform="rotate(0)   scale(1.5)"/>
+        <use href="#petal" fill="url(#gPetalC)" transform="rotate(72)  scale(1.5)"/>
+        <use href="#petal" fill="url(#gPetalC)" transform="rotate(144) scale(1.5)"/>
+        <use href="#petal" fill="url(#gPetalC)" transform="rotate(216) scale(1.5)"/>
+        <use href="#petal" fill="url(#gPetalC)" transform="rotate(288) scale(1.5)"/>
+      </g>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(36)  scale(1.02)"/>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(108) scale(1.02)"/>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(180) scale(1.02)"/>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(252) scale(1.02)"/>
+      <use href="#petal" fill="url(#gPetalW)" transform="rotate(324) scale(1.02)"/>
+      <use href="#petal" fill="#fff9fa" transform="rotate(0)   scale(.58)"/>
+      <use href="#petal" fill="#fff9fa" transform="rotate(120) scale(.58)"/>
+      <use href="#petal" fill="#fff9fa" transform="rotate(240) scale(.58)"/>
+      <circle r="1.6" fill="#ecd9b8"/>
+    </g>
+
+    <!-- eucalyptus sprig: stem + alternating round leaves -->
+    <g id="eucSprig">
+      <path d="M0 0 C6 -14 9 -30 8 -46" fill="none" stroke="#c47a92" stroke-width="1.5" stroke-linecap="round"/>
+      <use href="#eucLeaf" fill="url(#gEuc)" transform="translate(1 -6)   rotate(-58) scale(.92)"/>
+      <use href="#eucLeaf" fill="url(#gEuc)" transform="translate(3 -12)  rotate(56)  scale(.86)"/>
+      <use href="#eucLeaf" fill="url(#gEuc)" transform="translate(5 -20)  rotate(-52) scale(.98)"/>
+      <use href="#eucLeaf" fill="url(#gEuc)" transform="translate(7 -28)  rotate(50)  scale(.9)"/>
+      <use href="#eucLeaf" fill="url(#gEuc)" transform="translate(8 -36)  rotate(-44) scale(.78)"/>
+      <use href="#eucLeaf" fill="url(#gEuc)" transform="translate(8 -44)  rotate(12)  scale(.62)"/>
+    </g>
+
+    <!-- olive sprig -->
+    <g id="oliveSprig">
+      <path d="M0 0 C-5 -13 -7 -28 -6 -42" fill="none" stroke="#b16a82" stroke-width="1.4" stroke-linecap="round"/>
+      <use href="#oliveLeaf" fill="url(#gLeafMid)"  transform="translate(-1 -7)  rotate(-62) scale(.9)"/>
+      <use href="#oliveLeaf" fill="url(#gLeafSoft)" transform="translate(-2 -14) rotate(58)  scale(.85)"/>
+      <use href="#oliveLeaf" fill="url(#gLeafMid)"  transform="translate(-4 -22) rotate(-56) scale(.95)"/>
+      <use href="#oliveLeaf" fill="url(#gLeafSoft)" transform="translate(-5 -30) rotate(54)  scale(.82)"/>
+      <use href="#oliveLeaf" fill="url(#gLeafMid)"  transform="translate(-6 -38) rotate(-20) scale(.7)"/>
+    </g>
+
+    <!-- fern frond: central rachis + graded pinnae -->
+    <g id="fern">
+      <path d="M0 0 C-2 -16 -3 -34 -2 -50" fill="none" stroke="#9c5a72" stroke-width="1.6" stroke-linecap="round"/>
+      <g fill="url(#gLeafMid)">
+        <use href="#oliveLeaf" transform="translate(-.6 -6)   rotate(-74) scale(.78)"/>
+        <use href="#oliveLeaf" transform="translate(-.6 -6)   rotate(74)  scale(.78)"/>
+        <use href="#oliveLeaf" transform="translate(-1.2 -14) rotate(-70) scale(.86)"/>
+        <use href="#oliveLeaf" transform="translate(-1.2 -14) rotate(70)  scale(.86)"/>
+        <use href="#oliveLeaf" transform="translate(-1.8 -23) rotate(-66) scale(.8)"/>
+        <use href="#oliveLeaf" transform="translate(-1.8 -23) rotate(66)  scale(.8)"/>
+        <use href="#oliveLeaf" transform="translate(-2.2 -32) rotate(-60) scale(.68)"/>
+        <use href="#oliveLeaf" transform="translate(-2.2 -32) rotate(60)  scale(.68)"/>
+        <use href="#oliveLeaf" transform="translate(-2.4 -40) rotate(-50) scale(.54)"/>
+        <use href="#oliveLeaf" transform="translate(-2.4 -40) rotate(50)  scale(.54)"/>
+        <use href="#oliveLeaf" transform="translate(-2.2 -47) rotate(-8)  scale(.44)"/>
+      </g>
+    </g>
+
+    <!-- horizontal divider sprig used between sections -->
+    <symbol id="sprig-h" viewBox="0 0 240 60">
+      <g transform="translate(120 44)">
+        <g transform="rotate(-90)">
+          <use href="#eucSprig" transform="translate(0 0) rotate(14) scale(.95)"/>
+        </g>
+        <g transform="rotate(90) scale(-1 1)">
+          <use href="#eucSprig" transform="translate(0 0) rotate(14) scale(.95)"/>
+        </g>
+        <use href="#rose"   transform="translate(0 -6) scale(1.1)"/>
+        <use href="#orchid" transform="translate(-22 2) scale(.72) rotate(-18)"/>
+        <use href="#orchid" transform="translate(22 2)  scale(.72) rotate(18)"/>
+        <use href="#floret" transform="translate(-11 -11) scale(.7)"/>
+        <use href="#floret" transform="translate(12 -10)  scale(.66)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+
+    <filter id="mauNuoc" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <linearGradient id="laHongG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#eaa1af"/><stop offset=".35" stop-color="#f6cfd6"/><stop offset=".75" stop-color="#f0a8b6"/><stop offset="1" stop-color="#df8095"/>
+    </linearGradient>
+    <linearGradient id="laNhatG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f3c3cc"/><stop offset=".4" stop-color="#fbe3e7"/><stop offset="1" stop-color="#ec9fae"/>
+    </linearGradient>
+    <linearGradient id="vangNet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9c983"/><stop offset=".5" stop-color="#c79a4e"/><stop offset="1" stop-color="#e3be78"/>
+    </linearGradient>
+    <linearGradient id="canhLonG" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#e796a6"/><stop offset=".55" stop-color="#f4c3cc"/><stop offset="1" stop-color="#fde9ec"/>
+    </linearGradient>
+    <radialGradient id="canhRoiG" cx=".4" cy=".35" r=".7">
+      <stop offset="0" stop-color="#fbe0e5"/><stop offset=".7" stop-color="#f0a9b6"/><stop offset="1" stop-color="#e48c9d"/>
+    </radialGradient>
+    <g id="laHong">
+      <path d="M0 0C5-8 15-12.5 27-11.5C34-10.8 40-6 45 0C39 6.5 31 10.5 22 10.8C12 11 5 7 0 0Z" fill="url(#laHongG)"/>
+      <path d="M8-2.6C15-8 26-9.5 36-5.6C30-4.6 20-3.6 8-2.6Z" fill="#fff" opacity=".28"/>
+      <path d="M2 0C14-.6 28-.8 43 0" fill="none" stroke="#d3a35e" stroke-width=".6" opacity=".9"/>
+      <path d="M14-.4L19-5.4M24-.5L29-6.4M33-.4L37-4.2M18 .2L22 5.2M28 .2L32 5.8" fill="none" stroke="#d7ab69" stroke-width=".35" opacity=".65"/>
+    </g>
+    <g id="laNhat">
+      <path d="M0 0C5-8 15-12.5 27-11.5C34-10.8 40-6 45 0C39 6.5 31 10.5 22 10.8C12 11 5 7 0 0Z" fill="url(#laNhatG)"/>
+      <path d="M2 0C14-.6 28-.8 43 0" fill="none" stroke="#d9ae6c" stroke-width=".5" opacity=".75"/>
+    </g>
+    <g id="laKinh">
+      <path d="M0 0C6-14 22-22 44-20C58-18.5 70-10 78 0C68 12 54 19 38 19.5C20 20 7 12 0 0Z" fill="#fbe3e7" fill-opacity=".55" stroke="url(#vangNet)" stroke-width=".9"/>
+      <path d="M0 0C14-6 40-12 78 0" fill="#f1b9c4" opacity=".35"/>
+      <path d="M3 0C25-1.5 50-1.5 75 0M24-.8L34-13M40-1L50-15M56-.8L63-10M30 .6L40 13M48 .6L56 13" fill="none" stroke="#cfa260" stroke-width=".55" opacity=".85"/>
+    </g>
+    <symbol id="hoaLon" viewBox="0 0 170 260" overflow="visible">
+      <g filter="url(#mauNuoc)" stroke="#d8ad6c" stroke-width=".9" stroke-opacity=".8">
+        <path d="M84 250C30 200 8 120 46 30C70 90 96 150 84 250Z" fill="url(#canhLonG)" opacity=".78"/>
+        <path d="M90 250C150 210 172 130 140 40C112 98 88 160 90 250Z" fill="url(#canhLonG)" opacity=".7"/>
+        <path d="M87 252C70 170 76 80 104 8C124 90 116 172 87 252Z" fill="url(#canhLonG)" opacity=".86"/>
+      </g>
+      <g fill="none" stroke="#d1a35f" stroke-width=".7" opacity=".75">
+        <path d="M87 250C88 180 94 100 104 20"/><path d="M84 248C66 190 52 120 48 40"/><path d="M90 248C112 196 128 130 138 50"/>
+      </g>
+    </symbol>
+    <symbol id="tim" viewBox="0 0 24 22"><path d="M12 21.2S1.6 14.6 1.6 7.6A5.4 5.4 0 0 1 12 4.9a5.4 5.4 0 0 1 10.4 2.7c0 7-10.4 13.6-10.4 13.6Z"/></symbol>
+<symbol id="canhA" viewBox="0 0 200 130" overflow="visible"><g filter="url(#mauNuoc)"><path d="M4.0 118.0Q60.0 20.0 196.0 22.0" fill="none" stroke="#c9976d" stroke-width="1.1" stroke-linecap="round" opacity=".85"/><use href="#laHong" transform="translate(16.0 99.4) rotate(-109.6) scale(1.04)"/><use href="#laHong" transform="translate(27.6 85.0) rotate(8.2) scale(1.02)"/><use href="#laHong" transform="translate(40.4 72.1) rotate(-91.2) scale(1.03)"/><use href="#laHong" transform="translate(54.3 60.6) rotate(23.4) scale(0.88)"/><use href="#laHong" transform="translate(69.5 50.7) rotate(-81.6) scale(0.89)"/><use href="#laHong" transform="translate(85.8 42.2) rotate(30.0) scale(0.96)"/><use href="#laHong" transform="translate(103.3 35.2) rotate(-73.7) scale(0.90)"/><use href="#laHong" transform="translate(122.0 29.7) rotate(36.2) scale(0.82)"/><use href="#laHong" transform="translate(141.9 25.6) rotate(-69.3) scale(0.78)"/><use href="#laHong" transform="translate(163.0 23.1) rotate(53.6) scale(0.72)"/><use href="#laHong" transform="translate(185.2 22.0) rotate(-49.8) scale(0.70)"/><use href="#laHong" transform="translate(196.0 22.0) rotate(0.8) scale(0.63)"/></g></symbol>
+    <symbol id="canhB" viewBox="0 0 200 130" overflow="visible"><g filter="url(#mauNuoc)"><path d="M6.0 112.0Q96.0 70.0 194.0 8.0" fill="none" stroke="#c9976d" stroke-width="1.1" stroke-linecap="round" opacity=".85"/><use href="#laNhat" transform="translate(24.1 103.4) rotate(-76.0) scale(0.87)"/><use href="#laNhat" transform="translate(43.7 93.7) rotate(22.3) scale(0.88)"/><use href="#laNhat" transform="translate(63.5 83.6) rotate(-80.7) scale(0.82)"/><use href="#laNhat" transform="translate(83.5 72.9) rotate(26.7) scale(0.71)"/><use href="#laNhat" transform="translate(103.6 61.9) rotate(-83.2) scale(0.67)"/><use href="#laNhat" transform="translate(124.0 50.3) rotate(19.3) scale(0.63)"/><use href="#laNhat" transform="translate(144.5 38.3) rotate(-90.2) scale(0.64)"/><use href="#laNhat" transform="translate(165.3 25.9) rotate(19.7) scale(0.56)"/><use href="#laNhat" transform="translate(186.2 12.9) rotate(-93.3) scale(0.57)"/><use href="#laNhat" transform="translate(194.0 8.0) rotate(-32.3) scale(0.52)"/></g></symbol>
+    <symbol id="canhC" viewBox="0 0 200 130" overflow="visible"><g filter="url(#mauNuoc)"><path d="M8.0 120.0Q40.0 40.0 150.0 6.0" fill="none" stroke="#c9976d" stroke-width="1.1" stroke-linecap="round" opacity=".85"/><use href="#laHong" transform="translate(15.2 104.5) rotate(-119.8) scale(1.00)"/><use href="#laHong" transform="translate(26.1 86.6) rotate(5.2) scale(1.02)"/><use href="#laHong" transform="translate(39.4 70.2) rotate(-98.6) scale(0.88)"/><use href="#laHong" transform="translate(55.1 55.1) rotate(10.7) scale(0.82)"/><use href="#laHong" transform="translate(73.1 41.5) rotate(-83.9) scale(0.85)"/><use href="#laHong" transform="translate(93.5 29.2) rotate(22.7) scale(0.77)"/><use href="#laHong" transform="translate(116.2 18.3) rotate(-77.1) scale(0.68)"/><use href="#laHong" transform="translate(141.3 8.8) rotate(38.0) scale(0.69)"/><use href="#laHong" transform="translate(150.0 6.0) rotate(-17.2) scale(0.61)"/></g></symbol>
+    <symbol id="canhGoc" viewBox="0 0 200 130" overflow="visible"><g filter="url(#mauNuoc)"><path d="M12.0 128.0Q6.0 10.0 196.0 12.0" fill="none" stroke="#c9976d" stroke-width="1.1" stroke-linecap="round" opacity=".85"/><use href="#laHong" transform="translate(12.8 105.6) rotate(-140.3) scale(1.29)"/><use href="#laHong" transform="translate(17.1 86.4) rotate(-16.4) scale(1.35)"/><use href="#laHong" transform="translate(25.1 69.5) rotate(-117.5) scale(1.19)"/><use href="#laHong" transform="translate(36.7 54.7) rotate(9.4) scale(1.27)"/><use href="#laHong" transform="translate(51.8 42.1) rotate(-85.5) scale(1.15)"/><use href="#laHong" transform="translate(70.5 31.7) rotate(28.8) scale(0.99)"/><use href="#laHong" transform="translate(92.8 23.5) rotate(-65.4) scale(1.05)"/><use href="#laHong" transform="translate(118.6 17.5) rotate(41.2) scale(1.02)"/><use href="#laHong" transform="translate(148.1 13.7) rotate(-53.6) scale(0.87)"/><use href="#laHong" transform="translate(181.1 12.0) rotate(57.5) scale(0.93)"/><use href="#laHong" transform="translate(196.0 12.0) rotate(0.6) scale(0.80)"/></g></symbol>
+    <symbol id="canhNho" viewBox="0 0 200 130" overflow="visible"><g filter="url(#mauNuoc)"><path d="M4.0 124.0Q70.0 60.0 198.0 6.0" fill="none" stroke="#c9976d" stroke-width="1.1" stroke-linecap="round" opacity=".85"/><use href="#laNhat" transform="translate(17.8 111.3) rotate(-99.5) scale(0.60)"/><use href="#laNhat" transform="translate(26.3 104.1) rotate(21.7) scale(0.60)"/><use href="#laNhat" transform="translate(35.2 97.0) rotate(-98.9) scale(0.58)"/><use href="#laNhat" transform="translate(44.5 89.9) rotate(18.0) scale(0.50)"/><use href="#laNhat" transform="translate(54.2 82.9) rotate(-92.2) scale(0.57)"/><use href="#laNhat" transform="translate(64.3 76.0) rotate(15.8) scale(0.55)"/><use href="#laNhat" transform="translate(74.8 69.1) rotate(-83.9) scale(0.50)"/><use href="#laNhat" transform="translate(85.8 62.3) rotate(24.8) scale(0.49)"/><use href="#laNhat" transform="translate(97.1 55.6) rotate(-81.2) scale(0.43)"/><use href="#laNhat" transform="translate(108.8 48.9) rotate(31.8) scale(0.44)"/><use href="#laNhat" transform="translate(121.0 42.3) rotate(-78.2) scale(0.46)"/><use href="#laNhat" transform="translate(133.5 35.8) rotate(22.9) scale(0.45)"/><use href="#laNhat" transform="translate(146.5 29.3) rotate(-75.8) scale(0.42)"/><use href="#laNhat" transform="translate(159.9 22.9) rotate(35.1) scale(0.36)"/><use href="#laNhat" transform="translate(173.7 16.6) rotate(-75.3) scale(0.36)"/><use href="#laNhat" transform="translate(187.9 10.3) rotate(36.8) scale(0.40)"/><use href="#laNhat" transform="translate(198.0 6.0) rotate(-22.9) scale(0.34)"/></g></symbol>
+    <symbol id="laVang" viewBox="0 0 120 170" overflow="visible"><g fill="none" stroke="url(#vangNet)" stroke-linecap="round"><path d="M60 160C18 128 10 70 60 6C110 70 102 128 60 160Z" stroke-width="1.3"/><path d="M60 168V12" stroke-width="1.1"/><path d="M60 130 Q53.9 120.0 48.4 108.0 M60 130 Q66.1 120.0 71.6 108.0 M60 110 Q48.9 100.0 38.8 88.0 M60 110 Q71.1 100.0 81.2 88.0 M60 90 Q45.7 80.0 32.9 68.0 M60 90 Q74.3 80.0 87.1 68.0 M60 70 Q45.1 60.0 31.7 48.0 M60 70 Q74.9 60.0 88.3 48.0 M60 50 Q47.0 40.0 35.3 28.0 M60 50 Q73.0 40.0 84.7 28.0 M60 30 Q51.2 20.0 43.2 8.0 M60 30 Q68.8 20.0 76.8 8.0" stroke-width=".8"/></g><g fill="#d7ad64"><circle cx="92" cy="30" r="1.8"/><circle cx="98" cy="22" r="1.2"/><circle cx="24" cy="60" r="1.5"/><circle cx="88" cy="44" r="1.0"/></g></symbol>
+    <symbol id="chumKinh" viewBox="0 0 140 190" overflow="visible"><path d="M70 188C66 140 58 90 40 40" fill="none" stroke="url(#vangNet)" stroke-width="1"/><use href="#laKinh" transform="translate(40 40) rotate(-118) scale(.72)"/><use href="#laKinh" transform="translate(52 92) rotate(-28) scale(.8)"/><use href="#laKinh" transform="translate(60 126) rotate(-160) scale(.7)"/><use href="#laKinh" transform="translate(66 160) rotate(-20) scale(.6)"/></symbol>
+    <symbol id="canhRoi" viewBox="0 0 20 12"><path d="M1 6C4 0 13-1 19 5C13 12 5 12 1 6Z" fill="url(#canhRoiG)"/><path d="M2.5 6C8 5 13 5 18 5.2" stroke="#e7a0ae" stroke-width=".5" fill="none"/></symbol>
+    <symbol id="hoaNho" viewBox="-12 -12 24 24"><g fill="#fff" opacity=".95"><ellipse cx="0" cy="-6.2" rx="2.6" ry="5.6" transform="rotate(0)"/><ellipse cx="0" cy="-6.2" rx="2.6" ry="5.6" transform="rotate(60)"/><ellipse cx="0" cy="-6.2" rx="2.6" ry="5.6" transform="rotate(120)"/><ellipse cx="0" cy="-6.2" rx="2.6" ry="5.6" transform="rotate(180)"/><ellipse cx="0" cy="-6.2" rx="2.6" ry="5.6" transform="rotate(240)"/><ellipse cx="0" cy="-6.2" rx="2.6" ry="5.6" transform="rotate(300)"/></g><circle r="2.2" fill="#f2b8c3"/></symbol>
+</defs></svg>
+
+<div class="nen" aria-hidden="true"><i style="left:-60px;top:18%;width:220px;height:220px"></i><i style="right:-70px;top:46%;width:240px;height:240px;background:#efa3b2"></i><i style="left:20%;bottom:-80px;width:260px;height:200px;background:#f6c4cc"></i></div>
+<div class="roi" aria-hidden="true">
+<span class="bong" style="--x:15%;--s:9px;--d:19.0s;--tre:-10.9s;--lac:-17px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:21%;--s:9px;--d:25.4s;--tre:-3.5s;--lac:-49px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:49%;--s:15px;--d:24.0s;--tre:-14.1s;--lac:-37px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:23%;--s:11px;--d:19.0s;--tre:-21.0s;--lac:37px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:82%;--s:13px;--d:21.3s;--tre:-16.5s;--lac:34px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:37%;--s:9px;--d:20.9s;--tre:-5.2s;--lac:27px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:9%;--s:12px;--d:19.1s;--tre:-9.0s;--lac:19px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:6%;--s:9px;--d:17.0s;--tre:-2.4s;--lac:-3px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:11%;--s:14px;--d:21.8s;--tre:-3.9s;--lac:49px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span class="bong" style="--x:12%;--s:16px;--d:21.1s;--tre:-11.9s;--lac:34px"><svg viewBox="-12 -12 24 24"><use href="#hoaNho"/></svg></span>
+<span style="--x:41%;--s:22px;--d:14.1s;--tre:-8.9s;--lac:-44px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:19%;--s:22px;--d:18.7s;--tre:-11.7s;--lac:1px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:49%;--s:18px;--d:15.3s;--tre:-8.1s;--lac:54px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:28%;--s:17px;--d:17.2s;--tre:-4.3s;--lac:-60px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:66%;--s:22px;--d:18.8s;--tre:-7.8s;--lac:-5px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:34%;--s:16px;--d:15.2s;--tre:-1.8s;--lac:25px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:66%;--s:20px;--d:14.5s;--tre:-9.4s;--lac:-7px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:24%;--s:18px;--d:16.7s;--tre:-8.6s;--lac:-57px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:41%;--s:17px;--d:18.7s;--tre:-4.4s;--lac:-76px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:48%;--s:21px;--d:15.4s;--tre:-8.6s;--lac:-12px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:94%;--s:22px;--d:17.8s;--tre:-3.8s;--lac:-61px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:40%;--s:21px;--d:11.8s;--tre:-5.0s;--lac:88px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:66%;--s:14px;--d:18.1s;--tre:-11.8s;--lac:0px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+<span style="--x:0%;--s:17px;--d:14.1s;--tre:-0.5s;--lac:30px"><svg viewBox="0 0 20 12"><use href="#canhRoi"/></svg></span>
+</div>
+
+<!-- ============ THIỆP MỞ ĐẦU ============ -->
+<div class="mo" id="mo">
+  <div class="the-mo">
+    <svg class="canh-tl" viewBox="0 0 200 130" aria-hidden="true"><use href="#canhGoc"/></svg>
+    <svg class="canh-br" viewBox="0 0 200 130" aria-hidden="true"><use href="#canhGoc"/></svg>
+    <div class="tim-tron" aria-hidden="true"><svg viewBox="0 0 24 22"><use href="#tim"/></svg></div>
+    <p class="ten-mo">Ngọc Huy<i>&amp;</i>Hương Giang</p>
+    <div class="gach-hoa" aria-hidden="true"><svg viewBox="0 0 24 22"><use href="#tim"/></svg></div>
+    <div class="ngay-mo">29/11/2026</div>
+    <div class="loi-mo" id="moLoi">Thân Mời</div>
+    <div class="khach-mo" id="moTen">Quý khách</div>
+    <div class="du-mo">Đến dự buổi tiệc chung vui cùng gia đình</div>
+    <button class="nut-mo" id="moBtn" type="button">Mở thiệp</button>
+  </div>
+</div>
+<script>document.documentElement.classList.add("dong","js");</script>
+
+<main class="trang" id="trang">
+  <!-- ============ VÒM KÍNH GHI TÊN ============ -->
+  <header class="dau">
+    <div class="deco sau" style="left:-34px;top:-40px;width:118px;height:160px;transform:rotate(-14deg)"><svg viewBox="0 0 140 190"><use href="#chumKinh"/></svg></div>
+    <div class="deco sau" style="right:-64px;top:120px;width:150px;height:230px;transform:rotate(-10deg)"><svg viewBox="0 0 170 260"><use href="#hoaLon"/></svg></div>
+    <div class="deco sau" style="right:-30px;top:300px;width:110px;height:170px;transform:rotate(28deg);opacity:.75"><svg viewBox="0 0 170 260"><use href="#hoaLon"/></svg></div>
+    <div class="vom hd"><h1>Ngọc Huy<i>&amp;</i>Hương Giang</h1></div>
+    <div class="deco" style="left:29%;top:66%;width:110px;height:156px;transform:rotate(18deg)"><svg viewBox="0 0 120 170"><use href="#laVang"/></svg></div>
+    <div class="deco" style="left:55%;top:70%;width:72px;height:102px;transform:rotate(40deg);opacity:.7"><svg viewBox="0 0 120 170"><use href="#laVang"/></svg></div>
+    <div class="deco" style="left:34px;top:47%;width:260px;height:169px;transform:scaleX(-1) rotate(-12deg)"><svg viewBox="0 0 200 130"><use href="#canhA"/></svg></div>
+    <div class="deco" style="left:-34px;bottom:-56px;width:170px;height:111px;transform:rotate(-22deg)"><svg viewBox="0 0 200 130"><use href="#canhNho"/></svg></div>
+  </header>
+
+  <div class="tam">
+        <div class="deco" style="right:-62px;top:560px;width:120px;height:190px;opacity:.8"><svg viewBox="0 0 170 260"><use href="#hoaLon"/></svg></div>
+
+    <!-- ============ THÔNG TIN LỄ CƯỚI ============ -->
+    <section class="muc hd" aria-labelledby="t-le">
+      <h2 class="tde" id="t-le">Thông tin lễ cưới</h2>
+      <div class="bome">
+        <div><p class="ob">Ông Bà</p><p class="bm">Lê Công Bồng</p><p class="bm">Bùi Thị Tuyết</p>
+          <p class="dc">Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên</p></div>
+        <i class="vach" aria-hidden="true"></i>
+        <div><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p>
+          <p class="dc">62 Nguyễn Xiển, Phường Thanh Liệt, Thành phố Hà Nội</p></div>
+      </div>
+      <p class="baotin">Trân trọng báo tin<br>Lễ thành hôn của con chúng tôi</p>
+      <p class="ten-lon">Lê Ngọc Huy</p>
+      <div class="vai">Chú rể</div>
+      <div class="va" aria-hidden="true">&amp;</div>
+      <p class="ten-lon">Hoàng Thị Hương Giang</p>
+      <div class="vai">Cô dâu</div>
+
+      <div class="le-tai">
+        <div class="nhan">Lễ Vu Quy tại</div>
+        <div class="noi-le">Tư gia nhà gái</div>
+        <div class="nhan">Vào lúc</div>
+        <div class="gio">07:00</div>
+      </div>
+      <div class="le-tai">
+        <div class="nhan">Lễ Thành Hôn tại</div>
+        <div class="noi-le">Tư gia nhà trai</div>
+        <div class="nhan">Vào lúc</div>
+        <div class="gio">10:30</div>
+      </div>
+      <div class="ngay3"><span>Chủ Nhật</span><i></i><b>29</b><i></i><span>Tháng 11</span></div>
+      <div class="ngay-so">29/11/2026</div>
+      <div class="am">Tức ngày 21/10/2026 năm Bính Ngọ âm lịch</div>
+    </section>
+
+    <!-- ============ ALBUM ẢNH CƯỚI ============ -->
+    <section class="muc hd" aria-labelledby="t-album">
+      <div class="deco" style="right:-98px;top:-80px;width:150px;height:98px;transform:rotate(200deg)"><svg viewBox="0 0 200 130"><use href="#canhB"/></svg></div>
+      <h2 class="tde" id="t-album">Album ảnh cưới</h2>
+      <div class="album" id="album" role="region" aria-roledescription="băng chuyền" aria-label="Album ảnh cưới"></div>
+      <div class="cham" id="albumCham"></div>
+    </section>
+
+    <!-- ============ THÔNG TIN TIỆC CƯỚI ============ -->
+    <section class="muc hd" aria-labelledby="t-tiec">
+      <div class="deco" style="left:-96px;top:250px;width:150px;height:98px;transform:rotate(-30deg)"><svg viewBox="0 0 200 130"><use href="#canhA"/></svg></div>
+      <h2 class="tde" id="t-tiec">Thông tin tiệc cưới</h2>
+      <div class="tde nho">Tiệc cưới sẽ diễn ra vào lúc:</div>
+      <div class="gio">11:00</div>
+      <div class="ngay3"><span>Chủ Nhật</span><i></i><b>29</b><i></i><span>Tháng 11</span></div>
+      <div class="ngay-so">29/11/2026</div>
+      <div class="am">Tức ngày 21/10/2026 năm Bính Ngọ âm lịch</div>
+      <div class="hai-cot">
+        <div><div class="nhan">Lễ Thành Hôn</div><div class="gio">10:30</div></div>
+        <div><div class="nhan">Khai tiệc</div><div class="gio">11:00</div></div>
+      </div>
+    </section>
+
+    <section class="muc gan hd" aria-labelledby="t-dem">
+      <h2 class="tde nho" id="t-dem">Cùng đếm ngược</h2>
+      <div class="dem" id="dem" aria-live="off">—</div>
+      <div class="lich" id="lich" aria-label="Lịch tháng 11 năm 2026, ngày cưới 29"></div>
+      <a class="them-lich" id="themLich" target="_blank" rel="noopener">Thêm vào lịch</a>
+    </section>
+
+    <section class="muc gan hd" aria-labelledby="t-noi">
+      <h2 class="tde" id="t-noi">Tiệc cưới sẽ tổ chức tại</h2>
+      <div class="noi-tiec">Tư gia nhà trai</div>
+      <p class="dc-tiec">Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên</p>
+      <a class="bando" data-map="groom" href="#" target="_blank" rel="noopener" aria-label="Chỉ đường tới tư gia nhà trai trên Google Maps">
+        <svg class="bando-ve" viewBox="0 0 320 150" aria-hidden="true">
+  <rect width="320" height="150" rx="16" fill="#fbe6e9"/>
+  <path d="M0 104C60 92 92 122 150 110S250 70 320 84V150H0Z" fill="#f6d3d9" opacity=".8"/>
+  <g fill="none" stroke="#fff" stroke-linecap="round">
+    <path d="M-10 60H330" stroke-width="9"/><path d="M118 -10V160" stroke-width="7"/><path d="M228 -10L196 160" stroke-width="6"/>
+    <path d="M0 22C80 30 150 18 320 34" stroke-width="4"/><path d="M40 160L84 0" stroke-width="3.5"/>
+  </g>
+  <g fill="#f3c5cd"><rect x="136" y="72" width="44" height="26" rx="5"/><rect x="246" y="96" width="50" height="30" rx="5"/>
+    <rect x="16" y="76" width="56" height="22" rx="5"/><rect x="250" y="8" width="44" height="28" rx="5"/><rect x="134" y="10" width="38" height="24" rx="5"/></g>
+  <g class="ghim"><circle cx="160" cy="62" r="18" fill="#cb5d6c" opacity=".18"/>
+    <path d="M160 70s-13-11.5-13-21a13 13 0 0 1 26 0c0 9.5-13 21-13 21Z" fill="#cb5d6c"/><circle cx="160" cy="49" r="4.8" fill="#fff"/></g>
+</svg>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Chỉ đường</span>
+      </a>
+    </section>
+
+    <section class="muc hd" aria-labelledby="t-ao">
+      <div class="deco" style="left:-96px;top:-80px;width:150px;height:98px;transform:rotate(-40deg)"><svg viewBox="0 0 200 130"><use href="#canhB"/></svg></div>
+      <h2 class="tde" id="t-ao">Dress code</h2>
+      <div class="mau-ao" role="list" aria-label="Màu trang phục gợi ý">
+        <i role="listitem" aria-label="Đỏ rượu" style="background:#933845"></i>
+        <i role="listitem" aria-label="Hồng" style="background:#cb5d6c"></i>
+        <i role="listitem" aria-label="Trắng" style="background:#fff"></i>
+      </div>
+    </section>
+
+    <section class="muc hd" aria-labelledby="t-lt">
+      <h2 class="tde" id="t-lt">Lịch trình ngày cưới</h2>
+      <ol class="lt">
+        <li><div class="t"><svg viewBox="0 0 24 24"><path d="M5 20V10.5L12 5l7 5.5V20Z"/><path d="M10 20v-4.5a2 2 0 0 1 4 0V20"/><path d="M12 9.6v.1"/></svg>07:00</div><i class="d"></i><div class="v">Lễ Vu Quy<small>Tư gia nhà gái</small></div></li>
+        <li><div class="t"><svg viewBox="0 0 24 24"><circle cx="9" cy="14.5" r="4.6"/><circle cx="15" cy="14.5" r="4.6"/><path d="M15 4.5l1.7 1.8-1.7 2.2-1.7-2.2Z"/></svg>10:30</div><i class="d"></i><div class="v">Lễ Thành Hôn<small>Tư gia nhà trai</small></div></li>
+        <li><div class="t"><svg viewBox="0 0 24 24"><path d="M6.5 3.5h4l-.4 5.3a1.6 1.6 0 0 1-3.2 0Z"/><path d="M8.5 10.4V19M6.5 19h4"/><path d="M13.5 3.5h4l-.4 5.3a1.6 1.6 0 0 1-3.2 0Z"/><path d="M15.5 10.4V19M13.5 19h4"/><path d="M10.6 5.2l2.8-.9"/></svg>11:00</div><i class="d"></i><div class="v">Khai tiệc<small>Tư gia nhà trai</small></div></li>
+      </ol>
+    </section>
+
+    <!-- ============ XÁC NHẬN THAM DỰ ============ -->
+    <section class="muc hd" aria-labelledby="t-rsvp">
+      <div class="deco" style="right:-100px;top:-90px;width:150px;height:98px;transform:rotate(206deg)"><svg viewBox="0 0 200 130"><use href="#canhA"/></svg></div>
+      <h2 class="tde" id="t-rsvp">Xác nhận tham dự</h2>
+      <form class="form" id="rsvp" novalidate>
+        <label class="an" for="rv-name">Họ và tên</label>
+        <input id="rv-name" type="text" placeholder="Tên của bạn" autocomplete="name" maxlength="120">
+        <div class="chon" role="radiogroup" aria-label="Bạn có tham dự không">
+          <label><input type="radio" name="attend" value="Sẽ tham dự" checked> Sẽ tham dự</label>
+          <label><input type="radio" name="attend" value="Rất tiếc không thể đến"> Rất tiếc</label>
+        </div>
+        <div class="hai">
+          <label class="an" for="rv-count">Số người</label>
+          <select id="rv-count"><option>1 người</option><option>2 người</option><option>3 người</option><option>4 người</option><option>5+ người</option></select>
+          <label class="an" for="rv-days">Số ngày dự</label>
+          <select id="rv-days"><option>Chỉ ngày 29.11</option><option>2 ngày</option><option>3 ngày</option></select>
+        </div>
+        <label class="an" for="rv-msg">Lời nhắn</label>
+        <textarea id="rv-msg" placeholder="Lời nhắn (không bắt buộc)" maxlength="1000"></textarea>
+        <div class="hp" aria-hidden="true"><input id="rv-web" type="text" tabindex="-1" autocomplete="off"></div>
+        <button class="nut rong" id="rv-send" type="submit">Gửi xác nhận</button>
+      </form>
+    </section>
+
+    <!-- ============ SỔ LƯU BÚT ============ -->
+    <section class="muc hd" aria-labelledby="t-lb">
+      <h2 class="tde" id="t-lb">Sổ lưu bút</h2>
+      <form class="form" id="luubut" novalidate>
+        <label class="an" for="lb-ten">Tên của bạn</label>
+        <input id="lb-ten" type="text" placeholder="Tên của bạn" maxlength="60">
+        <label class="an" for="lb-loi">Lời chúc của bạn</label>
+        <textarea id="lb-loi" placeholder="Lời chúc của bạn" maxlength="500"></textarea>
+        <div class="hp" aria-hidden="true"><input id="lb-web" type="text" tabindex="-1" autocomplete="off"></div>
+        <button class="nut" id="lb-gui" type="submit">Gửi lời chúc</button>
+      </form>
+      <div class="ds-loi" id="lbDs" aria-live="polite"><article class="loi trong"><p>Hãy là người đầu tiên gửi lời chúc tới cô dâu chú rể 💌</p></article></div>
+    </section>
+
+    <!-- ============ HỘP QUÀ MỪNG ============ -->
+    <section class="muc hd" aria-labelledby="t-qua">
+      <h2 class="tde qua" id="t-qua">Hộp quà mừng</h2>
+      <button class="qua-btn" id="quaBtn" type="button" aria-haspopup="dialog" aria-controls="quaDlg">
+        <span class="giftart" aria-hidden="true">
+        <!-- hộp kính đựng hoa, thắt nơ satin trắng; màu kính theo màu của bản (--sage) -->
+        <svg viewBox="0 0 208 196">
+          <defs>
+            <clipPath id="qKinh"><path d="M54 92H130V170H54ZM130 92L158 76V154L130 170Z"/></clipPath>
+            <linearGradient id="qRib" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#e6e9e6"/><stop offset=".45" stop-color="#ffffff"/><stop offset="1" stop-color="#d5d9d5"/>
+            </linearGradient>
+            <linearGradient id="qBow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f3f4f2"/><stop offset="1" stop-color="#cdd2cd"/>
+            </linearGradient>
+            <linearGradient id="qQuet" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="qMo" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="8"/></filter>
+            <symbol id="quaNho" viewBox="0 0 40 40" overflow="visible">
+              <path d="M6 17H26V37H6ZM26 17L34 12V32L26 37Z" style="fill:var(--than)"/>
+              <path d="M26 17L34 12V32L26 37Z" fill="#000" opacity=".13"/>
+              <path d="M5 13H27V18H5ZM5 13L13 8H35L27 13ZM27 13L35 8V13L27 18Z" style="fill:var(--than)"/>
+              <path d="M5 13L13 8H35L27 13Z" fill="#fff" opacity=".3"/>
+              <path d="M27 13L35 8V13L27 18Z" fill="#000" opacity=".16"/>
+              <path d="M5 18H27M27 18L35 13" fill="none" stroke="#000" stroke-opacity=".12" stroke-width=".6"/>
+              <path d="M14.5 13H17.5V37H14.5ZM29 15.5L31.5 14V34L29 35.5ZM14.5 13H17.5L25.5 8H22.5Z" style="fill:var(--no)"/>
+              <path d="M20 10.6C16.8 11.2 12.6 10.4 12.7 7.8 12.8 5.4 16.9 5.9 20 10.6ZM20 10.6C23.2 11.2 27.4 10.4 27.3 7.8 27.2 5.4 23.1 5.9 20 10.6Z" style="fill:var(--no)"/>
+              <circle cx="20" cy="10.5" r="1.4" style="fill:var(--no)"/>
+            </symbol>
+          </defs>
+          <g filter="url(#qMo)" style="fill:var(--sage)">
+            <circle cx="28" cy="70" r="22" opacity=".24"/><circle cx="184" cy="64" r="17" opacity=".2"/>
+            <circle cx="178" cy="156" r="24" opacity=".18"/><circle cx="104" cy="34" r="26" opacity=".12"/>
+            <circle cx="22" cy="156" r="15" opacity=".22"/>
+          </g>
+          <ellipse class="gshadow" cx="108" cy="178" rx="60" ry="7"/>
+          <g class="gbody">
+            <g clip-path="url(#qKinh)">
+              <rect x="50" y="70" width="112" height="106" style="fill:var(--paper-2)"/>
+              <use href="#eucSprig" transform="translate(60 176) rotate(-28) scale(1.05)"/>
+              <use href="#eucSprig" transform="translate(122 178) rotate(22) scale(1)"/>
+              <use href="#oliveSprig" transform="translate(92 182) rotate(-6) scale(1.15)"/>
+              <use href="#eucSprig" transform="translate(152 168) rotate(14) scale(0.85)"/>
+              <use href="#fern" transform="translate(66 132) rotate(-64) scale(0.7)"/>
+              <use href="#oliveSprig" transform="translate(146 124) rotate(38) scale(0.7)"/>
+              <use href="#eucSprig" transform="translate(104 140) rotate(70) scale(0.6)"/>
+              <use href="#floret" transform="translate(151.0 145.3) rotate(215) scale(0.41)"/>
+              <use href="#floret" transform="translate(79.1 164.7) rotate(35) scale(0.36)"/>
+              <use href="#floret" transform="translate(86.7 165.6) rotate(1) scale(0.36)"/>
+              <use href="#floret" transform="translate(147.1 113.1) rotate(15) scale(0.37)"/>
+              <use href="#floret" transform="translate(58.7 90.8) rotate(189) scale(0.37)"/>
+              <use href="#floret" transform="translate(107.4 134.7) rotate(43) scale(0.40)"/>
+              <use href="#floret" transform="translate(102.1 143.7) rotate(248) scale(0.35)"/>
+              <use href="#floret" transform="translate(67.2 138.6) rotate(242) scale(0.32)"/>
+              <use href="#floret" transform="translate(68.9 131.4) rotate(71) scale(0.41)"/>
+              <use href="#floret" transform="translate(138.4 89.1) rotate(31) scale(0.39)"/>
+              <use href="#floret" transform="translate(126.4 138.6) rotate(139) scale(0.41)"/>
+              <use href="#floret" transform="translate(153.1 104.6) rotate(67) scale(0.39)"/>
+              <use href="#floret" transform="translate(136.4 118.8) rotate(91) scale(0.40)"/>
+              <use href="#floret" transform="translate(128.6 91.0) rotate(318) scale(0.38)"/>
+              <use href="#floret" transform="translate(112.1 160.0) rotate(248) scale(0.38)"/>
+              <use href="#floret" transform="translate(56.2 90.8) rotate(270) scale(0.35)"/>
+              <use href="#floret" transform="translate(106.7 147.3) rotate(30) scale(0.37)"/>
+              <use href="#floret" transform="translate(76.6 166.5) rotate(206) scale(0.31)"/>
+              <use href="#floret" transform="translate(83.6 160.9) rotate(183) scale(0.34)"/>
+              <use href="#floret" transform="translate(142.9 150.1) rotate(70) scale(0.34)"/>
+              <use href="#floret" transform="translate(158.8 101.7) rotate(64) scale(0.42)"/>
+              <use href="#floret" transform="translate(88.5 84.8) rotate(207) scale(0.32)"/>
+              <use href="#floret" transform="translate(98.0 128.0) rotate(78) scale(0.34)"/>
+              <use href="#floret" transform="translate(133.5 89.4) rotate(308) scale(0.31)"/>
+              <use href="#floret" transform="translate(111.8 129.2) rotate(22) scale(0.33)"/>
+              <use href="#floret" transform="translate(138.2 115.4) rotate(0) scale(0.39)"/>
+              <use href="#floret" transform="translate(73.2 89.9) rotate(35) scale(0.34)"/>
+              <use href="#floret" transform="translate(104.9 94.6) rotate(180) scale(0.40)"/>
+              <use href="#floret" transform="translate(149.4 137.5) rotate(222) scale(0.40)"/>
+              <use href="#floret" transform="translate(80.5 95.2) rotate(219) scale(0.33)"/>
+              <use href="#floret" transform="translate(63.7 89.2) rotate(57) scale(0.35)"/>
+              <use href="#floret" transform="translate(141.4 151.6) rotate(343) scale(0.38)"/>
+              <use href="#floret" transform="translate(137.7 89.9) rotate(8) scale(0.39)"/>
+              <use href="#floret" transform="translate(109.9 124.7) rotate(211) scale(0.36)"/>
+              <use href="#floret" transform="translate(88.3 123.5) rotate(137) scale(0.36)"/>
+              <use href="#floret" transform="translate(54.3 100.0) rotate(275) scale(0.39)"/>
+              <use href="#floret" transform="translate(51.5 84.9) rotate(262) scale(0.32)"/>
+              <use href="#floret" transform="translate(88.1 90.8) rotate(43) scale(0.31)"/>
+              <use href="#floret" transform="translate(98.4 135.5) rotate(300) scale(0.35)"/>
+              <use href="#floret" transform="translate(62.9 108.3) rotate(318) scale(0.33)"/>
+              <use href="#floret" transform="translate(78.8 93.9) rotate(0) scale(0.31)"/>
+              <use href="#floret" transform="translate(79.4 127.8) rotate(121) scale(0.31)"/>
+              <use href="#floret" transform="translate(158.3 136.4) rotate(303) scale(0.32)"/>
+              <use href="#floret" transform="translate(133.4 154.7) rotate(332) scale(0.34)"/>
+              <use href="#floret" transform="translate(129.8 153.7) rotate(331) scale(0.41)"/>
+              <use href="#floret" transform="translate(90.2 143.2) rotate(349) scale(0.34)"/>
+              <use href="#floret" transform="translate(51.8 159.4) rotate(42) scale(0.36)"/>
+              <use href="#floret" transform="translate(68.6 152.8) rotate(307) scale(0.40)"/>
+              <use href="#floret" transform="translate(111.8 145.2) rotate(242) scale(0.31)"/>
+              <use href="#floret" transform="translate(72.0 136.1) rotate(135) scale(0.39)"/>
+              <use href="#floret" transform="translate(110.2 91.4) rotate(269) scale(0.39)"/>
+              <use href="#floret" transform="translate(159.8 94.4) rotate(104) scale(0.34)"/>
+              <use href="#floret" transform="translate(145.7 145.2) rotate(98) scale(0.39)"/>
+              <use href="#floret" transform="translate(120.7 162.0) rotate(125) scale(0.40)"/>
+              <use href="#floret" transform="translate(110.2 139.9) rotate(39) scale(0.41)"/>
+              <use href="#floret" transform="translate(138.6 129.6) rotate(0) scale(0.38)"/>
+              <use href="#floret" transform="translate(100.0 81.4) rotate(69) scale(0.36)"/>
+              <use href="#floret" transform="translate(84.7 100.3) rotate(69) scale(0.30)"/>
+              <use href="#floret" transform="translate(148.1 122.9) rotate(225) scale(0.41)"/>
+              <use href="#floret" transform="translate(81.4 129.2) rotate(309) scale(0.41)"/>
+              <use href="#floret" transform="translate(70.1 170.1) rotate(282) scale(0.37)"/>
+              <use href="#floret" transform="translate(136.6 131.3) rotate(316) scale(0.35)"/>
+              <use href="#orchid" transform="translate(70 104) rotate(20) scale(0.5)"/>
+              <use href="#orchid" transform="translate(124 104) rotate(-30) scale(0.46)"/>
+              <use href="#orchid" transform="translate(150 100) rotate(10) scale(0.42)"/>
+              <use href="#orchid" transform="translate(84 166) rotate(0) scale(0.48)"/>
+              <use href="#rose" transform="translate(74 142) rotate(10) scale(0.86)"/>
+              <use href="#rose" transform="translate(113 120) rotate(-15) scale(0.76)"/>
+              <use href="#rose" transform="translate(102 164) rotate(30) scale(0.66)"/>
+              <use href="#rose" transform="translate(64 108) rotate(0) scale(0.58)"/>
+              <use href="#rose" transform="translate(126 160) rotate(-20) scale(0.62)"/>
+              <use href="#rose" transform="translate(145 116) rotate(5) scale(0.54)"/>
+              <use href="#rose" transform="translate(148 146) rotate(40) scale(0.5)"/>
+              <g transform="skewX(-16)"><rect class="quet" x="40" y="60" width="28" height="130" fill="url(#qQuet)"/></g>
+            </g>
+            <path d="M54 92H130V170H54Z" style="fill:var(--sage)" opacity=".1"/>
+            <path d="M130 92L158 76V154L130 170Z" style="fill:var(--sage)" opacity=".24"/>
+            <path d="M54 92H130V170H54ZM130 92L158 76V154L130 170" fill="none" style="stroke:var(--sage)" stroke-width="2.8" stroke-linejoin="round" opacity=".78"/>
+            <path d="M56.5 95V167.5M133 92.5L155.5 79.5" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".75"/>
+            <path d="M86 92H98V170H86Z" fill="url(#qRib)"/>
+            <path d="M141 85.7L147 82.3V160.3L141 163.7Z" fill="url(#qRib)" opacity=".92"/>
+          </g>
+          <g class="glid">
+            <path d="M50 80L80 63H164L134 80Z" style="fill:var(--sage)" opacity=".3"/>
+            <path d="M50 80H134V94H50Z" style="fill:var(--sage)" opacity=".22"/>
+            <path d="M134 80L164 63V77L134 94Z" style="fill:var(--sage)" opacity=".36"/>
+            <path d="M50 80L80 63H164L134 80ZM50 80H134V94H50ZM134 80L164 63V77L134 94" fill="none" style="stroke:var(--sage)" stroke-width="2.4" stroke-linejoin="round" opacity=".8"/>
+            <path d="M52 82.5H131M82 65.5H160" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round" opacity=".7"/>
+            <path d="M86 80H98V94H86ZM146 72.2L152 68.8V82.8L146 86.2ZM86 80H98L128 63H116ZM59.8 74.5H143.8L154.2 68.5H70.2Z" fill="url(#qRib)"/>
+            <path d="M104 72C98 80 93 89 89 98L95 99.5C98 91 102 83 107 74.5ZM110 72C116 80 123 87 130 93L125 96.5C120 89 115 82 108 74.5Z" fill="url(#qBow)" stroke="#c8cdc8" stroke-width=".6"/>
+            <path d="M107 70C96 72 78 70 74 60 71 51 84 46 94 54 100 59 104 64 107 70ZM107 70C118 72 136 70 140 60 143 51 130 46 120 54 114 59 110 64 107 70Z" fill="url(#qBow)" stroke="#c8cdc8" stroke-width=".7"/>
+            <path d="M104 67C97 63 89 59 84 57M110 67C117 63 125 59 130 57" fill="none" stroke="#c5cac5" stroke-width="1" stroke-linecap="round" opacity=".8"/>
+            <ellipse cx="107" cy="70" rx="6.4" ry="4.8" fill="url(#qBow)" stroke="#c8cdc8" stroke-width=".7"/>
+          </g>
+          <use class="mini" href="#quaNho" x="6" y="18" width="32" height="32" style="--than:#f7eedc;--no:#c9a24a;--t:3.8s;--d:-0.4s;--r0:-9deg;--r1:-2deg"/>
+          <use class="mini" href="#quaNho" x="166" y="8" width="30" height="30" style="--than:#fbf8f3;--no:#c69a44;--t:4.4s;--d:-1.6s;--r0:6deg;--r1:12deg"/>
+          <use class="mini" href="#quaNho" x="0" y="98" width="24" height="24" style="--than:#ead5ba;--no:#b4895a;--t:3.4s;--d:-2.2s;--r0:-6deg;--r1:4deg"/>
+          <use class="mini" href="#quaNho" x="178" y="94" width="24" height="24" style="--than:var(--paper-2);--no:var(--sage-deep);--t:4s;--d:-0.9s;--r0:8deg;--r1:-3deg"/>
+          <use class="mini" href="#quaNho" x="18" y="146" width="36" height="36" style="--than:#c8463a;--no:#ecc56c;--t:4.8s;--d:-2.8s;--r0:-4deg;--r1:6deg"/>
+          <use class="mini" href="#quaNho" x="158" y="146" width="30" height="30" style="--than:var(--sage);--no:#ffffff;--t:3.6s;--d:-1.2s;--r0:10deg;--r1:2deg"/>
+          <g style="fill:var(--ink-soft)">
+          <path class="qsao" style="--d:0s" transform="translate(40 16) scale(5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:0.8s" transform="translate(148 44) scale(4)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:1.6s" transform="translate(16 84) scale(4.5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:0.4s" transform="translate(196 136) scale(5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:2s" transform="translate(66 190) scale(4)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          <path class="qsao" style="--d:1.2s" transform="translate(186 30) scale(3.5)" d="M0-1.2L.28-.28 1.2 0 .28.28 0 1.2-.28.28-1.2 0-.28-.28Z"/>
+          </g>
+        </svg>
+      </span>
+        <span class="nhan-mo">Nhấn để mở</span>
+      </button>
+      <p class="cam-on">Cảm ơn quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi. Kính chúc quý khách thật nhiều sức khoẻ và hạnh phúc!</p>
+      <div class="ky">♡ Ngọc Huy &amp; Hương Giang · 29.11.2026</div>
+    </section>
+  </div>
+  <div class="chan" aria-hidden="true">
+    <div class="deco" style="left:-50px;width:230px;height:150px;transform:rotate(-8deg)"><svg viewBox="0 0 200 130"><use href="#canhNho"/></svg></div>
+    <div class="deco" style="left:22%;width:210px;height:137px;transform:rotate(-24deg)"><svg viewBox="0 0 200 130"><use href="#canhB"/></svg></div>
+    <div class="deco" style="right:-40px;width:230px;height:150px;transform:scaleX(-1) rotate(-6deg)"><svg viewBox="0 0 200 130"><use href="#canhNho"/></svg></div>
+    <div class="deco" style="right:16%;width:190px;height:124px;transform:scaleX(-1) rotate(-30deg)"><svg viewBox="0 0 200 130"><use href="#canhA"/></svg></div>
+  </div>
+</main>
+
+<dialog class="qr-dlg" id="quaDlg" aria-labelledby="quaDlgT">
+  <div class="qr-dau"><h3 id="quaDlgT">Hộp quà mừng</h3><button class="qr-dong" id="quaDong" type="button" aria-label="Đóng">✕</button></div>
+  <div class="qr-than">
+    <div class="qr-the">
+      <div class="qr-hop"><svg class="qr" viewBox="0 0 45 45" role="img" aria-label="Mã QR chuyển khoản tới Hương Giang"><rect width="45" height="45" fill="#fff"/><path d="M0 0h7v1h-7zM9 0h6v1h-6zM17 0h1v1h-1zM21 0h1v1h-1zM23 0h1v1h-1zM27 0h1v1h-1zM30 0h1v1h-1zM36 0h1v1h-1zM38 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM13 1h1v1h-1zM15 1h2v1h-2zM19 1h1v1h-1zM21 1h1v1h-1zM24 1h4v1h-4zM29 1h1v1h-1zM32 1h1v1h-1zM35 1h1v1h-1zM38 1h1v1h-1zM44 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM12 2h3v1h-3zM16 2h1v1h-1zM18 2h1v1h-1zM20 2h2v1h-2zM24 2h2v1h-2zM28 2h1v1h-1zM30 2h1v1h-1zM32 2h2v1h-2zM35 2h1v1h-1zM38 2h1v1h-1zM40 2h3v1h-3zM44 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM13 3h2v1h-2zM18 3h3v1h-3zM22 3h1v1h-1zM24 3h1v1h-1zM26 3h2v1h-2zM30 3h1v1h-1zM33 3h1v1h-1zM35 3h2v1h-2zM38 3h1v1h-1zM40 3h3v1h-3zM44 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM13 4h2v1h-2zM16 4h2v1h-2zM20 4h5v1h-5zM27 4h1v1h-1zM30 4h1v1h-1zM34 4h3v1h-3zM38 4h1v1h-1zM40 4h3v1h-3zM44 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM11 5h1v1h-1zM14 5h2v1h-2zM17 5h1v1h-1zM20 5h1v1h-1zM24 5h3v1h-3zM29 5h1v1h-1zM32 5h2v1h-2zM38 5h1v1h-1zM44 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM38 6h7v1h-7zM8 7h1v1h-1zM10 7h2v1h-2zM19 7h2v1h-2zM24 7h1v1h-1zM28 7h6v1h-6zM35 7h2v1h-2zM0 8h1v1h-1zM2 8h5v1h-5zM9 8h5v1h-5zM15 8h3v1h-3zM19 8h6v1h-6zM27 8h1v1h-1zM29 8h1v1h-1zM33 8h1v1h-1zM36 8h1v1h-1zM38 8h5v1h-5zM1 9h1v1h-1zM3 9h2v1h-2zM9 9h1v1h-1zM14 9h2v1h-2zM18 9h2v1h-2zM21 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM30 9h4v1h-4zM35 9h2v1h-2zM39 9h1v1h-1zM42 9h3v1h-3zM0 10h1v1h-1zM6 10h1v1h-1zM8 10h2v1h-2zM13 10h2v1h-2zM18 10h1v1h-1zM21 10h2v1h-2zM24 10h1v1h-1zM27 10h1v1h-1zM29 10h1v1h-1zM34 10h1v1h-1zM36 10h4v1h-4zM41 10h2v1h-2zM0 11h4v1h-4zM7 11h2v1h-2zM12 11h5v1h-5zM21 11h1v1h-1zM23 11h2v1h-2zM28 11h1v1h-1zM30 11h3v1h-3zM35 11h2v1h-2zM39 11h2v1h-2zM42 11h1v1h-1zM2 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM9 12h1v1h-1zM12 12h1v1h-1zM14 12h2v1h-2zM18 12h1v1h-1zM22 12h3v1h-3zM27 12h1v1h-1zM30 12h1v1h-1zM34 12h2v1h-2zM41 12h1v1h-1zM0 13h3v1h-3zM4 13h1v1h-1zM7 13h1v1h-1zM11 13h1v1h-1zM13 13h1v1h-1zM17 13h1v1h-1zM23 13h1v1h-1zM28 13h6v1h-6zM36 13h1v1h-1zM39 13h1v1h-1zM44 13h1v1h-1zM0 14h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM8 14h2v1h-2zM11 14h3v1h-3zM16 14h1v1h-1zM18 14h5v1h-5zM24 14h4v1h-4zM29 14h1v1h-1zM34 14h6v1h-6zM42 14h2v1h-2zM1 15h2v1h-2zM4 15h2v1h-2zM8 15h2v1h-2zM15 15h1v1h-1zM18 15h1v1h-1zM21 15h1v1h-1zM28 15h6v1h-6zM39 15h1v1h-1zM41 15h4v1h-4zM0 16h1v1h-1zM2 16h5v1h-5zM8 16h1v1h-1zM10 16h2v1h-2zM13 16h1v1h-1zM15 16h2v1h-2zM18 16h1v1h-1zM22 16h3v1h-3zM26 16h2v1h-2zM29 16h2v1h-2zM35 16h1v1h-1zM38 16h1v1h-1zM41 16h2v1h-2zM3 17h3v1h-3zM7 17h1v1h-1zM9 17h1v1h-1zM11 17h2v1h-2zM14 17h1v1h-1zM16 17h2v1h-2zM21 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM27 17h1v1h-1zM30 17h4v1h-4zM36 17h2v1h-2zM43 17h2v1h-2zM3 18h2v1h-2zM6 18h2v1h-2zM9 18h3v1h-3zM15 18h2v1h-2zM18 18h4v1h-4zM24 18h2v1h-2zM27 18h3v1h-3zM34 18h3v1h-3zM39 18h2v1h-2zM42 18h1v1h-1zM0 19h1v1h-1zM2 19h1v1h-1zM5 19h1v1h-1zM7 19h1v1h-1zM9 19h3v1h-3zM14 19h2v1h-2zM17 19h2v1h-2zM21 19h1v1h-1zM24 19h1v1h-1zM28 19h1v1h-1zM30 19h1v1h-1zM32 19h2v1h-2zM36 19h3v1h-3zM40 19h3v1h-3zM0 20h10v1h-10zM12 20h1v1h-1zM14 20h1v1h-1zM18 20h10v1h-10zM29 20h3v1h-3zM33 20h1v1h-1zM36 20h6v1h-6zM0 21h1v1h-1zM2 21h3v1h-3zM8 21h1v1h-1zM10 21h2v1h-2zM13 21h5v1h-5zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h1v1h-1zM30 21h1v1h-1zM32 21h1v1h-1zM35 21h2v1h-2zM40 21h1v1h-1zM42 21h3v1h-3zM1 22h1v1h-1zM3 22h2v1h-2zM6 22h1v1h-1zM8 22h2v1h-2zM16 22h1v1h-1zM18 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h4v1h-4zM29 22h1v1h-1zM31 22h6v1h-6zM38 22h1v1h-1zM40 22h1v1h-1zM42 22h1v1h-1zM1 23h4v1h-4zM8 23h1v1h-1zM10 23h2v1h-2zM13 23h8v1h-8zM24 23h1v1h-1zM28 23h1v1h-1zM30 23h4v1h-4zM36 23h1v1h-1zM40 23h1v1h-1zM42 23h1v1h-1zM3 24h8v1h-8zM13 24h2v1h-2zM16 24h1v1h-1zM18 24h8v1h-8zM27 24h1v1h-1zM30 24h1v1h-1zM33 24h2v1h-2zM36 24h6v1h-6zM1 25h1v1h-1zM3 25h3v1h-3zM11 25h3v1h-3zM17 25h3v1h-3zM22 25h1v1h-1zM24 25h1v1h-1zM27 25h1v1h-1zM30 25h1v1h-1zM33 25h1v1h-1zM35 25h1v1h-1zM37 25h1v1h-1zM39 25h1v1h-1zM42 25h3v1h-3zM0 26h3v1h-3zM4 26h1v1h-1zM6 26h1v1h-1zM9 26h1v1h-1zM12 26h1v1h-1zM14 26h1v1h-1zM16 26h3v1h-3zM21 26h1v1h-1zM23 26h1v1h-1zM25 26h3v1h-3zM29 26h1v1h-1zM34 26h2v1h-2zM37 26h1v1h-1zM39 26h1v1h-1zM0 27h1v1h-1zM8 27h1v1h-1zM11 27h3v1h-3zM15 27h1v1h-1zM21 27h2v1h-2zM24 27h1v1h-1zM26 27h3v1h-3zM30 27h4v1h-4zM37 27h3v1h-3zM42 27h3v1h-3zM0 28h1v1h-1zM2 28h2v1h-2zM6 28h1v1h-1zM8 28h2v1h-2zM11 28h1v1h-1zM15 28h1v1h-1zM18 28h1v1h-1zM21 28h1v1h-1zM24 28h1v1h-1zM30 28h1v1h-1zM33 28h1v1h-1zM36 28h1v1h-1zM40 28h2v1h-2zM43 28h1v1h-1zM0 29h1v1h-1zM2 29h1v1h-1zM9 29h2v1h-2zM12 29h1v1h-1zM16 29h1v1h-1zM22 29h1v1h-1zM24 29h1v1h-1zM29 29h2v1h-2zM32 29h2v1h-2zM37 29h1v1h-1zM39 29h1v1h-1zM42 29h1v1h-1zM0 30h1v1h-1zM3 30h1v1h-1zM6 30h2v1h-2zM9 30h2v1h-2zM12 30h1v1h-1zM15 30h2v1h-2zM20 30h2v1h-2zM24 30h3v1h-3zM34 30h1v1h-1zM39 30h5v1h-5zM1 31h3v1h-3zM9 31h1v1h-1zM11 31h1v1h-1zM13 31h1v1h-1zM15 31h2v1h-2zM19 31h1v1h-1zM21 31h5v1h-5zM28 31h5v1h-5zM35 31h5v1h-5zM41 31h3v1h-3zM3 32h1v1h-1zM5 32h2v1h-2zM8 32h3v1h-3zM12 32h2v1h-2zM15 32h3v1h-3zM20 32h2v1h-2zM24 32h1v1h-1zM26 32h2v1h-2zM29 32h2v1h-2zM36 32h1v1h-1zM39 32h4v1h-4zM44 32h1v1h-1zM2 33h1v1h-1zM4 33h1v1h-1zM8 33h7v1h-7zM17 33h1v1h-1zM19 33h1v1h-1zM22 33h4v1h-4zM30 33h2v1h-2zM33 33h1v1h-1zM35 33h1v1h-1zM39 33h1v1h-1zM41 33h4v1h-4zM4 34h1v1h-1zM6 34h6v1h-6zM15 34h1v1h-1zM18 34h1v1h-1zM20 34h2v1h-2zM23 34h1v1h-1zM29 34h1v1h-1zM34 34h1v1h-1zM40 34h3v1h-3zM1 35h4v1h-4zM7 35h1v1h-1zM10 35h5v1h-5zM16 35h1v1h-1zM18 35h2v1h-2zM22 35h1v1h-1zM24 35h1v1h-1zM28 35h1v1h-1zM30 35h1v1h-1zM32 35h8v1h-8zM41 35h2v1h-2zM44 35h1v1h-1zM0 36h1v1h-1zM3 36h2v1h-2zM6 36h4v1h-4zM12 36h1v1h-1zM14 36h1v1h-1zM20 36h5v1h-5zM27 36h1v1h-1zM29 36h3v1h-3zM33 36h1v1h-1zM36 36h5v1h-5zM8 37h2v1h-2zM11 37h2v1h-2zM16 37h1v1h-1zM18 37h3v1h-3zM24 37h1v1h-1zM30 37h2v1h-2zM36 37h1v1h-1zM40 37h1v1h-1zM42 37h3v1h-3zM0 38h7v1h-7zM9 38h1v1h-1zM12 38h2v1h-2zM16 38h5v1h-5zM22 38h1v1h-1zM24 38h4v1h-4zM29 38h1v1h-1zM33 38h2v1h-2zM36 38h1v1h-1zM38 38h1v1h-1zM40 38h1v1h-1zM42 38h1v1h-1zM0 39h1v1h-1zM6 39h1v1h-1zM8 39h3v1h-3zM12 39h1v1h-1zM17 39h1v1h-1zM20 39h1v1h-1zM24 39h1v1h-1zM28 39h6v1h-6zM36 39h1v1h-1zM40 39h1v1h-1zM42 39h3v1h-3zM0 40h1v1h-1zM2 40h3v1h-3zM6 40h1v1h-1zM8 40h3v1h-3zM13 40h3v1h-3zM18 40h1v1h-1zM20 40h5v1h-5zM27 40h1v1h-1zM30 40h1v1h-1zM36 40h6v1h-6zM43 40h1v1h-1zM0 41h1v1h-1zM2 41h3v1h-3zM6 41h1v1h-1zM8 41h1v1h-1zM11 41h1v1h-1zM18 41h2v1h-2zM21 41h1v1h-1zM27 41h1v1h-1zM30 41h4v1h-4zM37 41h1v1h-1zM39 41h1v1h-1zM41 41h4v1h-4zM0 42h1v1h-1zM2 42h3v1h-3zM6 42h1v1h-1zM8 42h1v1h-1zM11 42h1v1h-1zM13 42h1v1h-1zM15 42h4v1h-4zM20 42h1v1h-1zM22 42h2v1h-2zM25 42h3v1h-3zM29 42h1v1h-1zM34 42h3v1h-3zM38 42h1v1h-1zM41 42h3v1h-3zM0 43h1v1h-1zM6 43h1v1h-1zM9 43h1v1h-1zM11 43h2v1h-2zM14 43h2v1h-2zM18 43h4v1h-4zM23 43h1v1h-1zM28 43h1v1h-1zM31 43h2v1h-2zM35 43h3v1h-3zM39 43h2v1h-2zM42 43h1v1h-1zM0 44h7v1h-7zM8 44h4v1h-4zM13 44h1v1h-1zM18 44h1v1h-1zM21 44h1v1h-1zM24 44h1v1h-1zM26 44h1v1h-1zM30 44h1v1h-1zM33 44h1v1h-1zM35 44h3v1h-3zM39 44h1v1h-1zM41 44h1v1h-1zM43 44h1v1h-1z" fill="#3b1820"/></svg></div>
+      <div class="nh">TPBank</div>
+      <div class="so" data-copy="04082002999" title="Chạm để sao chép">0408 2002 999</div>
+      <div class="chu">HOANG THI HUONG GIANG</div>
+      <div class="vai-qr">Cô dâu</div>
+      <button class="luu" type="button" data-luu="qr-co-dau-tpbank.png">Lưu QR</button>
+    </div>
+    <div class="qr-the">
+      <div class="qr-hop"><svg class="qr" viewBox="0 0 45 45" role="img" aria-label="Mã QR chuyển khoản tới Ngọc Huy"><rect width="45" height="45" fill="#fff"/><path d="M0 0h7v1h-7zM9 0h3v1h-3zM16 0h2v1h-2zM21 0h1v1h-1zM23 0h1v1h-1zM25 0h1v1h-1zM27 0h2v1h-2zM30 0h1v1h-1zM33 0h1v1h-1zM36 0h1v1h-1zM38 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h5v1h-5zM16 1h1v1h-1zM18 1h1v1h-1zM22 1h1v1h-1zM24 1h2v1h-2zM27 1h1v1h-1zM29 1h1v1h-1zM32 1h2v1h-2zM35 1h1v1h-1zM38 1h1v1h-1zM44 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h2v1h-2zM13 2h1v1h-1zM15 2h1v1h-1zM17 2h2v1h-2zM21 2h1v1h-1zM24 2h1v1h-1zM28 2h1v1h-1zM30 2h4v1h-4zM35 2h1v1h-1zM38 2h1v1h-1zM40 2h3v1h-3zM44 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM11 3h3v1h-3zM15 3h1v1h-1zM18 3h3v1h-3zM22 3h1v1h-1zM24 3h4v1h-4zM30 3h2v1h-2zM35 3h2v1h-2zM38 3h1v1h-1zM40 3h3v1h-3zM44 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM14 4h2v1h-2zM17 4h1v1h-1zM20 4h5v1h-5zM27 4h2v1h-2zM30 4h1v1h-1zM34 4h3v1h-3zM38 4h1v1h-1zM40 4h3v1h-3zM44 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h5v1h-5zM16 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM24 5h3v1h-3zM29 5h1v1h-1zM33 5h1v1h-1zM38 5h1v1h-1zM44 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM38 6h7v1h-7zM8 7h1v1h-1zM11 7h1v1h-1zM16 7h5v1h-5zM24 7h1v1h-1zM28 7h1v1h-1zM30 7h4v1h-4zM36 7h1v1h-1zM0 8h1v1h-1zM2 8h5v1h-5zM9 8h1v1h-1zM11 8h1v1h-1zM14 8h3v1h-3zM18 8h7v1h-7zM27 8h1v1h-1zM30 8h1v1h-1zM33 8h1v1h-1zM35 8h1v1h-1zM38 8h5v1h-5zM5 9h1v1h-1zM7 9h3v1h-3zM11 9h2v1h-2zM15 9h5v1h-5zM21 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM30 9h4v1h-4zM36 9h1v1h-1zM39 9h1v1h-1zM42 9h3v1h-3zM0 10h1v1h-1zM3 10h2v1h-2zM6 10h1v1h-1zM9 10h1v1h-1zM11 10h1v1h-1zM15 10h1v1h-1zM18 10h1v1h-1zM21 10h2v1h-2zM24 10h1v1h-1zM27 10h1v1h-1zM29 10h1v1h-1zM31 10h1v1h-1zM34 10h6v1h-6zM41 10h2v1h-2zM0 11h4v1h-4zM8 11h1v1h-1zM11 11h2v1h-2zM14 11h3v1h-3zM19 11h3v1h-3zM26 11h1v1h-1zM28 11h1v1h-1zM30 11h3v1h-3zM36 11h1v1h-1zM40 11h1v1h-1zM42 11h1v1h-1zM0 12h1v1h-1zM2 12h3v1h-3zM6 12h2v1h-2zM10 12h1v1h-1zM13 12h3v1h-3zM18 12h1v1h-1zM20 12h1v1h-1zM22 12h3v1h-3zM27 12h1v1h-1zM30 12h1v1h-1zM34 12h2v1h-2zM41 12h1v1h-1zM4 13h2v1h-2zM7 13h1v1h-1zM10 13h1v1h-1zM14 13h4v1h-4zM19 13h5v1h-5zM27 13h7v1h-7zM36 13h1v1h-1zM42 13h3v1h-3zM0 14h1v1h-1zM3 14h1v1h-1zM6 14h2v1h-2zM9 14h3v1h-3zM13 14h1v1h-1zM15 14h2v1h-2zM18 14h3v1h-3zM24 14h3v1h-3zM31 14h1v1h-1zM34 14h5v1h-5zM40 14h4v1h-4zM0 15h4v1h-4zM5 15h1v1h-1zM8 15h3v1h-3zM12 15h2v1h-2zM15 15h2v1h-2zM21 15h1v1h-1zM25 15h1v1h-1zM28 15h5v1h-5zM37 15h1v1h-1zM39 15h1v1h-1zM41 15h2v1h-2zM0 16h2v1h-2zM4 16h1v1h-1zM6 16h2v1h-2zM11 16h1v1h-1zM15 16h1v1h-1zM18 16h1v1h-1zM22 16h1v1h-1zM24 16h1v1h-1zM26 16h2v1h-2zM29 16h2v1h-2zM35 16h1v1h-1zM38 16h1v1h-1zM41 16h2v1h-2zM44 16h1v1h-1zM0 17h1v1h-1zM2 17h2v1h-2zM5 17h1v1h-1zM8 17h2v1h-2zM12 17h2v1h-2zM15 17h1v1h-1zM17 17h1v1h-1zM20 17h2v1h-2zM23 17h1v1h-1zM25 17h1v1h-1zM27 17h1v1h-1zM30 17h4v1h-4zM36 17h2v1h-2zM39 17h5v1h-5zM0 18h1v1h-1zM3 18h1v1h-1zM6 18h2v1h-2zM12 18h2v1h-2zM19 18h3v1h-3zM24 18h1v1h-1zM27 18h1v1h-1zM29 18h1v1h-1zM34 18h4v1h-4zM39 18h1v1h-1zM41 18h3v1h-3zM4 19h1v1h-1zM9 19h1v1h-1zM14 19h1v1h-1zM16 19h3v1h-3zM21 19h1v1h-1zM28 19h1v1h-1zM30 19h1v1h-1zM32 19h3v1h-3zM36 19h2v1h-2zM40 19h3v1h-3zM0 20h2v1h-2zM4 20h9v1h-9zM16 20h3v1h-3zM20 20h5v1h-5zM27 20h1v1h-1zM29 20h2v1h-2zM33 20h1v1h-1zM36 20h5v1h-5zM44 20h1v1h-1zM2 21h3v1h-3zM8 21h1v1h-1zM12 21h3v1h-3zM18 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h2v1h-2zM30 21h1v1h-1zM35 21h2v1h-2zM40 21h1v1h-1zM42 21h3v1h-3zM2 22h3v1h-3zM6 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM14 22h4v1h-4zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h3v1h-3zM29 22h1v1h-1zM32 22h3v1h-3zM36 22h1v1h-1zM38 22h1v1h-1zM40 22h1v1h-1zM42 22h1v1h-1zM3 23h2v1h-2zM8 23h3v1h-3zM12 23h2v1h-2zM15 23h1v1h-1zM19 23h2v1h-2zM24 23h1v1h-1zM28 23h6v1h-6zM36 23h1v1h-1zM40 23h1v1h-1zM42 23h1v1h-1zM1 24h1v1h-1zM4 24h5v1h-5zM10 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM19 24h7v1h-7zM27 24h1v1h-1zM30 24h1v1h-1zM33 24h9v1h-9zM1 25h3v1h-3zM5 25h1v1h-1zM7 25h2v1h-2zM10 25h1v1h-1zM14 25h1v1h-1zM18 25h2v1h-2zM22 25h3v1h-3zM27 25h1v1h-1zM30 25h4v1h-4zM35 25h1v1h-1zM37 25h1v1h-1zM39 25h1v1h-1zM42 25h3v1h-3zM1 26h1v1h-1zM3 26h1v1h-1zM5 26h3v1h-3zM9 26h1v1h-1zM11 26h2v1h-2zM15 26h1v1h-1zM17 26h1v1h-1zM21 26h1v1h-1zM23 26h1v1h-1zM25 26h3v1h-3zM29 26h1v1h-1zM34 26h1v1h-1zM36 26h2v1h-2zM39 26h1v1h-1zM0 27h1v1h-1zM3 27h1v1h-1zM5 27h1v1h-1zM8 27h2v1h-2zM11 27h3v1h-3zM15 27h3v1h-3zM22 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM28 27h1v1h-1zM31 27h3v1h-3zM38 27h2v1h-2zM42 27h1v1h-1zM44 27h1v1h-1zM0 28h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM10 28h1v1h-1zM12 28h2v1h-2zM15 28h2v1h-2zM21 28h1v1h-1zM24 28h1v1h-1zM27 28h1v1h-1zM30 28h1v1h-1zM33 28h1v1h-1zM36 28h1v1h-1zM40 28h2v1h-2zM43 28h1v1h-1zM0 29h3v1h-3zM4 29h2v1h-2zM7 29h4v1h-4zM12 29h1v1h-1zM14 29h2v1h-2zM17 29h2v1h-2zM22 29h1v1h-1zM24 29h1v1h-1zM28 29h3v1h-3zM33 29h1v1h-1zM37 29h1v1h-1zM39 29h1v1h-1zM42 29h1v1h-1zM44 29h1v1h-1zM1 30h3v1h-3zM6 30h2v1h-2zM9 30h1v1h-1zM11 30h3v1h-3zM17 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM25 30h3v1h-3zM29 30h1v1h-1zM34 30h1v1h-1zM39 30h2v1h-2zM43 30h1v1h-1zM0 31h1v1h-1zM2 31h3v1h-3zM9 31h1v1h-1zM13 31h1v1h-1zM15 31h3v1h-3zM22 31h1v1h-1zM24 31h3v1h-3zM28 31h6v1h-6zM35 31h5v1h-5zM41 31h4v1h-4zM0 32h1v1h-1zM2 32h1v1h-1zM6 32h1v1h-1zM8 32h2v1h-2zM11 32h1v1h-1zM13 32h5v1h-5zM20 32h2v1h-2zM24 32h1v1h-1zM26 32h2v1h-2zM30 32h1v1h-1zM34 32h1v1h-1zM36 32h1v1h-1zM39 32h2v1h-2zM42 32h1v1h-1zM1 33h1v1h-1zM4 33h1v1h-1zM7 33h2v1h-2zM10 33h1v1h-1zM12 33h4v1h-4zM17 33h1v1h-1zM19 33h1v1h-1zM22 33h1v1h-1zM27 33h1v1h-1zM30 33h2v1h-2zM33 33h1v1h-1zM35 33h1v1h-1zM42 33h3v1h-3zM4 34h1v1h-1zM6 34h1v1h-1zM11 34h1v1h-1zM14 34h1v1h-1zM16 34h1v1h-1zM21 34h3v1h-3zM25 34h5v1h-5zM34 34h1v1h-1zM39 34h1v1h-1zM41 34h1v1h-1zM1 35h4v1h-4zM8 35h2v1h-2zM14 35h2v1h-2zM18 35h1v1h-1zM21 35h1v1h-1zM24 35h2v1h-2zM28 35h1v1h-1zM30 35h1v1h-1zM32 35h2v1h-2zM35 35h5v1h-5zM42 35h1v1h-1zM0 36h1v1h-1zM3 36h2v1h-2zM6 36h2v1h-2zM10 36h1v1h-1zM12 36h5v1h-5zM18 36h1v1h-1zM20 36h5v1h-5zM27 36h1v1h-1zM29 36h3v1h-3zM36 36h5v1h-5zM8 37h1v1h-1zM10 37h1v1h-1zM16 37h1v1h-1zM19 37h2v1h-2zM24 37h1v1h-1zM27 37h1v1h-1zM30 37h1v1h-1zM32 37h1v1h-1zM36 37h1v1h-1zM40 37h1v1h-1zM42 37h3v1h-3zM0 38h7v1h-7zM10 38h2v1h-2zM13 38h1v1h-1zM15 38h2v1h-2zM19 38h2v1h-2zM22 38h1v1h-1zM24 38h4v1h-4zM29 38h1v1h-1zM31 38h4v1h-4zM36 38h1v1h-1zM38 38h1v1h-1zM40 38h1v1h-1zM42 38h1v1h-1zM0 39h1v1h-1zM6 39h1v1h-1zM8 39h1v1h-1zM11 39h1v1h-1zM13 39h1v1h-1zM17 39h2v1h-2zM20 39h1v1h-1zM24 39h1v1h-1zM28 39h6v1h-6zM36 39h1v1h-1zM40 39h1v1h-1zM42 39h3v1h-3zM0 40h1v1h-1zM2 40h3v1h-3zM6 40h1v1h-1zM8 40h1v1h-1zM14 40h1v1h-1zM16 40h1v1h-1zM18 40h1v1h-1zM20 40h5v1h-5zM27 40h1v1h-1zM29 40h2v1h-2zM36 40h6v1h-6zM43 40h1v1h-1zM0 41h1v1h-1zM2 41h3v1h-3zM6 41h1v1h-1zM8 41h6v1h-6zM15 41h1v1h-1zM17 41h2v1h-2zM20 41h2v1h-2zM27 41h1v1h-1zM30 41h1v1h-1zM33 41h1v1h-1zM37 41h1v1h-1zM39 41h1v1h-1zM41 41h4v1h-4zM0 42h1v1h-1zM2 42h3v1h-3zM6 42h1v1h-1zM8 42h1v1h-1zM11 42h2v1h-2zM14 42h2v1h-2zM18 42h2v1h-2zM21 42h1v1h-1zM23 42h5v1h-5zM29 42h1v1h-1zM34 42h3v1h-3zM42 42h2v1h-2zM0 43h1v1h-1zM6 43h1v1h-1zM9 43h1v1h-1zM11 43h4v1h-4zM16 43h1v1h-1zM18 43h4v1h-4zM23 43h1v1h-1zM26 43h7v1h-7zM37 43h1v1h-1zM42 43h1v1h-1zM0 44h7v1h-7zM8 44h3v1h-3zM13 44h4v1h-4zM18 44h1v1h-1zM21 44h1v1h-1zM24 44h1v1h-1zM29 44h2v1h-2zM33 44h1v1h-1zM35 44h1v1h-1zM37 44h1v1h-1zM39 44h3v1h-3zM43 44h1v1h-1z" fill="#3b1820"/></svg></div>
+      <div class="nh">Techcombank</div>
+      <div class="so" data-copy="6688863368" title="Chạm để sao chép">6688 8633 68</div>
+      <div class="chu">LE NGOC HUY</div>
+      <div class="vai-qr">Chú rể</div>
+      <button class="luu" type="button" data-luu="qr-chu-re-techcombank.png">Lưu QR</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="noi">
+  <button id="cuonBtn" type="button" aria-label="Tự cuộn trang" hidden>
+    <svg viewBox="0 0 24 24"><g class="xuong"><path d="M7 6l5 5 5-5"/><path d="M7 13l5 5 5-5"/></g><g class="tam-dung"><path d="M9 6v12M15 6v12"/></g></svg>
+  </button>
+  <button id="nhacBtn" type="button" aria-label="Bật nhạc" aria-pressed="false" hidden>
+    <svg viewBox="0 0 24 24"><g class="song" fill="currentColor" stroke="none"><rect x="3" y="9" width="2" height="6" rx="1"/><rect x="7.5" y="5" width="2" height="14" rx="1"/><rect x="12" y="7.5" width="2" height="9" rx="1"/><rect x="16.5" y="4" width="2" height="16" rx="1"/><rect x="21" y="9.5" width="2" height="5" rx="1"/></g></svg>
+  </button>
+</div>
+<audio id="nhacNen" loop preload="none"></audio>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------------- CONFIG ---------------- */
+const CONFIG = {
+  ben: "chung",                                  // xác nhận ghi vào tab RSVP
+  rsvpToken: "hg-nh-2026",
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbxbbRGstq2okI7BIeNHPQiAe0QhMHffVDaMgeElHhejvIbLt2fqvKPUMSEY2-0qv5aJ9w/exec",
+  nhac: "../nhac.mp3",
+  ngayCuoi: "2026-11-29T07:00:00+07:00",         // đếm ngược tới lễ đầu tiên trong ngày
+  maps: { groom: "https://maps.app.goo.gl/N93YSFWjoCXKSkg68", bride: "https://maps.app.goo.gl/Drkt8N8c53VjXBXJ8" },
+  /* Ảnh cưới cho album: chép ảnh (dọc, khoảng 3:4) vào thư mục /hq rồi ghi tên file vào đây,
+     ví dụ ["anh-1.jpg", "anh-2.jpg"]. Để trống thì hiện 6 khung chờ màu hồng. */
+  album: []
+};
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("on"), 2200); }
+
+/* ---------------- khách mời: ?g=Tên&x=mức xưng hô ---------------- */
+const _q = new URLSearchParams(location.search);
+const GUEST = (_q.get("g") || _q.get("guest") || "").replace(/[\u0000-\u001f\u007f]/g, "").replace(/\s+/g, " ").trim().slice(0, 70);
+const LOI_MOI = { ongba: "Kính Mời", anhchi: "Trân Trọng Kính Mời", cochu: "Trân Trọng Kính Mời", giadinh: "Trân Trọng Kính Mời", quyvi: "Trân Trọng Kính Mời" };
+$("#moLoi").textContent = LOI_MOI[(_q.get("x") || "").toLowerCase()] || "Thân Mời";
+if(GUEST){
+  $("#moTen").textContent = GUEST;                 // textContent: tên lấy từ địa chỉ trang
+  $("#rv-name").value = GUEST; $("#lb-ten").value = GUEST;
+  document.title = GUEST + " · Ngọc Huy & Hương Giang";
+}
+if("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+/* ---------------- nhạc nền ---------------- */
+const NHAC = (function(){
+  const btn = $("#nhacBtn"), au = $("#nhacNen");
+  if(!btn || !au || !CONFIG.nhac) return null;
+  au.src = CONFIG.nhac; au.volume = .7;
+  let muonNghe = false;
+  const capNhat = () => { const on = !au.paused; btn.classList.toggle("dang-phat", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false"); btn.setAttribute("aria-label", on ? "Tắt nhạc" : "Bật nhạc"); };
+  au.addEventListener("play", capNhat); au.addEventListener("pause", capNhat);
+  const phat = () => { muonNghe = true; const p = au.play(); if(p && p.catch) p.catch(capNhat); };
+  btn.addEventListener("click", () => { if(au.paused) phat(); else { muonNghe = false; au.pause(); } });
+  document.addEventListener("visibilitychange", () => { if(document.hidden) au.pause(); else if(muonNghe) phat(); });
+  return { batDau(){ btn.hidden = false; phat(); } };
+})();
+
+/* ---------------- tự cuộn trang (như trình chiếu), chạm vào là dừng ---------------- */
+const TUCUON = (function(){
+  const btn = $("#cuonBtn"); let chay = false, truoc = 0, du = 0, raf = 0;
+  const capNhat = () => { btn.classList.toggle("dang-chay", chay); btn.setAttribute("aria-label", chay ? "Dừng tự cuộn" : "Tự cuộn trang"); };
+  const buoc = t => {
+    if(!chay) return;
+    du += (truoc ? Math.min(64, t - truoc) : 16) * .042; truoc = t;   // ~42 px mỗi giây
+    if(du >= 1){ const px = Math.floor(du); du -= px; window.scrollBy(0, px); }
+    if(innerHeight + scrollY >= document.documentElement.scrollHeight - 2){ dung(); return; }
+    raf = requestAnimationFrame(buoc);
+  };
+  function chayDi(){ if(chay) return; chay = true; truoc = 0; raf = requestAnimationFrame(buoc); capNhat(); }
+  function dung(){ chay = false; cancelAnimationFrame(raf); capNhat(); }
+  btn.addEventListener("click", () => chay ? dung() : chayDi());
+  ["wheel", "touchstart", "keydown", "mousedown"].forEach(ev => addEventListener(ev, e => {
+    if(e.target && e.target.closest && e.target.closest(".noi")) return;
+    if(chay) dung();
+  }, { passive: true }));
+  return { batDau(tre){ btn.hidden = false; if(!reduce) setTimeout(chayDi, tre || 0); }, dung };
+})();
+
+/* ---------------- mở thiệp ---------------- */
+(function(){
+  const mo = $("#mo"); let xong = false;
+  $("#moBtn").addEventListener("click", () => {
+    if(xong) return; xong = true;
+    if(NHAC) NHAC.batDau();                        // gọi ngay trong lúc chạm thì trình duyệt mới cho phát tiếng
+    scrollTo(0, 0);
+    mo.classList.add("dang-mo");
+    document.documentElement.classList.remove("dong");
+    setTimeout(() => { mo.remove(); TUCUON.batDau(2500); }, reduce ? 300 : 950);
+  });
+})();
+
+/* ---------------- hiện dần khi cuộn tới ---------------- */
+(function(){
+  const els = $$(".hd");
+  if(reduce || !("IntersectionObserver" in window)){ els.forEach(e => e.classList.add("in")); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ---------------- album ảnh trượt ---------------- */
+(function(){
+  const khung = $("#album"), cham = $("#albumCham");
+  const ds = CONFIG.album && CONFIG.album.length ? CONFIG.album : null;
+  const n = ds ? ds.length : 6;
+  const tems = [], nut = [];
+  for(let i = 0; i < n; i++){
+    const f = document.createElement("figure"); f.className = "anh";
+    if(ds){ const im = document.createElement("img"); im.src = ds[i]; im.alt = "Ảnh cưới " + (i + 1); im.loading = "lazy"; im.decoding = "async"; f.appendChild(im); }
+    else { f.innerHTML = '<div class="anh-cho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.6"/></svg>Ảnh cưới ' + (i + 1) + '</div>'; }
+    f.addEventListener("click", () => { if(i !== hien){ den(i); nghi(); } });
+    khung.appendChild(f); tems.push(f);
+    const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Ảnh " + (i + 1));
+    b.addEventListener("click", () => { den(i); nghi(); }); cham.appendChild(b); nut.push(b);
+  }
+  let hien = Math.min(2, n - 1), hen = 0, dungDen = 0;
+  function ve(){
+    tems.forEach((el, i) => {
+      let d = ((i - hien) % n + n) % n; if(d > n / 2) d -= n;      // vòng tròn: ảnh cuối nằm bên trái ảnh đầu
+      const a = Math.abs(d);
+      el.style.transform = `translateX(${d * (a > 1 ? 30 : 36)}%) scale(${a ? (a > 1 ? .6 : .76) : 1}) rotateY(${-Math.sign(d) * 22}deg)`;
+      el.style.zIndex = 20 - a; el.style.opacity = a > 1 ? 0 : 1; el.style.pointerEvents = a > 1 ? "none" : "auto";
+      el.classList.toggle("giua", d === 0);
+    });
+    nut.forEach((b, i) => b.setAttribute("aria-current", i === hien ? "true" : "false"));
+  }
+  function den(i){ hien = (i + n) % n; ve(); }
+  function nghi(){ dungDen = Date.now() + 8000; }
+  let x0 = null;
+  khung.addEventListener("pointerdown", e => { x0 = e.clientX; });
+  khung.addEventListener("pointerup", e => { if(x0 === null) return; const dx = e.clientX - x0; x0 = null;
+    if(Math.abs(dx) > 40){ den(hien + (dx < 0 ? 1 : -1)); nghi(); } });
+  ve();
+  if(!reduce) hen = setInterval(() => { if(Date.now() > dungDen && !document.hidden) den(hien + 1); }, 4000);
+})();
+
+/* ---------------- đếm ngược, lịch, thêm vào lịch ---------------- */
+(function(){
+  const dich = new Date(CONFIG.ngayCuoi).getTime(), o = $("#dem");
+  const dem = () => {
+    let s = Math.floor((dich - Date.now()) / 1000);
+    if(s <= 0){ o.textContent = "Hôm nay là ngày vui của chúng tôi!"; return; }
+    const d = Math.floor(s / 86400); s %= 86400; const h = Math.floor(s / 3600); s %= 3600; const m = Math.floor(s / 60); s %= 60;
+    o.textContent = `${d} ngày ${h} giờ ${m} phút ${s} giây`;
+  };
+  dem(); setInterval(dem, 1000);
+
+  const nam = 2026, thang = 10, ngay = 29;                 // tháng tính từ 0
+  const dau = (new Date(nam, thang, 1).getDay() + 6) % 7, so = new Date(nam, thang + 1, 0).getDate();
+  let html = '<h4>Tháng 11 / 2026</h4><div class="thu"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div><div class="o-ngay">';
+  for(let i = 0; i < dau; i++) html += "<span></span>";
+  for(let d = 1; d <= so; d++) html += d === ngay ? '<span class="cuoi"><svg viewBox="0 0 24 22"><use href="#tim"/></svg><b>' + d + "</b></span>" : "<span>" + d + "</span>";
+  $("#lich").innerHTML = html + "</div>";
+
+  const p = new URLSearchParams({ action: "TEMPLATE", text: "Đám cưới Ngọc Huy & Hương Giang",
+    dates: "20261129T000000Z/20261129T060000Z",
+    details: "07:00 Lễ Vu Quy — tư gia nhà gái, 62 Nguyễn Xiển, Phường Thanh Liệt, Hà Nội\n10:30 Lễ Thành Hôn — tư gia nhà trai\n11:00 Khai tiệc\nThiệp: " + location.origin + location.pathname,
+    location: "Tư gia nhà trai, Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên" });
+  $("#themLich").href = "https://calendar.google.com/calendar/render?" + p.toString();
+  $$("[data-map]").forEach(a => { a.href = CONFIG.maps[a.dataset.map] || CONFIG.maps.groom; });
+})();
+
+/* ---------------- gửi lên Google Sheet ---------------- */
+async function gui(duLieu){
+  if(!CONFIG.rsvpEndpoint) throw new Error("no_endpoint");
+  // text/plain giữ đây là "simple request" nên không bị chặn preflight CORS
+  const r = await fetch(CONFIG.rsvpEndpoint, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(Object.assign({ token: CONFIG.rsvpToken, guest: GUEST, source: "hq" }, duLieu)) });
+  const d = await r.json().catch(() => ({ ok: r.ok }));
+  if(!d.ok) throw new Error(d.error || "failed");
+}
+
+$("#rsvp").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("#rv-send"), ten = $("#rv-name").value.trim();
+  if(!ten){ toast("Bạn nhớ điền tên nhé 🌸"); $("#rv-name").focus(); return; }
+  const cu = btn.textContent; btn.disabled = true; btn.textContent = "Đang gửi…";
+  try{
+    await gui({ ben: CONFIG.ben, name: ten, attend: (document.querySelector('input[name="attend"]:checked') || {}).value || "",
+      count: $("#rv-count").value, days: $("#rv-days").value, msg: $("#rv-msg").value.trim(), hp: $("#rv-web").value });
+    btn.textContent = "Đã nhận, cảm ơn bạn!"; toast("Cảm ơn bạn đã xác nhận 💐"); $("#rv-msg").value = "";
+  }catch(err){ btn.disabled = false; btn.textContent = cu; toast("Gửi chưa được, bạn thử lại sau nhé 🙏"); }
+});
+
+/* ---------------- sổ lưu bút ---------------- */
+function theLoi(x){
+  const a = document.createElement("article"); a.className = "loi";
+  const h = document.createElement("header"), b = document.createElement("b"), t = document.createElement("time");
+  b.textContent = x.ten; t.textContent = x.luc || ""; h.append(b, t);
+  const p = document.createElement("p"); p.textContent = x.loi;       // textContent: lời chúc do khách gõ
+  a.append(h, p); return a;
+}
+async function taiLuuBut(){
+  if(!CONFIG.rsvpEndpoint) return;
+  try{
+    const ctl = new AbortController(); setTimeout(() => ctl.abort(), 10000);
+    const r = await fetch(CONFIG.rsvpEndpoint + "?luubut=1", { signal: ctl.signal });
+    const d = await r.json();
+    if(d && d.ok && Array.isArray(d.items) && d.items.length){
+      const box = $("#lbDs"); box.textContent = "";
+      d.items.forEach(x => box.appendChild(theLoi({ ten: String(x.ten || ""), loi: String(x.loi || ""), luc: String(x.luc || "") })));
+    }
+  }catch(e){ /* chưa đọc được thì giữ dòng mời viết lời chúc */ }
+}
+(function(){
+  const muc = $("#t-lb");
+  if(!("IntersectionObserver" in window)){ taiLuuBut(); return; }
+  const io = new IntersectionObserver(es => { if(es.some(e => e.isIntersecting)){ io.disconnect(); taiLuuBut(); } }, { rootMargin: "600px 0px" });
+  io.observe(muc);
+})();
+$("#luubut").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("#lb-gui"), ten = $("#lb-ten").value.trim(), loi = $("#lb-loi").value.trim();
+  if(!ten){ toast("Bạn nhớ điền tên nhé 🌸"); $("#lb-ten").focus(); return; }
+  if(!loi){ toast("Bạn viết đôi lời chúc nhé 💌"); $("#lb-loi").focus(); return; }
+  const cu = btn.textContent; btn.disabled = true; btn.textContent = "Đang gửi…";
+  try{
+    await gui({ ben: "luubut", name: ten, msg: loi, hp: $("#lb-web").value });
+    const box = $("#lbDs"), trong = box.querySelector(".trong"); if(trong) trong.remove();
+    box.prepend(theLoi({ ten, loi, luc: "Vừa xong" })); box.scrollTop = 0;
+    $("#lb-loi").value = ""; toast("Cảm ơn lời chúc của bạn 💕");
+  }catch(err){ toast("Gửi chưa được, bạn thử lại sau nhé 🙏"); }
+  btn.disabled = false; btn.textContent = cu;
+});
+
+/* ---------------- hộp quà mừng -> mã QR ---------------- */
+(function(){
+  const btn = $("#quaBtn"), dlg = $("#quaDlg");
+  btn.addEventListener("click", () => {
+    TUCUON.dung();
+    const mo = () => dlg.showModal();
+    if(reduce){ mo(); return; }
+    btn.classList.add("opening");
+    setTimeout(() => { btn.classList.remove("opening"); mo(); }, 430);
+  });
+  $("#quaDong").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if(e.target === dlg) dlg.close(); });
+  $$("[data-copy]").forEach(el => el.addEventListener("click", async () => {
+    try{ await navigator.clipboard.writeText(el.dataset.copy); toast("Đã sao chép số tài khoản ✓"); }catch(_){ toast("Số TK: " + el.dataset.copy); }
+  }));
+  // Lưu QR: vẽ mã (SVG) lên canvas rồi tải về dạng ảnh PNG
+  $$("[data-luu]").forEach(b => b.addEventListener("click", () => {
+    const svg = b.closest(".qr-the").querySelector("svg").cloneNode(true);
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg"); svg.setAttribute("width", "640"); svg.setAttribute("height", "640");
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement("canvas"); c.width = c.height = 720;
+      const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, 720, 720); g.imageSmoothingEnabled = false; g.drawImage(img, 40, 40, 640, 640);
+      c.toBlob(blob => { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = b.dataset.luu;
+        document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); toast("Đã lưu mã QR"); }, "image/png");
+    };
+    img.onerror = () => toast("Máy chưa lưu được, bạn chụp màn hình giúp nhé");
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(new XMLSerializer().serializeToString(svg));
+  }));
+})();
+</script>
+</body>
+</html>
