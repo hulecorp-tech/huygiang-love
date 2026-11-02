@@ -133,13 +133,13 @@
 
     /* ---------- khung trang ---------- */
     .trang{position:relative;z-index:1;width:min(480px,100%);margin:0 auto;overflow:hidden;padding-bottom:0;}
-    @media (min-width:600px){.trang{overflow:visible;} .chan{width:140%;max-width:none;margin-left:-20%;}}
 
     /* vòm hoa ghi tên */
     .dau{position:relative;min-height:min(100svh,860px);display:flex;flex-direction:column;align-items:center;justify-content:center;
       padding:28px 0 70px;}
-    .dau-canh{position:absolute;right:-20%;top:24%;width:48%;opacity:.9;pointer-events:none;animation:dua 9s ease-in-out infinite;}
-    .dau-la{position:absolute;left:-16%;bottom:2%;width:46%;pointer-events:none;transform:rotate(-8deg);opacity:.95;}
+    .dau-canh{position:absolute;right:-21%;top:26%;width:44%;opacity:.85;pointer-events:none;animation:dua 9s ease-in-out infinite;}
+    .dau-la{position:absolute;left:-21%;top:26%;width:44%;opacity:.85;pointer-events:none;transform:scaleX(-1);animation:dua2 9s ease-in-out infinite;}
+    @keyframes dua2{0%,100%{transform:scaleX(-1) rotate(0) translateY(0)}50%{transform:scaleX(-1) rotate(-2.5deg) translateY(-6px)}}
     @keyframes dua{0%,100%{transform:rotate(0) translateY(0)}50%{transform:rotate(-2.5deg) translateY(-6px)}}
     .vom{position:relative;width:min(88vw,400px);aspect-ratio:744/1100;}
     .vom-kinh{position:absolute;left:13%;right:12%;top:8%;bottom:10%;border-radius:999px 999px 22px 22px;
@@ -170,8 +170,8 @@
       box-shadow:0 40px 70px -46px rgba(120,45,60,.55),0 2px 0 rgba(255,255,255,.7) inset;}
     .tam::before{content:"";position:absolute;inset:9px;border-radius:23px;border:1px solid rgba(176,133,64,.38);pointer-events:none;}
     .tam::after{content:"";position:absolute;inset:13px;border-radius:19px;border:.5px solid rgba(176,133,64,.2);pointer-events:none;}
-    .tam-goc{position:absolute;left:-30px;top:-46px;width:50%;max-width:230px;pointer-events:none;z-index:4;transform:rotate(-4deg);}
-    .tam-goc2{position:absolute;right:-26px;top:-34px;width:34%;max-width:160px;pointer-events:none;z-index:4;transform:scaleX(-1) rotate(-8deg);opacity:.95;}
+    .tam-goc{position:absolute;left:-26px;top:-40px;width:42%;max-width:200px;pointer-events:none;z-index:4;}
+    .tam-goc2{position:absolute;right:-26px;top:-40px;width:42%;max-width:200px;pointer-events:none;z-index:4;transform:scaleX(-1);}
     .muc{position:relative;}
     .muc + .muc{margin-top:64px;}
     .muc.gan{margin-top:52px;}
@@ -310,6 +310,7 @@
     .ky{margin-top:18px;display:flex;align-items:baseline;justify-content:center;gap:6px;font-family:"Viaoda Libre",var(--serif);font-size:22px;color:var(--hong);}
     .ky i{font-family:var(--script);font-style:normal;font-size:30px;padding:0 .1em;}
     .chan{display:block;width:100%;height:auto;margin-top:-30px;position:relative;z-index:4;pointer-events:none;}
+    @media (min-width:600px){.trang{overflow:visible;} .trang .chan{width:130%;max-width:none;margin-left:-15%;}}
 
     /* hộp QR */
     .qr-dlg{width:min(92vw,400px);max-height:88vh;padding:0;border:0;border-radius:24px;overflow:hidden;
@@ -366,7 +367,7 @@
 
     @media (prefers-reduced-motion:reduce){
       .roi{display:none;}
-      .vang-chu,.nut-mo::after,.pb-dau,.dau-canh,.keo svg,.qua-anh,.sao,.lich .o-ngay span.cuoi svg,#nhacBtn .song rect{animation:none !important;}
+      .vang-chu,.nut-mo::after,.pb-dau,.dau-canh,.dau-la,.keo svg,.qua-anh,.sao,.lich .o-ngay span.cuoi svg,#nhacBtn .song rect{animation:none !important;}
       .js .hd,.js .vom,.js .vom-chu > *{opacity:1;transform:none;transition:none;}
       .anh,.the-trong{transition:none;}
     }
@@ -426,7 +427,7 @@
   <!-- ============ VÒM HOA GHI TÊN ============ -->
   <header class="dau">
     <img class="dau-canh" src="anh/canh-lon.webp" alt="" width="528" height="800">
-    <img class="dau-la" src="anh/canh-la.webp" alt="" width="700" height="700">
+    <img class="dau-la" src="anh/canh-lon.webp" alt="" width="528" height="800">
     <div class="vom">
       <div class="vom-kinh"></div>
       <img class="vom-hoa" src="anh/vom-hoa.webp" alt="" width="744" height="1100">

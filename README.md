@@ -13,11 +13,12 @@ và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-invitat
 | `/ng` | bản chữ to cho người lớn tuổi nhà gái (chỉ Lễ Vu Quy) | Nhà gái |
 | `/ae` | thiệp riêng nhóm bạn thân | RSVP |
 | `/hong` | bản màu hồng, phía nhà gái (chỉ Lễ Vu Quy) | RSVP |
-| `/hq` | kiểu Hàn Quốc pastel: album ảnh, lịch, sổ lưu bút, hộp quà | RSVP (lời chúc vào tab Lưu bút) |
+| `/hq` | tranh màu nước hoa mẫu đơn, mở bằng phong bì sáp: album, lịch, sổ lưu bút, hộp quà | RSVP (lời chúc vào tab Lưu bút) |
+| `/hq2` | kiểu Hàn Quốc pastel toàn hồng (lá hồng màu nước, lá vàng), cùng các mục như `/hq` | RSVP (lời chúc vào tab Lưu bút) |
 
 Công cụ tạo link mời riêng từng khách nằm trong từng bản:
 `/tao-link.html`, `/nhatrai/tao-link.html`, `/nhagai/tao-link.html`,
-`/ng/tao-link.html`, `/hq/tao-link.html` — năm file giống hệt nhau, tự nhận ra mình đang ở bản
+`/ng/tao-link.html`, `/hq/tao-link.html`, `/hq2/tao-link.html` — sáu file giống hệt nhau, tự nhận ra mình đang ở bản
 nào theo tên thư mục.
 
 Thiệp nhận tham số `?g=<tên khách>` và `?x=<mức xưng hô>`.
