@@ -402,6 +402,48 @@
       html.da-mo .dau .vom,html.da-mo .vom h1,html.da-mo .dau .deco{animation:none !important;opacity:1;}
       .js .dau .deco{opacity:var(--o,1);}
     }
+
+    /* ===== đoạn đầu: khung vòm hoa đối xứng, vòm kính ghi tên ===== */
+    .dau{position:relative;height:auto;display:flex;flex-direction:column;align-items:center;padding:14px 0 30px;}
+    .dau-canh{position:absolute;top:30%;width:25%;max-width:150px;pointer-events:none;}
+    .dau-canh.trai{left:-12%;transform:scaleX(-1) rotate(-6deg);}
+    .dau-canh.phai{right:-12%;transform:rotate(-6deg);}
+    @media (min-width:600px){.dau-canh{width:150px;top:26%;} .dau-canh.trai{left:-70px;} .dau-canh.phai{right:-70px;}}
+    .dau .vom{position:relative;left:auto;top:auto;translate:none;width:min(88vw,390px);height:auto;aspect-ratio:725/1100;display:block;
+      padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
+    .vom-kinh{position:absolute;left:12%;right:12%;top:10%;bottom:17%;border-radius:999px 999px 18px 18px;
+      background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,248,249,.5));border:1px solid rgba(255,255,255,.9);
+      backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:inset 0 0 40px rgba(255,255,255,.55),0 20px 40px -30px rgba(150,60,80,.4);}
+    .vom-khung{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+    .vom-chu{position:absolute;left:15%;right:15%;top:20%;bottom:25%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+    .vom-chu h1{margin:0;font-weight:400;display:flex;flex-direction:column;align-items:center;font-size:inherit;line-height:1;}
+    .vc-nho{font-family:var(--sans);font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#b08540;padding-left:.34em;margin-bottom:14px;}
+    .vc-ten{font-family:"Viaoda Libre",var(--serif);font-size:clamp(30px,9.2vw,40px);line-height:1.12;color:#bd4d62;}
+    .vc-va{font-family:"Alex Brush",cursive;font-size:clamp(40px,12vw,52px);line-height:1.05;padding:0 .12em;margin:2px 0;
+      background:linear-gradient(100deg,#9b7130,#d9b46a 28%,#f6e2a8 42%,#c79b4c 58%,#f0d69a 74%,#a77b36);background-size:220% 100%;
+      -webkit-background-clip:text;background-clip:text;color:transparent;animation:vangLoa 6s linear infinite;}
+    @keyframes vangLoa{to{background-position:-220% 0}}
+    .vc-gach{display:flex;align-items:center;gap:10px;margin:14px 0 10px;}
+    .vc-gach i{width:34px;height:1px;background:linear-gradient(90deg,transparent,#c29a55);}
+    .vc-gach i:last-child{background:linear-gradient(270deg,transparent,#c29a55);}
+    .vc-gach svg{width:10px;height:9px;fill:#c25467;}
+    .vc-ngay{font-family:var(--serif);font-size:clamp(17px,5vw,20px);letter-spacing:.22em;color:#8c3245;padding-left:.22em;font-variant-numeric:lining-nums;}
+    .vc-am{margin-top:6px;font-family:var(--serif);font-size:12.5px;font-style:italic;color:#9a5a66;}
+    .keo{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:6px;text-decoration:none;color:#9a5a66;
+      font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;}
+    .keo svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;animation:keoXuong 1.8s ease-in-out infinite;}
+    @keyframes keoXuong{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(5px);opacity:1}}
+    .dau + .tam{margin-top:6px;}
+    /* hiện dần sau khi bước qua cổng hoa */
+    .js .vom-chu > *{opacity:0;}
+    html.da-mo .vom-chu > *{animation:chuLen 1s cubic-bezier(.2,.7,.2,1) both;}
+    html.da-mo .vom-chu > :nth-child(1){animation-delay:.7s;} html.da-mo .vom-chu > :nth-child(2){animation-delay:.9s;}
+    html.da-mo .vom-chu > :nth-child(3){animation-delay:1.2s;} html.da-mo .vom-chu > :nth-child(4){animation-delay:1.35s;}
+    html.da-mo .vom-chu > :nth-child(5){animation-delay:1.5s;}
+    @keyframes chuLen{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    html.da-mo .vom .vom-chu > h1{animation:chuLen 1s cubic-bezier(.2,.7,.2,1) .9s both;}
+    .dau .deco{--o:.8;}
+    @media (prefers-reduced-motion:reduce){.vc-va,.keo svg{animation:none !important;} .js .vom-chu > *{opacity:1;}}
   </style>
 </head>
 <body>
@@ -446,14 +488,20 @@
 <main class="trang" id="trang">
   <!-- ============ VÒM KÍNH GHI TÊN ============ -->
   <header class="dau">
-    <div class="deco sau" style="left:-34px;top:-40px;width:118px;height:160px;transform:rotate(-14deg)"><img src="anh/canh-trong.webp" alt="" loading="lazy"></div>
-    <div class="deco sau" style="right:-64px;top:120px;width:150px;height:230px;transform:rotate(-10deg)"><img src="anh/canh-trong.webp" alt="" loading="lazy"></div>
-    <div class="deco sau" style="right:-30px;top:300px;width:110px;height:170px;transform:rotate(28deg);opacity:.75;--o:.75"><img src="anh/canh-trong.webp" alt="" loading="lazy"></div>
-    <div class="vom"><h1>Ngọc Huy<i>&amp;</i>Hương Giang</h1></div>
-    <div class="deco" style="left:29%;top:66%;width:110px;height:156px;transform:rotate(18deg)"><img src="anh/la-vang2.webp" alt="" loading="lazy"></div>
-    <div class="deco" style="left:55%;top:70%;width:72px;height:102px;transform:rotate(40deg);opacity:.7;--o:.7"><img src="anh/la-vang2.webp" alt="" loading="lazy"></div>
-    <div class="deco" style="left:6px;top:46%;width:270px;height:180px;transform:rotate(-4deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
-    <div class="deco" style="left:-34px;bottom:-56px;width:170px;height:111px;transform:rotate(-22deg)"><img src="anh/canh-nho.webp" alt="" loading="lazy"></div>
+    <img class="deco dau-canh trai" src="anh/canh-trong.webp" alt="" width="533" height="800">
+    <img class="deco dau-canh phai" src="anh/canh-trong.webp" alt="" width="533" height="800">
+    <div class="vom">
+      <div class="vom-kinh"></div>
+      <img class="vom-khung" src="anh/vom-hong.webp" alt="" width="725" height="1100">
+      <div class="vom-chu">
+        <span class="vc-nho">Thiệp mời cưới</span>
+        <h1><span class="vc-ten">Ngọc Huy</span><span class="vc-va">&amp;</span><span class="vc-ten">Hương Giang</span></h1>
+        <span class="vc-gach" aria-hidden="true"><i></i><svg viewBox="0 0 24 22"><use href="#tim"/></svg><i></i></span>
+        <span class="vc-ngay">29 · 11 · 2026</span>
+        <span class="vc-am">Chủ Nhật · 21/10 năm Bính Ngọ</span>
+      </div>
+    </div>
+    <a class="keo" href="#t-le" aria-label="Xem thiệp"><span>Kéo xuống</span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
   </header>
 
   <div class="tam">
