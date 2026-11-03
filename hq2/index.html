@@ -470,6 +470,42 @@
     html.da-mo .vom .vom-chu > h1{animation:chuLen 1s cubic-bezier(.2,.7,.2,1) .9s both;}
     .dau .deco{--o:.8;}
     @media (prefers-reduced-motion:reduce){.vc-va,.keo svg{animation:none !important;} .js .vom-chu > *{opacity:1;}}
+
+    /* ===== khung lịch: thẻ giấy viền nhũ vàng kép, tim hồng ngày 28 & 29 ===== */
+    .lich{position:relative;margin:28px auto 0;max-width:312px;padding:26px clamp(10px,4vw,18px) 18px;border:0;border-radius:26px;font-family:var(--serif);
+      background:linear-gradient(180deg,#fffdfd 0%,#fff5f6 55%,#fdeef1 100%);
+      box-shadow:0 0 0 1px rgba(190,148,74,.55),0 22px 40px -26px rgba(140,45,65,.55),0 6px 14px -10px rgba(140,45,65,.3);}
+    .lich::before{content:"";position:absolute;inset:6px;border-radius:21px;border:1px solid rgba(190,148,74,.32);pointer-events:none;}
+    .lich .l-canh{position:absolute;width:96px;pointer-events:none;}
+    .lich .l-canh.tren{left:-26px;top:-30px;transform:rotate(-8deg);}
+    .lich .l-canh.duoi{right:-26px;bottom:-26px;transform:rotate(172deg);}
+    .lich .l-dau{position:relative;text-align:center;margin-bottom:14px;}
+    .lich .l-thang{display:block;white-space:nowrap;font-family:"Alex Brush",cursive;font-size:clamp(26px,8.6vw,34px);line-height:1.05;color:#bd4d62;}
+    .lich .l-nam{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px;font-size:13px;letter-spacing:.34em;color:#a9803f;padding-left:.34em;}
+    .lich .l-nam::before,.lich .l-nam::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,#c29a55);}
+    .lich .l-nam::after{background:linear-gradient(270deg,transparent,#c29a55);}
+    .lich .thu,.lich .o-ngay{position:relative;display:grid;grid-template-columns:repeat(7,1fr);}
+    .lich .thu{font-family:var(--sans);font-size:9.5px;font-weight:600;letter-spacing:.08em;color:#a9803f;padding:8px 0;margin-bottom:6px;border:0;
+      background:linear-gradient(90deg,transparent,rgba(240,196,205,.38),transparent);border-radius:999px;}
+    .lich .thu span:last-child{color:#c25467;}
+    .lich .o-ngay{row-gap:2px;}
+    .lich .o-ngay span{height:36px;display:grid;place-items:center;font-size:15px;color:#7d3242;position:relative;font-variant-numeric:lining-nums;}
+    .lich .o-ngay span:nth-child(7n){color:#c25467;}
+    .lich .o-ngay span.tim-ngay b{position:relative;z-index:1;font-weight:600;}
+    .lich .o-ngay span.tim-ngay svg{position:absolute;left:50%;top:50%;width:min(34px,106%);height:auto;aspect-ratio:24/22;translate:-50% -46%;}
+    .lich .o-ngay span.cuoi{color:#fff;}
+    .lich .o-ngay span.cuoi svg{fill:#cf5b72;filter:drop-shadow(0 4px 5px rgba(170,50,75,.45));animation:dap 1.6s ease-in-out infinite;}
+    .lich .o-ngay span.cuoi::after{content:"";position:absolute;right:-1px;top:-1px;width:9px;height:9px;background:#e6c27a;
+      clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:saoLich 2.4s ease-in-out infinite;}
+    .lich .o-ngay span.truoc{color:#b84a5f;}
+    .lich .o-ngay span.truoc svg{fill:#f8cbd3;filter:drop-shadow(0 3px 4px rgba(200,110,130,.3));animation:dap 1.6s ease-in-out .8s infinite;}
+    @keyframes saoLich{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+    .them-lich{display:inline-flex;align-items:center;gap:7px;margin-top:18px;padding:8px 18px;border-radius:999px;text-decoration:none;
+      font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.08em;color:#9c3a50;background:#fff;
+      box-shadow:0 0 0 1px rgba(190,148,74,.6),0 8px 16px -10px rgba(140,45,65,.5);transition:transform .25s;}
+    .them-lich svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+    @media (hover:hover){.them-lich:hover{transform:translateY(-2px);}}
+    @media (prefers-reduced-motion:reduce){.lich .o-ngay span svg,.lich .o-ngay span.cuoi::after{animation:none !important;}}
   </style>
 </head>
 <body>
@@ -596,8 +632,8 @@
     <section class="muc gan hd" aria-labelledby="t-dem">
       <h2 class="tde nho" id="t-dem">Cùng đếm ngược</h2>
       <div class="dem" id="dem" aria-live="off">—</div>
-      <div class="lich" id="lich" aria-label="Lịch tháng 11 năm 2026, ngày cưới 29"></div>
-      <a class="them-lich" id="themLich" target="_blank" rel="noopener">Thêm vào lịch</a>
+      <div class="lich" id="lich" aria-label="Lịch tháng 11 năm 2026, đánh dấu ngày 28 và ngày cưới 29"></div>
+      <a class="them-lich" id="themLich" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>Thêm vào lịch</a>
     </section>
 
     <section class="muc gan hd" aria-labelledby="t-noi">
@@ -854,9 +890,10 @@ const TUCUON = (function(){
 
   const nam = 2026, thang = 10, ngay = 29;                 // tháng tính từ 0
   const dau = (new Date(nam, thang, 1).getDay() + 6) % 7, so = new Date(nam, thang + 1, 0).getDate();
-  let html = '<h4>Tháng 11 / 2026</h4><div class="thu"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div><div class="o-ngay">';
+  let html = '<img class="l-canh tren" src="anh/canh-goc.webp" alt="" loading="lazy"><img class="l-canh duoi" src="anh/canh-goc.webp" alt="" loading="lazy">'
+    + '<div class="l-dau"><span class="l-thang">Tháng Mười Một</span><span class="l-nam">2026</span></div><div class="thu"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div><div class="o-ngay">';
   for(let i = 0; i < dau; i++) html += "<span></span>";
-  for(let d = 1; d <= so; d++) html += d === ngay ? '<span class="cuoi"><svg viewBox="0 0 24 22"><use href="#tim"/></svg><b>' + d + "</b></span>" : "<span>" + d + "</span>";
+  for(let d = 1; d <= so; d++) html += d === ngay ? '<span class="tim-ngay cuoi"><svg viewBox="0 0 24 22"><use href="#tim"/></svg><b>' + d + "</b></span>" : d === 28 ? '<span class="tim-ngay truoc"><svg viewBox="0 0 24 22"><use href="#tim"/></svg><b>' + d + "</b></span>" : "<span>" + d + "</span>";
   $("#lich").innerHTML = html + "</div>";
 
   const p = new URLSearchParams({ action: "TEMPLATE", text: "Đám cưới Ngọc Huy & Hương Giang",
