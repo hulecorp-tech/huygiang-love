@@ -24,5 +24,5 @@ nào theo tên thư mục.
 
 Thiệp nhận tham số `?g=<tên khách>` và `?x=<mức xưng hô>`.
 
-Nhạc nền: `nhac.mp3` ở gốc trang, dùng chung cho mọi bản (phát khi khách chạm mở thiệp gấp).
+Nhạc nền: `nhac.mp3` ở gốc trang, dùng chung cho mọi bản (riêng `/tech` có `tech/nhac.mp3` kiểu synthwave) (phát khi khách chạm mở thiệp gấp).
 Đổi bài thì thay file này, hoặc sửa `CONFIG.nhac` trong từng trang.
