@@ -77,6 +77,7 @@
     @media (hover:hover){.nut-vien:hover{transform:translateY(-2px);background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.1));}}
 
     /* chữ chrome */
+    .chrome-chu,.tde-chu{padding:.3em .42em !important;margin:-.3em -.42em !important;}
     .chrome-chu{background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;
       filter:drop-shadow(0 0 1px rgba(255,255,255,.9)) drop-shadow(0 3px 10px rgba(10,30,140,.55)) drop-shadow(0 0 16px rgba(160,190,255,.35));}
 
@@ -163,9 +164,10 @@
     .o-pixel i:nth-last-child(-n+3){opacity:.4;}
     .ten-khoi{position:relative;margin-top:94px;text-align:center;}
     .ten-khoi h1{margin:0;font-weight:400;display:flex;flex-direction:column;align-items:center;line-height:.95;}
-    .ten-khoi .t1,.ten-khoi .t2{font-family:var(--script);font-size:clamp(50px,15vw,76px);padding:0 .14em;white-space:nowrap;}
-    .ten-khoi .va{font-family:var(--script);font-size:clamp(40px,12vw,58px);line-height:.9;margin:-2px 0;}
-    .nam-hong{position:absolute;right:-4px;top:-50px;font-family:"EB Garamond",serif;font-style:italic;font-weight:700;font-size:clamp(24px,7.4vw,34px);letter-spacing:.02em;
+    .ten-khoi .t1,.ten-khoi .t2{font-family:var(--script);font-size:clamp(50px,15vw,76px);white-space:nowrap;}
+    .ten-khoi .va{font-family:var(--script);font-size:clamp(40px,12vw,58px);line-height:.9;}
+    .ten-khoi h1 > span{position:relative;}
+    .nam-hong{position:absolute;right:-14px;top:-58px;padding:.1em .3em;font-family:"EB Garamond",serif;font-style:italic;font-weight:700;font-size:clamp(24px,7.4vw,34px);letter-spacing:.02em;
       background:linear-gradient(180deg,#ffd2ea,#ff8fc7 60%,#ff6fb5);-webkit-background-clip:text;background-clip:text;color:transparent;
       filter:drop-shadow(0 2px 8px rgba(255,120,190,.5));transform:rotate(-6deg);}
     .sao-ten{position:absolute;right:-10px;bottom:-14px;width:46px;animation:xoaySao 6s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(200,220,255,.8));}
@@ -211,7 +213,7 @@
     .cs-thanh span{margin-left:8px;letter-spacing:.04em;}
     .cs-than{position:relative;padding:24px 18px 26px;text-align:center;}
     .tde{margin:0 0 20px;display:flex;flex-direction:column;align-items:center;font-weight:400;}
-    .tde-chu{font-family:var(--script);font-size:clamp(40px,12vw,52px);line-height:1.05;padding:0 .12em;background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;
+    .tde-chu{font-family:var(--script);font-size:clamp(40px,12vw,52px);line-height:1.05;background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;
       filter:drop-shadow(0 0 1px rgba(255,255,255,.9)) drop-shadow(0 3px 8px rgba(10,30,140,.5));}
     .tde-nho{margin-top:4px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:rgba(200,215,255,.8);text-transform:lowercase;}
 
@@ -228,7 +230,7 @@
     .doi{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:16px;}
     .nguoi{display:flex;flex-direction:column;align-items:center;}
     .vai{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--hong);}
-    .ten-lon{font-family:var(--script);font-size:clamp(26px,8.4vw,42px);line-height:1.15;padding:0 .14em;white-space:nowrap;}
+    .ten-lon{font-family:var(--script);font-size:clamp(26px,8.4vw,42px);line-height:1.15;white-space:nowrap;}
     .doi-nhan{width:86px;margin:2px 0;animation:troi 6s ease-in-out infinite;}
 
     /* lễ cưới */
@@ -435,7 +437,7 @@
     <p class="mini phai">Lễ Vu Quy<br>Lễ Thành Hôn<br>&amp; Tiệc mừng</p>
     <div class="ten-khoi">
       <span class="nam-hong">29.11.2026</span>
-      <h1 class="chrome-chu"><span class="t1">Ngọc Huy</span><span class="va">&amp;</span><span class="t2">Hương Giang</span></h1>
+      <h1><span class="chrome-chu t1">Ngọc Huy</span><span class="chrome-chu va">&amp;</span><span class="chrome-chu t2">Hương Giang</span></h1>
       <img class="sao-ten" src="anh/sao-chrome.webp" alt="" width="230" height="240">
     </div>
     <div class="muc-luc-nhan">
