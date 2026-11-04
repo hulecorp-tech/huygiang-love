@@ -77,7 +77,8 @@
     @media (hover:hover){.nut-vien:hover{transform:translateY(-2px);background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.1));}}
 
     /* chữ chrome */
-    .chrome-chu,.tde-chu{padding:.3em .42em !important;margin:-.3em -.42em !important;}
+    /* vùng tô màu chrome rộng hơn chữ: nét bay của chữ thư pháp không bị cắt (mọi trình duyệt) */
+    .chrome-chu,.tde-chu{padding:.48em .6em !important;margin:-.48em -.6em !important;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
     .chrome-chu{background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;
       filter:drop-shadow(0 0 1px rgba(255,255,255,.9)) drop-shadow(0 3px 10px rgba(10,30,140,.55)) drop-shadow(0 0 16px rgba(160,190,255,.35));}
 
@@ -118,8 +119,9 @@
     @keyframes anBoot{to{opacity:0}}
     @keyframes hienMoi{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
     .mm-loi{font-size:clamp(8px,2.2vw,10.5px);letter-spacing:.3em;text-transform:uppercase;color:#9fd2ff;padding-left:.3em;}
-    .mm-ten{margin-top:4px;text-wrap:balance;font-family:var(--script);font-size:clamp(22px,7vw,34px);line-height:1.1;color:#fff;text-shadow:0 0 12px rgba(160,200,255,.9),0 0 2px #fff;
-      overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .mm-ten{margin-top:2px;text-wrap:balance;font-family:var(--script);font-size:clamp(22px,7vw,34px);line-height:1.28;color:#fff;text-shadow:0 0 12px rgba(160,200,255,.9),0 0 2px #fff;
+      overflow-wrap:anywhere;padding:.14em .3em;max-width:100%;}
+    .mm-ten.dai{font-size:clamp(18px,5.6vw,27px);} .mm-ten.rat-dai{font-size:clamp(15px,4.5vw,21px);}
     .man-loe{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
     .mo-du{margin:10px 0 18px;text-align:center;font-size:13.5px;color:var(--mo);}
     .mo-du b{font-weight:600;color:#fff;}
@@ -654,6 +656,7 @@ const LOI_MOI = { ongba: "Kính mời", anhchi: "Trân trọng kính mời", coc
 $("#moLoi").textContent = LOI_MOI[(_q.get("x") || "").toLowerCase()] || "Thân mời";
 if(GUEST){
   $("#moTen").textContent = GUEST;                 // textContent: tên lấy từ địa chỉ trang
+  $("#moTen").classList.add(GUEST.length > 30 ? "rat-dai" : GUEST.length > 16 ? "dai" : "ngan");   // tên dài thì chữ nhỏ lại cho vừa màn hình
   $("#rv-name").value = GUEST; $("#lb-ten").value = GUEST;
   document.title = GUEST + " · Ngọc Huy & Hương Giang";
 }
