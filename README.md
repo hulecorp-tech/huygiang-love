@@ -15,10 +15,11 @@ và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-invitat
 | `/hong` | bản màu hồng, phía nhà gái (chỉ Lễ Vu Quy) | RSVP |
 | `/hq` | tranh màu nước hoa mẫu đơn, mở bằng phong bì sáp: album, lịch, sổ lưu bút, hộp quà | RSVP (lời chúc vào tab Lưu bút) |
 | `/hq2` | kiểu Hàn Quốc pastel toàn hồng (lá hồng màu nước, lá vàng), cùng các mục như `/hq` | RSVP (lời chúc vào tab Lưu bút) |
+| `/tech` | phong cách công nghệ Y2K "Love OS": máy tính retro mở đầu, chữ chrome, mục lục TV retro, cửa sổ kính | RSVP (lời chúc vào tab Lưu bút) |
 
 Công cụ tạo link mời riêng từng khách nằm trong từng bản:
 `/tao-link.html`, `/nhatrai/tao-link.html`, `/nhagai/tao-link.html`,
-`/ng/tao-link.html`, `/hq/tao-link.html`, `/hq2/tao-link.html` — sáu file giống hệt nhau, tự nhận ra mình đang ở bản
+`/ng/tao-link.html`, `/hq/tao-link.html`, `/hq2/tao-link.html`, `/tech/tao-link.html` — bảy file giống hệt nhau, tự nhận ra mình đang ở bản
 nào theo tên thư mục.
 
 Thiệp nhận tham số `?g=<tên khách>` và `?x=<mức xưng hô>`.
