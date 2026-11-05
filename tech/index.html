@@ -561,12 +561,8 @@
           <label><input type="radio" name="attend" value="Sẽ tham dự" checked> Sẽ tham dự</label>
           <label><input type="radio" name="attend" value="Rất tiếc không thể đến"> Rất tiếc</label>
         </div>
-        <div class="hai">
-          <label class="an" for="rv-count">Số người</label>
-          <select id="rv-count"><option>1 người</option><option>2 người</option><option>3 người</option><option>4 người</option><option>5+ người</option></select>
-          <label class="an" for="rv-days">Số ngày dự</label>
-          <select id="rv-days"><option>Chỉ ngày 29.11</option><option>2 ngày</option><option>3 ngày</option></select>
-        </div>
+        <label class="an" for="rv-count">Số người</label>
+        <select id="rv-count"><option>1 người</option><option>2 người</option><option>3 người</option><option>4 người</option><option>5+ người</option></select>
         <label class="an" for="rv-msg">Lời nhắn</label>
         <textarea id="rv-msg" placeholder="Lời nhắn (không bắt buộc)" maxlength="1000"></textarea>
         <div class="hp" aria-hidden="true"><input id="rv-web" type="text" tabindex="-1" autocomplete="off"></div>
@@ -826,7 +822,7 @@ $("#rsvp").addEventListener("submit", async e => {
   const cu = btn.textContent; btn.disabled = true; btn.textContent = "Đang gửi…";
   try{
     await gui({ ben: CONFIG.ben, name: ten, attend: (document.querySelector('input[name="attend"]:checked') || {}).value || "",
-      count: $("#rv-count").value, days: $("#rv-days").value, msg: $("#rv-msg").value.trim(), hp: $("#rv-web").value });
+      count: $("#rv-count").value, msg: $("#rv-msg").value.trim(), hp: $("#rv-web").value });
     btn.textContent = "Đã nhận, cảm ơn bạn!"; toast("Cảm ơn bạn đã xác nhận 💐"); $("#rv-msg").value = "";
   }catch(err){ btn.disabled = false; btn.textContent = cu; toast("Gửi chưa được, bạn thử lại sau nhé 🙏"); }
 });
