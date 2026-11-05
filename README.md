@@ -17,7 +17,7 @@ Công cụ tạo link mời riêng từng khách: `/tech/tao-link.html`, `/pte/t
 
 Thiệp nhận tham số `?g=<tên khách>` và `?x=<mức xưng hô>`.
 
-Nhạc nền: `/hq2` dùng `nhac.mp3` ở gốc trang (piano); `/tech` và `/pte` dùng nhạc synthwave riêng trong thư mục của mình.
+Nhạc nền: `nhac.mp3` ở gốc trang, dùng chung cho `/tech`, `/pte` và `/hq2` (đã hạ âm lượng sẵn trong file).
 
 Các bản cũ (`/ae`, `/hong`, `/nhatrai`, `/nhagai`, `/ng`, `/hq` và thiệp chính cũ ở gốc)
 đã gỡ khỏi trang ngày 05/11/2026; chúng vẫn được lưu trong repo nguồn.
