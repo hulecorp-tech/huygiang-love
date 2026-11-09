@@ -487,7 +487,7 @@
         <div class="the-nha"><span class="nha">Nhà trai</span><p class="ob">Ông Bà</p><p class="bm">Lê Công Bồng</p><p class="bm">Bùi Thị Tuyết</p>
           <p class="dc">Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên</p></div>
         <div class="the-nha"><span class="nha">Nhà gái</span><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p>
-          <p class="dc">62 Nguyễn Xiển, Phường Thanh Liệt, Thành phố Hà Nội</p></div>
+          <p class="dc">Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội</p></div>
       </div>
       <p class="baotin">Trân trọng báo tin lễ thành hôn của con chúng tôi</p>
       <div class="doi">
@@ -544,7 +544,7 @@
       <h2 class="tde" id="t-dd"><span class="tde-chu">Địa Điểm</span><span class="tde-nho">// nơi tổ chức</span></h2>
       <div class="dia">
         <div class="dd"><span class="dd-le">Lễ Vu Quy · 07:00</span><span class="dd-ten">Tư gia nhà gái</span>
-          <p>62 Nguyễn Xiển, Phường Thanh Liệt, Thành phố Hà Nội</p>
+          <p>Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội</p>
           <a class="nut-vien" data-map="bride" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Chỉ đường</a></div>
         <div class="dd"><span class="dd-le">Lễ Thành Hôn &amp; Tiệc · 10:30</span><span class="dd-ten">Tư gia nhà trai</span>
           <p>Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên</p>
@@ -651,7 +651,7 @@ const CONFIG = {
   rsvpEndpoint: "https://script.google.com/macros/s/AKfycbxbbRGstq2okI7BIeNHPQiAe0QhMHffVDaMgeElHhejvIbLt2fqvKPUMSEY2-0qv5aJ9w/exec",
   nhac: "../nhac.mp3",
   ngayCuoi: "2026-11-29T07:00:00+07:00",         // đếm ngược tới lễ đầu tiên trong ngày
-  maps: { groom: "https://maps.app.goo.gl/N93YSFWjoCXKSkg68", bride: "https://maps.app.goo.gl/Drkt8N8c53VjXBXJ8" },
+  maps: { groom: "https://maps.app.goo.gl/N93YSFWjoCXKSkg68", bride: "https://maps.app.goo.gl/Vmq1eWTFrRa3SVkY9" },
   /* Ảnh cho album (dọc, khoảng 2:3). Hiện là 3 tranh minh hoạ; có ảnh cưới thật thì chép vào
      thư mục anh/ rồi thay danh sách, ví dụ ["anh/cuoi-1.jpg", "anh/cuoi-2.jpg"]. Để trống thì hiện khung chờ. */
   album: ["anh/anh-1.webp", "anh/anh-2.webp", "anh/anh-3.webp"]
@@ -803,7 +803,7 @@ const TUCUON = (function(){
 
   const p = new URLSearchParams({ action: "TEMPLATE", text: "Đám cưới Ngọc Huy & Hương Giang",
     dates: "20261129T000000Z/20261129T060000Z",
-    details: "07:00 Lễ Vu Quy — tư gia nhà gái, 62 Nguyễn Xiển, Phường Thanh Liệt, Hà Nội\n10:30 Lễ Thành Hôn — tư gia nhà trai\n11:00 Khai tiệc\nThiệp: " + location.origin + location.pathname,
+    details: "07:00 Lễ Vu Quy — tư gia nhà gái, Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội\n10:30 Lễ Thành Hôn — tư gia nhà trai\n11:00 Khai tiệc\nThiệp: " + location.origin + location.pathname,
     location: "Tư gia nhà trai, Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên" });
   $("#themLich").href = "https://calendar.google.com/calendar/render?" + p.toString();
   $$("[data-map]").forEach(a => { a.href = CONFIG.maps[a.dataset.map] || CONFIG.maps.groom; });
