@@ -530,13 +530,56 @@
     .mk-gach i:last-child{background:linear-gradient(270deg,transparent,#c29a55);}
     .mk-gach svg{width:10px;height:9px;fill:#c25467;}
     .mk-du{margin:0;font-size:15px;font-style:italic;color:var(--ruou);line-height:1.6;}
-    .bome.mot{grid-template-columns:1fr;max-width:260px;margin:0 auto;}
     .le-tai + .ngay3{margin-top:18px;}
+    .nw{white-space:nowrap;}   /* địa chỉ chỉ xuống dòng sau dấu phẩy */
     .dem-tde{margin-top:40px !important;}
     .chu-lich{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-family:var(--sans);font-size:12px;color:var(--ruou);}
     .chu-lich span{display:inline-flex;align-items:center;gap:6px;}
     .tim-nho{width:13px;height:12px;display:inline-block;clip-path:path("M6.5 11.6S.9 8 .9 4.2A2.9 2.9 0 0 1 6.5 2.7a2.9 2.9 0 0 1 5.6 1.5c0 3.8-5.6 7.4-5.6 7.4Z");}
     .tim-nho.dam{background:#cf5b72;} .tim-nho.nhat{background:#f8cbd3;}
+
+    /* ===== chữ to hơn ~10–20%: tiêu đề, bố mẹ, ngày giờ, lịch, form, quà ===== */
+    .trang{font-size:16.5px;}
+    .tde{font-size:clamp(20px,5.8vw,23px);}
+    .tde.nho{font-size:clamp(16px,4.6vw,17.5px);}
+    .ob{font-size:15.5px;}
+    .bm{font-size:clamp(12.5px,4vw,16px);white-space:nowrap;}
+    .dc{font-size:clamp(11.5px,3.5vw,13.5px);}
+    .ten-lon{font-size:clamp(23px,7.2vw,29px);}
+    .vai{font-size:12px;}
+    .va{font-size:32px;}
+    .le-tai .nhan{font-size:clamp(14.5px,4vw,15.5px);}
+    .le-tai .noi-le{font-size:17px;}
+    .gio{font-size:clamp(19.5px,5.6vw,22px);}
+    .ngay3 span{font-size:clamp(10.5px,3.2vw,12px);}
+    .ngay3 b{font-size:clamp(28px,7.8vw,31px);}
+    .ngay-so{font-size:clamp(17px,4.9vw,19px);}
+    .am{font-size:clamp(9.5px,2.85vw,11px);letter-spacing:.1em;}
+    @media (max-width:340px){ .am{letter-spacing:.03em;} }
+    .dc-tiec{font-size:13.5px;}
+    .nut-cd{font-size:13.5px;}
+    .dem{font-size:14px;}
+    .lich .l-nam{font-size:14px;}
+    .lich .thu{font-size:11px;}
+    .lich .o-ngay span{font-size:16px;}
+    .them-lich{font-size:13.5px;}
+    .chu-lich{font-size:13.5px;}
+    .mk-loi{font-size:12.5px;}
+    .mk-du{font-size:16.5px;}
+    .anh-cho{font-size:12.5px;}
+    .form input[type=text],.form textarea,.form select{font-size:17px;}
+    .chon label{font-size:15.5px;}
+    .nut{font-size:12.5px;}
+    .nut.rong{font-size:13.5px;}
+    .tde.qua{font-size:clamp(19px,5.4vw,21px);}
+    .qua-btn .nhan-mo{font-size:12.5px;}
+    .cam-on{font-size:14.5px;}
+    .ky{font-size:12px;}
+    .qr-the .nh{font-size:13px;} .qr-the .so{font-size:14px;} .qr-the .chu{font-size:13.5px;} .qr-the .vai-qr{font-size:12px;}
+    .luu{font-size:12.5px;}
+    /* thiệp mở đầu + phần vòm: chỉ nới các dòng chữ nhỏ li ti */
+    .cg-loi{font-size:11px;} .cg-nho{font-size:10.5px;} .cg-du{font-size:15px;} .cg-ngay{font-size:14px;} .cg-am{font-size:12px;}
+    .vc-nho{font-size:11.5px;} .vc-am{font-size:13.5px;} .keo{font-size:11.5px;}
   </style>
 </head>
 <body>
@@ -619,7 +662,7 @@
       <div class="ngay-so">28/11/2026</div>
       <div class="am">Tức ngày 20/10/2026 năm Bính Ngọ âm lịch</div>
       <div class="le-tai"><div class="nhan">Tại</div><div class="noi-le">Tư gia nhà gái</div></div>
-      <p class="dc-tiec">Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội</p>
+      <p class="dc-tiec">Đội 9 Hoan Hợp, <span class="nw">Xã Hồng Sơn,</span> <span class="nw">Hà Nội</span></p>
       <a class="nut-cd" data-map="bride" href="#" target="_blank" rel="noopener" aria-label="Chỉ đường tới tư gia nhà gái trên Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Chỉ đường</a>
     </section>
 
@@ -627,8 +670,12 @@
     <section class="muc hd" aria-labelledby="t-vq">
       <div class="deco" style="left:-96px;top:250px;width:150px;height:98px;transform:rotate(-30deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
       <h2 class="tde" id="t-vq">Lễ Vu Quy</h2>
-      <div class="bome mot"><div><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p>
-        <p class="dc">Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội</p></div></div>
+      <div class="bome">
+        <div><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p>
+          <p class="dc">Đội 9 Hoan Hợp, <span class="nw">Xã Hồng Sơn,</span> <span class="nw">Hà Nội</span></p></div>
+        <i class="vach" aria-hidden="true"></i>
+        <div><p class="ob">Ông Bà</p><p class="bm">Lê Công Bồng</p><p class="bm">Bùi Thị Tuyết</p></div>
+      </div>
       <p class="ten-lon">Hoàng Thị Hương Giang</p>
       <div class="vai">Cô dâu</div>
       <div class="va" aria-hidden="true">&amp;</div>
