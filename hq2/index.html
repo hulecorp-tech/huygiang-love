@@ -518,6 +518,25 @@
     .them-lich svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
     @media (hover:hover){.them-lich:hover{transform:translateY(-2px);}}
     @media (prefers-reduced-motion:reduce){.lich .o-ngay span svg,.lich .o-ngay span.cuoi::after{animation:none !important;}}
+
+    /* ===== bản nhà gái: lời mời + tên khách, bữa cơm, lễ vu quy ===== */
+    .moi-khach{display:flex;flex-direction:column;align-items:center;text-align:center;}
+    .mk-loi{font-family:var(--sans);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#a9803f;padding-left:.32em;}
+    .mk-ten{display:block;max-width:100%;margin-top:6px;padding:0 .2em;font-family:"Alex Brush",cursive;font-size:clamp(34px,10.4vw,46px);line-height:1.15;
+      color:#b84a5f;text-wrap:balance;overflow-wrap:anywhere;}
+    .mk-ten.dai{font-size:clamp(28px,8.4vw,38px);} .mk-ten.rat-dai{font-size:clamp(22px,6.6vw,30px);}
+    .mk-gach{display:flex;align-items:center;gap:10px;margin:12px 0 8px;}
+    .mk-gach i{width:40px;height:1px;background:linear-gradient(90deg,transparent,#c29a55);}
+    .mk-gach i:last-child{background:linear-gradient(270deg,transparent,#c29a55);}
+    .mk-gach svg{width:10px;height:9px;fill:#c25467;}
+    .mk-du{margin:0;font-size:15px;font-style:italic;color:var(--ruou);line-height:1.6;}
+    .bome.mot{grid-template-columns:1fr;max-width:260px;margin:0 auto;}
+    .le-tai + .ngay3{margin-top:18px;}
+    .dem-tde{margin-top:40px !important;}
+    .chu-lich{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-family:var(--sans);font-size:12px;color:var(--ruou);}
+    .chu-lich span{display:inline-flex;align-items:center;gap:6px;}
+    .tim-nho{width:13px;height:12px;display:inline-block;clip-path:path("M6.5 11.6S.9 8 .9 4.2A2.9 2.9 0 0 1 6.5 2.7a2.9 2.9 0 0 1 5.6 1.5c0 3.8-5.6 7.4-5.6 7.4Z");}
+    .tim-nho.dam{background:#cf5b72;} .tim-nho.nhat{background:#f8cbd3;}
   </style>
 </head>
 <body>
@@ -584,38 +603,47 @@
   <div class="tam">
         <div class="deco" style="right:-62px;top:560px;width:120px;height:190px;opacity:.8"><img src="anh/canh-trong.webp" alt="" loading="lazy"></div>
 
-    <!-- ============ THÔNG TIN LỄ CƯỚI ============ -->
-    <section class="muc hd" aria-labelledby="t-le">
-      <h2 class="tde" id="t-le">Thông tin lễ cưới</h2>
-      <div class="bome">
-        <div><p class="ob">Ông Bà</p><p class="bm">Lê Công Bồng</p><p class="bm">Bùi Thị Tuyết</p>
-          <p class="dc">Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên</p></div>
-        <i class="vach" aria-hidden="true"></i>
-        <div><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p>
-          <p class="dc">Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội</p></div>
-      </div>
-      <p class="baotin">Trân trọng báo tin<br>Lễ thành hôn của con chúng tôi</p>
-      <p class="ten-lon">Lê Ngọc Huy</p>
-      <div class="vai">Chú rể</div>
-      <div class="va" aria-hidden="true">&amp;</div>
+    <!-- ============ THÂN MỜI + TÊN KHÁCH ============ -->
+    <section class="muc hd moi-khach" aria-label="Lời mời">
+      <span class="mk-loi moi-loi">Thân mời</span>
+      <span class="mk-ten moi-ten">Quý khách</span>
+      <span class="mk-gach" aria-hidden="true"><i></i><svg viewBox="0 0 24 22"><use href="#tim"/></svg><i></i></span>
+      <p class="mk-du">Tới dự bữa cơm thân mật và Lễ Vu Quy<br>cùng gia đình chúng tôi</p>
+    </section>
+
+    <!-- ============ BỮA CƠM THÂN MẬT ============ -->
+    <section class="muc hd" aria-labelledby="t-com">
+      <h2 class="tde" id="t-com">Bữa cơm thân mật</h2>
+      <div class="le-tai"><div class="nhan">Vào lúc</div><div class="gio">16:00</div></div>
+      <div class="ngay3"><span>Thứ Bảy</span><i></i><b>28</b><i></i><span>Tháng 11</span></div>
+      <div class="ngay-so">28/11/2026</div>
+      <div class="am">Tức ngày 20/10/2026 năm Bính Ngọ âm lịch</div>
+      <div class="le-tai"><div class="nhan">Tại</div><div class="noi-le">Tư gia nhà gái</div></div>
+      <p class="dc-tiec">Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội</p>
+      <a class="nut-cd" data-map="bride" href="#" target="_blank" rel="noopener" aria-label="Chỉ đường tới tư gia nhà gái trên Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Chỉ đường</a>
+    </section>
+
+    <!-- ============ LỄ VU QUY ============ -->
+    <section class="muc hd" aria-labelledby="t-vq">
+      <div class="deco" style="left:-96px;top:250px;width:150px;height:98px;transform:rotate(-30deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
+      <h2 class="tde" id="t-vq">Lễ Vu Quy</h2>
+      <div class="bome mot"><div><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p>
+        <p class="dc">Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội</p></div></div>
       <p class="ten-lon">Hoàng Thị Hương Giang</p>
       <div class="vai">Cô dâu</div>
-
-      <div class="le-tai">
-        <div class="nhan">Lễ Vu Quy tại</div>
-        <div class="noi-le">Tư gia nhà gái</div>
-        <div class="nhan">Vào lúc</div>
-        <div class="gio">07:00</div>
-      </div>
-      <div class="le-tai">
-        <div class="nhan">Lễ Thành Hôn tại</div>
-        <div class="noi-le">Tư gia nhà trai</div>
-        <div class="nhan">Vào lúc</div>
-        <div class="gio">10:30</div>
-      </div>
+      <div class="va" aria-hidden="true">&amp;</div>
+      <p class="ten-lon">Lê Ngọc Huy</p>
+      <div class="vai">Chú rể</div>
+      <div class="le-tai"><div class="nhan">Vào lúc</div><div class="gio">07:00</div></div>
       <div class="ngay3"><span>Chủ Nhật</span><i></i><b>29</b><i></i><span>Tháng 11</span></div>
       <div class="ngay-so">29/11/2026</div>
       <div class="am">Tức ngày 21/10/2026 năm Bính Ngọ âm lịch</div>
+      <div class="le-tai"><div class="nhan">Tại</div><div class="noi-le">Tư gia nhà gái</div></div>
+      <h3 class="tde nho dem-tde">Cùng đếm ngược</h3>
+      <div class="dem" id="dem" aria-live="off">—</div>
+      <div class="lich" id="lich" aria-label="Lịch tháng 11 năm 2026: ngày 28 bữa cơm thân mật, ngày 29 Lễ Vu Quy"></div>
+      <p class="chu-lich"><span><i class="tim-nho nhat"></i>28 · Bữa cơm thân mật</span><span><i class="tim-nho dam"></i>29 · Lễ Vu Quy</span></p>
+      <a class="them-lich" id="themLich" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>Thêm vào lịch</a>
     </section>
 
     <!-- ============ ALBUM ẢNH CƯỚI ============ -->
@@ -625,36 +653,6 @@
       <div class="album" id="album" role="region" aria-roledescription="băng chuyền" aria-label="Album ảnh cưới"></div>
       <div class="cham" id="albumCham"></div>
     </section>
-
-    <!-- ============ THÔNG TIN TIỆC CƯỚI ============ -->
-    <section class="muc hd" aria-labelledby="t-tiec">
-      <div class="deco" style="left:-96px;top:250px;width:150px;height:98px;transform:rotate(-30deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
-      <h2 class="tde" id="t-tiec">Thông tin tiệc cưới</h2>
-      <div class="tde nho">Tiệc cưới sẽ diễn ra vào lúc:</div>
-      <div class="gio">11:00</div>
-      <div class="ngay3"><span>Chủ Nhật</span><i></i><b>29</b><i></i><span>Tháng 11</span></div>
-      <div class="ngay-so">29/11/2026</div>
-      <div class="am">Tức ngày 21/10/2026 năm Bính Ngọ âm lịch</div>
-      <div class="hai-cot">
-        <div><div class="nhan">Lễ Thành Hôn</div><div class="gio">10:30</div></div>
-        <div><div class="nhan">Khai tiệc</div><div class="gio">11:00</div></div>
-      </div>
-    </section>
-
-    <section class="muc gan hd" aria-labelledby="t-dem">
-      <h2 class="tde nho" id="t-dem">Cùng đếm ngược</h2>
-      <div class="dem" id="dem" aria-live="off">—</div>
-      <div class="lich" id="lich" aria-label="Lịch tháng 11 năm 2026, đánh dấu ngày 28 và ngày cưới 29"></div>
-      <a class="them-lich" id="themLich" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>Thêm vào lịch</a>
-    </section>
-
-    <section class="muc gan hd" aria-labelledby="t-noi">
-      <h2 class="tde" id="t-noi">Tiệc cưới sẽ tổ chức tại</h2>
-      <div class="noi-tiec">Tư gia nhà trai</div>
-      <p class="dc-tiec">Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên</p>
-      <a class="nut-cd" data-map="groom" href="#" target="_blank" rel="noopener" aria-label="Chỉ đường tới tư gia nhà trai trên Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Chỉ đường</a>
-    </section>
-
     <!-- ============ XÁC NHẬN THAM DỰ ============ -->
     <section class="muc hd" aria-labelledby="t-rsvp">
       <div class="deco" style="right:-100px;top:-90px;width:150px;height:98px;transform:rotate(206deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
@@ -675,20 +673,6 @@
       </form>
     </section>
 
-    <!-- ============ SỔ LƯU BÚT ============ -->
-    <section class="muc hd" aria-labelledby="t-lb">
-      <h2 class="tde" id="t-lb">Sổ lưu bút</h2>
-      <form class="form" id="luubut" novalidate>
-        <label class="an" for="lb-ten">Tên của bạn</label>
-        <input id="lb-ten" type="text" placeholder="Tên của bạn" maxlength="60">
-        <label class="an" for="lb-loi">Lời chúc của bạn</label>
-        <textarea id="lb-loi" placeholder="Lời chúc của bạn" maxlength="500"></textarea>
-        <div class="hp" aria-hidden="true"><input id="lb-web" type="text" tabindex="-1" autocomplete="off"></div>
-        <button class="nut" id="lb-gui" type="submit">Gửi lời chúc</button>
-      </form>
-      <div class="ds-loi" id="lbDs" aria-live="polite"><article class="loi trong"><p>Hãy là người đầu tiên gửi lời chúc tới cô dâu chú rể 💌</p></article></div>
-    </section>
-
     <!-- ============ HỘP QUÀ MỪNG ============ -->
     <section class="muc hd" aria-labelledby="t-qua">
       <h2 class="tde qua" id="t-qua">Hộp quà mừng</h2>
@@ -697,7 +681,7 @@
         <span class="nhan-mo">Nhấn để mở</span>
       </button>
       <p class="cam-on">Cảm ơn quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi. Kính chúc quý khách thật nhiều sức khoẻ và hạnh phúc!</p>
-      <div class="ky">♡ Ngọc Huy &amp; Hương Giang · 29.11.2026</div>
+      <div class="ky">♡ Hương Giang &amp; Ngọc Huy · 29.11.2026</div>
     </section>
   </div>
   <img class="chan" src="anh/vien-hong.webp" alt="" loading="lazy">
@@ -713,14 +697,6 @@
       <div class="chu">HOANG THI HUONG GIANG</div>
       <div class="vai-qr">Cô dâu</div>
       <button class="luu" type="button" data-luu="qr-co-dau-tpbank.png">Lưu QR</button>
-    </div>
-    <div class="qr-the">
-      <div class="qr-hop"><svg class="qr" viewBox="0 0 45 45" role="img" aria-label="Mã QR chuyển khoản tới Ngọc Huy"><rect width="45" height="45" fill="#fff"/><path d="M0 0h7v1h-7zM9 0h3v1h-3zM16 0h2v1h-2zM21 0h1v1h-1zM23 0h1v1h-1zM25 0h1v1h-1zM27 0h2v1h-2zM30 0h1v1h-1zM33 0h1v1h-1zM36 0h1v1h-1zM38 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h5v1h-5zM16 1h1v1h-1zM18 1h1v1h-1zM22 1h1v1h-1zM24 1h2v1h-2zM27 1h1v1h-1zM29 1h1v1h-1zM32 1h2v1h-2zM35 1h1v1h-1zM38 1h1v1h-1zM44 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h2v1h-2zM13 2h1v1h-1zM15 2h1v1h-1zM17 2h2v1h-2zM21 2h1v1h-1zM24 2h1v1h-1zM28 2h1v1h-1zM30 2h4v1h-4zM35 2h1v1h-1zM38 2h1v1h-1zM40 2h3v1h-3zM44 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM11 3h3v1h-3zM15 3h1v1h-1zM18 3h3v1h-3zM22 3h1v1h-1zM24 3h4v1h-4zM30 3h2v1h-2zM35 3h2v1h-2zM38 3h1v1h-1zM40 3h3v1h-3zM44 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM14 4h2v1h-2zM17 4h1v1h-1zM20 4h5v1h-5zM27 4h2v1h-2zM30 4h1v1h-1zM34 4h3v1h-3zM38 4h1v1h-1zM40 4h3v1h-3zM44 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h5v1h-5zM16 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM24 5h3v1h-3zM29 5h1v1h-1zM33 5h1v1h-1zM38 5h1v1h-1zM44 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM38 6h7v1h-7zM8 7h1v1h-1zM11 7h1v1h-1zM16 7h5v1h-5zM24 7h1v1h-1zM28 7h1v1h-1zM30 7h4v1h-4zM36 7h1v1h-1zM0 8h1v1h-1zM2 8h5v1h-5zM9 8h1v1h-1zM11 8h1v1h-1zM14 8h3v1h-3zM18 8h7v1h-7zM27 8h1v1h-1zM30 8h1v1h-1zM33 8h1v1h-1zM35 8h1v1h-1zM38 8h5v1h-5zM5 9h1v1h-1zM7 9h3v1h-3zM11 9h2v1h-2zM15 9h5v1h-5zM21 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM30 9h4v1h-4zM36 9h1v1h-1zM39 9h1v1h-1zM42 9h3v1h-3zM0 10h1v1h-1zM3 10h2v1h-2zM6 10h1v1h-1zM9 10h1v1h-1zM11 10h1v1h-1zM15 10h1v1h-1zM18 10h1v1h-1zM21 10h2v1h-2zM24 10h1v1h-1zM27 10h1v1h-1zM29 10h1v1h-1zM31 10h1v1h-1zM34 10h6v1h-6zM41 10h2v1h-2zM0 11h4v1h-4zM8 11h1v1h-1zM11 11h2v1h-2zM14 11h3v1h-3zM19 11h3v1h-3zM26 11h1v1h-1zM28 11h1v1h-1zM30 11h3v1h-3zM36 11h1v1h-1zM40 11h1v1h-1zM42 11h1v1h-1zM0 12h1v1h-1zM2 12h3v1h-3zM6 12h2v1h-2zM10 12h1v1h-1zM13 12h3v1h-3zM18 12h1v1h-1zM20 12h1v1h-1zM22 12h3v1h-3zM27 12h1v1h-1zM30 12h1v1h-1zM34 12h2v1h-2zM41 12h1v1h-1zM4 13h2v1h-2zM7 13h1v1h-1zM10 13h1v1h-1zM14 13h4v1h-4zM19 13h5v1h-5zM27 13h7v1h-7zM36 13h1v1h-1zM42 13h3v1h-3zM0 14h1v1h-1zM3 14h1v1h-1zM6 14h2v1h-2zM9 14h3v1h-3zM13 14h1v1h-1zM15 14h2v1h-2zM18 14h3v1h-3zM24 14h3v1h-3zM31 14h1v1h-1zM34 14h5v1h-5zM40 14h4v1h-4zM0 15h4v1h-4zM5 15h1v1h-1zM8 15h3v1h-3zM12 15h2v1h-2zM15 15h2v1h-2zM21 15h1v1h-1zM25 15h1v1h-1zM28 15h5v1h-5zM37 15h1v1h-1zM39 15h1v1h-1zM41 15h2v1h-2zM0 16h2v1h-2zM4 16h1v1h-1zM6 16h2v1h-2zM11 16h1v1h-1zM15 16h1v1h-1zM18 16h1v1h-1zM22 16h1v1h-1zM24 16h1v1h-1zM26 16h2v1h-2zM29 16h2v1h-2zM35 16h1v1h-1zM38 16h1v1h-1zM41 16h2v1h-2zM44 16h1v1h-1zM0 17h1v1h-1zM2 17h2v1h-2zM5 17h1v1h-1zM8 17h2v1h-2zM12 17h2v1h-2zM15 17h1v1h-1zM17 17h1v1h-1zM20 17h2v1h-2zM23 17h1v1h-1zM25 17h1v1h-1zM27 17h1v1h-1zM30 17h4v1h-4zM36 17h2v1h-2zM39 17h5v1h-5zM0 18h1v1h-1zM3 18h1v1h-1zM6 18h2v1h-2zM12 18h2v1h-2zM19 18h3v1h-3zM24 18h1v1h-1zM27 18h1v1h-1zM29 18h1v1h-1zM34 18h4v1h-4zM39 18h1v1h-1zM41 18h3v1h-3zM4 19h1v1h-1zM9 19h1v1h-1zM14 19h1v1h-1zM16 19h3v1h-3zM21 19h1v1h-1zM28 19h1v1h-1zM30 19h1v1h-1zM32 19h3v1h-3zM36 19h2v1h-2zM40 19h3v1h-3zM0 20h2v1h-2zM4 20h9v1h-9zM16 20h3v1h-3zM20 20h5v1h-5zM27 20h1v1h-1zM29 20h2v1h-2zM33 20h1v1h-1zM36 20h5v1h-5zM44 20h1v1h-1zM2 21h3v1h-3zM8 21h1v1h-1zM12 21h3v1h-3zM18 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h2v1h-2zM30 21h1v1h-1zM35 21h2v1h-2zM40 21h1v1h-1zM42 21h3v1h-3zM2 22h3v1h-3zM6 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM14 22h4v1h-4zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h3v1h-3zM29 22h1v1h-1zM32 22h3v1h-3zM36 22h1v1h-1zM38 22h1v1h-1zM40 22h1v1h-1zM42 22h1v1h-1zM3 23h2v1h-2zM8 23h3v1h-3zM12 23h2v1h-2zM15 23h1v1h-1zM19 23h2v1h-2zM24 23h1v1h-1zM28 23h6v1h-6zM36 23h1v1h-1zM40 23h1v1h-1zM42 23h1v1h-1zM1 24h1v1h-1zM4 24h5v1h-5zM10 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM19 24h7v1h-7zM27 24h1v1h-1zM30 24h1v1h-1zM33 24h9v1h-9zM1 25h3v1h-3zM5 25h1v1h-1zM7 25h2v1h-2zM10 25h1v1h-1zM14 25h1v1h-1zM18 25h2v1h-2zM22 25h3v1h-3zM27 25h1v1h-1zM30 25h4v1h-4zM35 25h1v1h-1zM37 25h1v1h-1zM39 25h1v1h-1zM42 25h3v1h-3zM1 26h1v1h-1zM3 26h1v1h-1zM5 26h3v1h-3zM9 26h1v1h-1zM11 26h2v1h-2zM15 26h1v1h-1zM17 26h1v1h-1zM21 26h1v1h-1zM23 26h1v1h-1zM25 26h3v1h-3zM29 26h1v1h-1zM34 26h1v1h-1zM36 26h2v1h-2zM39 26h1v1h-1zM0 27h1v1h-1zM3 27h1v1h-1zM5 27h1v1h-1zM8 27h2v1h-2zM11 27h3v1h-3zM15 27h3v1h-3zM22 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM28 27h1v1h-1zM31 27h3v1h-3zM38 27h2v1h-2zM42 27h1v1h-1zM44 27h1v1h-1zM0 28h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM10 28h1v1h-1zM12 28h2v1h-2zM15 28h2v1h-2zM21 28h1v1h-1zM24 28h1v1h-1zM27 28h1v1h-1zM30 28h1v1h-1zM33 28h1v1h-1zM36 28h1v1h-1zM40 28h2v1h-2zM43 28h1v1h-1zM0 29h3v1h-3zM4 29h2v1h-2zM7 29h4v1h-4zM12 29h1v1h-1zM14 29h2v1h-2zM17 29h2v1h-2zM22 29h1v1h-1zM24 29h1v1h-1zM28 29h3v1h-3zM33 29h1v1h-1zM37 29h1v1h-1zM39 29h1v1h-1zM42 29h1v1h-1zM44 29h1v1h-1zM1 30h3v1h-3zM6 30h2v1h-2zM9 30h1v1h-1zM11 30h3v1h-3zM17 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM25 30h3v1h-3zM29 30h1v1h-1zM34 30h1v1h-1zM39 30h2v1h-2zM43 30h1v1h-1zM0 31h1v1h-1zM2 31h3v1h-3zM9 31h1v1h-1zM13 31h1v1h-1zM15 31h3v1h-3zM22 31h1v1h-1zM24 31h3v1h-3zM28 31h6v1h-6zM35 31h5v1h-5zM41 31h4v1h-4zM0 32h1v1h-1zM2 32h1v1h-1zM6 32h1v1h-1zM8 32h2v1h-2zM11 32h1v1h-1zM13 32h5v1h-5zM20 32h2v1h-2zM24 32h1v1h-1zM26 32h2v1h-2zM30 32h1v1h-1zM34 32h1v1h-1zM36 32h1v1h-1zM39 32h2v1h-2zM42 32h1v1h-1zM1 33h1v1h-1zM4 33h1v1h-1zM7 33h2v1h-2zM10 33h1v1h-1zM12 33h4v1h-4zM17 33h1v1h-1zM19 33h1v1h-1zM22 33h1v1h-1zM27 33h1v1h-1zM30 33h2v1h-2zM33 33h1v1h-1zM35 33h1v1h-1zM42 33h3v1h-3zM4 34h1v1h-1zM6 34h1v1h-1zM11 34h1v1h-1zM14 34h1v1h-1zM16 34h1v1h-1zM21 34h3v1h-3zM25 34h5v1h-5zM34 34h1v1h-1zM39 34h1v1h-1zM41 34h1v1h-1zM1 35h4v1h-4zM8 35h2v1h-2zM14 35h2v1h-2zM18 35h1v1h-1zM21 35h1v1h-1zM24 35h2v1h-2zM28 35h1v1h-1zM30 35h1v1h-1zM32 35h2v1h-2zM35 35h5v1h-5zM42 35h1v1h-1zM0 36h1v1h-1zM3 36h2v1h-2zM6 36h2v1h-2zM10 36h1v1h-1zM12 36h5v1h-5zM18 36h1v1h-1zM20 36h5v1h-5zM27 36h1v1h-1zM29 36h3v1h-3zM36 36h5v1h-5zM8 37h1v1h-1zM10 37h1v1h-1zM16 37h1v1h-1zM19 37h2v1h-2zM24 37h1v1h-1zM27 37h1v1h-1zM30 37h1v1h-1zM32 37h1v1h-1zM36 37h1v1h-1zM40 37h1v1h-1zM42 37h3v1h-3zM0 38h7v1h-7zM10 38h2v1h-2zM13 38h1v1h-1zM15 38h2v1h-2zM19 38h2v1h-2zM22 38h1v1h-1zM24 38h4v1h-4zM29 38h1v1h-1zM31 38h4v1h-4zM36 38h1v1h-1zM38 38h1v1h-1zM40 38h1v1h-1zM42 38h1v1h-1zM0 39h1v1h-1zM6 39h1v1h-1zM8 39h1v1h-1zM11 39h1v1h-1zM13 39h1v1h-1zM17 39h2v1h-2zM20 39h1v1h-1zM24 39h1v1h-1zM28 39h6v1h-6zM36 39h1v1h-1zM40 39h1v1h-1zM42 39h3v1h-3zM0 40h1v1h-1zM2 40h3v1h-3zM6 40h1v1h-1zM8 40h1v1h-1zM14 40h1v1h-1zM16 40h1v1h-1zM18 40h1v1h-1zM20 40h5v1h-5zM27 40h1v1h-1zM29 40h2v1h-2zM36 40h6v1h-6zM43 40h1v1h-1zM0 41h1v1h-1zM2 41h3v1h-3zM6 41h1v1h-1zM8 41h6v1h-6zM15 41h1v1h-1zM17 41h2v1h-2zM20 41h2v1h-2zM27 41h1v1h-1zM30 41h1v1h-1zM33 41h1v1h-1zM37 41h1v1h-1zM39 41h1v1h-1zM41 41h4v1h-4zM0 42h1v1h-1zM2 42h3v1h-3zM6 42h1v1h-1zM8 42h1v1h-1zM11 42h2v1h-2zM14 42h2v1h-2zM18 42h2v1h-2zM21 42h1v1h-1zM23 42h5v1h-5zM29 42h1v1h-1zM34 42h3v1h-3zM42 42h2v1h-2zM0 43h1v1h-1zM6 43h1v1h-1zM9 43h1v1h-1zM11 43h4v1h-4zM16 43h1v1h-1zM18 43h4v1h-4zM23 43h1v1h-1zM26 43h7v1h-7zM37 43h1v1h-1zM42 43h1v1h-1zM0 44h7v1h-7zM8 44h3v1h-3zM13 44h4v1h-4zM18 44h1v1h-1zM21 44h1v1h-1zM24 44h1v1h-1zM29 44h2v1h-2zM33 44h1v1h-1zM35 44h1v1h-1zM37 44h1v1h-1zM39 44h3v1h-3zM43 44h1v1h-1z" fill="#3b1820"/></svg></div>
-      <div class="nh">Techcombank</div>
-      <div class="so" data-copy="6688863368" title="Chạm để sao chép">6688 8633 68</div>
-      <div class="chu">LE NGOC HUY</div>
-      <div class="vai-qr">Chú rể</div>
-      <button class="luu" type="button" data-luu="qr-chu-re-techcombank.png">Lưu QR</button>
     </div>
   </div>
 </dialog>
@@ -760,10 +736,16 @@ const LOI_MOI = { ongba: "Kính Mời", anhchi: "Trân Trọng Kính Mời", coc
 $("#moLoi").textContent = LOI_MOI[(_q.get("x") || "").toLowerCase()] || "Thân Mời";
 if(GUEST){
   $("#moTen").textContent = GUEST;                 // textContent: tên lấy từ địa chỉ trang
-  $("#rv-name").value = GUEST; $("#lb-ten").value = GUEST;
+  $("#rv-name").value = GUEST;
   document.title = GUEST + " · Ngọc Huy & Hương Giang";
 }
 if("scrollRestoration" in history) history.scrollRestoration = "manual";
+/* lời mời + tên khách bên trong thiệp */
+$$(".moi-loi").forEach(e => { e.textContent = $("#moLoi").textContent; });
+$$(".moi-ten").forEach(e => {
+  e.textContent = GUEST || "Quý khách";                       // textContent: tên lấy từ địa chỉ trang
+  e.classList.add(GUEST.length > 30 ? "rat-dai" : GUEST.length > 16 ? "dai" : "ngan");
+});
 
 /* ---------------- nhạc nền ---------------- */
 const NHAC = (function(){
@@ -903,10 +885,10 @@ const TUCUON = (function(){
   for(let d = 1; d <= so; d++) html += d === ngay ? '<span class="tim-ngay cuoi"><svg viewBox="0 0 24 22"><use href="#tim"/></svg><b>' + d + "</b></span>" : d === 28 ? '<span class="tim-ngay truoc"><svg viewBox="0 0 24 22"><use href="#tim"/></svg><b>' + d + "</b></span>" : "<span>" + d + "</span>";
   $("#lich").innerHTML = html + "</div>";
 
-  const p = new URLSearchParams({ action: "TEMPLATE", text: "Đám cưới Ngọc Huy & Hương Giang",
-    dates: "20261129T000000Z/20261129T060000Z",
-    details: "07:00 Lễ Vu Quy — tư gia nhà gái, Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội\n10:30 Lễ Thành Hôn — tư gia nhà trai\n11:00 Khai tiệc\nThiệp: " + location.origin + location.pathname,
-    location: "Tư gia nhà trai, Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên" });
+  const p = new URLSearchParams({ action: "TEMPLATE", text: "Lễ Vu Quy Hương Giang & Ngọc Huy",
+    dates: "20261129T000000Z/20261129T020000Z",
+    details: "16:00 Thứ Bảy 28/11: Bữa cơm thân mật — tư gia nhà gái\n07:00 Chủ Nhật 29/11: Lễ Vu Quy — tư gia nhà gái\nĐội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội\nThiệp: " + location.origin + location.pathname,
+    location: "Tư gia nhà gái, Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội" });
   $("#themLich").href = "https://calendar.google.com/calendar/render?" + p.toString();
   $$("[data-map]").forEach(a => { a.href = CONFIG.maps[a.dataset.map] || CONFIG.maps.groom; });
 })();
@@ -931,47 +913,6 @@ $("#rsvp").addEventListener("submit", async e => {
       count: $("#rv-count").value, msg: $("#rv-msg").value.trim(), hp: $("#rv-web").value });
     btn.textContent = "Đã nhận, cảm ơn bạn!"; toast("Cảm ơn bạn đã xác nhận 💐"); $("#rv-msg").value = "";
   }catch(err){ btn.disabled = false; btn.textContent = cu; toast("Gửi chưa được, bạn thử lại sau nhé 🙏"); }
-});
-
-/* ---------------- sổ lưu bút ---------------- */
-function theLoi(x){
-  const a = document.createElement("article"); a.className = "loi";
-  const h = document.createElement("header"), b = document.createElement("b"), t = document.createElement("time");
-  b.textContent = x.ten; t.textContent = x.luc || ""; h.append(b, t);
-  const p = document.createElement("p"); p.textContent = x.loi;       // textContent: lời chúc do khách gõ
-  a.append(h, p); return a;
-}
-async function taiLuuBut(){
-  if(!CONFIG.rsvpEndpoint) return;
-  try{
-    const ctl = new AbortController(); setTimeout(() => ctl.abort(), 10000);
-    const r = await fetch(CONFIG.rsvpEndpoint + "?luubut=1", { signal: ctl.signal });
-    const d = await r.json();
-    if(d && d.ok && Array.isArray(d.items) && d.items.length){
-      const box = $("#lbDs"); box.textContent = "";
-      d.items.forEach(x => box.appendChild(theLoi({ ten: String(x.ten || ""), loi: String(x.loi || ""), luc: String(x.luc || "") })));
-    }
-  }catch(e){ /* chưa đọc được thì giữ dòng mời viết lời chúc */ }
-}
-(function(){
-  const muc = $("#t-lb");
-  if(!("IntersectionObserver" in window)){ taiLuuBut(); return; }
-  const io = new IntersectionObserver(es => { if(es.some(e => e.isIntersecting)){ io.disconnect(); taiLuuBut(); } }, { rootMargin: "600px 0px" });
-  io.observe(muc);
-})();
-$("#luubut").addEventListener("submit", async e => {
-  e.preventDefault();
-  const btn = $("#lb-gui"), ten = $("#lb-ten").value.trim(), loi = $("#lb-loi").value.trim();
-  if(!ten){ toast("Bạn nhớ điền tên nhé 🌸"); $("#lb-ten").focus(); return; }
-  if(!loi){ toast("Bạn viết đôi lời chúc nhé 💌"); $("#lb-loi").focus(); return; }
-  const cu = btn.textContent; btn.disabled = true; btn.textContent = "Đang gửi…";
-  try{
-    await gui({ ben: "luubut", name: ten, msg: loi, hp: $("#lb-web").value });
-    const box = $("#lbDs"), trong = box.querySelector(".trong"); if(trong) trong.remove();
-    box.prepend(theLoi({ ten, loi, luc: "Vừa xong" })); box.scrollTop = 0;
-    $("#lb-loi").value = ""; toast("Cảm ơn lời chúc của bạn 💕");
-  }catch(err){ toast("Gửi chưa được, bạn thử lại sau nhé 🙏"); }
-  btn.disabled = false; btn.textContent = cu;
 });
 
 /* ---------------- hộp quà mừng -> mã QR ---------------- */
