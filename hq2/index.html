@@ -745,9 +745,8 @@ const CONFIG = {
   nhac: "../nhac.mp3",
   ngayCuoi: "2026-11-29T07:00:00+07:00",         // đếm ngược tới lễ đầu tiên trong ngày
   maps: { groom: "https://maps.app.goo.gl/N93YSFWjoCXKSkg68", bride: "https://maps.app.goo.gl/Vmq1eWTFrRa3SVkY9" },
-  /* Ảnh cho album (dọc, khoảng 2:3). Hiện là 3 tranh minh hoạ; có ảnh cưới thật thì chép vào
-     thư mục anh/ rồi thay danh sách, ví dụ ["anh/cuoi-1.jpg", "anh/cuoi-2.jpg"]. Để trống thì hiện khung chờ. */
-  album: ["anh/anh-1.webp", "anh/anh-2.webp", "anh/anh-3.webp"]
+  /* Ảnh cưới cho album (dọc 2:3, WebP ~800x1200), để chung ở thư mục /album/ ở gốc trang cho mọi bản. */
+  album: ["../album/cuoi-1.webp", "../album/cuoi-2.webp", "../album/cuoi-3.webp", "../album/cuoi-4.webp", "../album/cuoi-5.webp"]
 };
 
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
