@@ -100,7 +100,7 @@
   <div class="card">
     <label for="base">Địa chỉ thiệp</label>
     <input id="base" type="text" value="https://huygiang.love/tech" spellcheck="false">
-    <p class="hint">Tự lấy theo bản đang chọn ở trên. Muốn link tới bản Hàn Quốc hồng thì sửa thành <code>https://huygiang.love/hq2</code>.</p>
+    <p class="hint">Tự lấy theo bản đang chọn ở trên: nhà trai <code>https://huygiang.love/nt</code>, nhà gái <code>https://huygiang.love/ng</code>.</p>
   </div>
 
   <div class="card">
@@ -190,7 +190,7 @@ function linkFor(name, xh){
   const base = baseEl.value.trim().replace(/[?&#].*$/, "").replace(/\/+$/, "");
   let u = base + "?g=" + enc(name);
   // Trùng xưng hô mặc định của bản đó thì khỏi ghi &x= cho link gọn
-  // (bản thường mặc định "ban", bản chữ to /ng mặc định "cochu").
+  // (cả ba bản hiện tại đều mặc định "ban").
   const k = (base.match(/\/([^\/]+)$/) || [])[1] || "";
   const macDinh = Object.prototype.hasOwnProperty.call(BAN, k) ? BAN[k].xh : "ban";
   if(xh && xh !== macDinh) u += "&x=" + xh;
@@ -291,15 +291,15 @@ for(const [k, l] of XH){
 }
 dfEl.value = "ban";
 
-/* Cùng một file này được đặt ở gốc trang và trong từng thư mục nhatrai/,
-   nhagai/, ng/. Nó nhìn tên thư mục đang chứa mình để biết đang tạo link
-   cho bản nào — link trỏ về đúng thư mục đó, và vì trang thiệp ở đó tự gửi
-   kèm CONFIG.ben nên xác nhận của khách rơi đúng tab trong Google Sheet.
+/* Cùng một file này được đặt trong từng thư mục nt/, ng/, tech/. Nó nhìn tên
+   thư mục đang chứa mình để biết đang tạo link cho bản nào — link trỏ về đúng
+   thư mục đó, và vì trang thiệp ở đó tự gửi kèm CONFIG.ben nên xác nhận của
+   khách rơi đúng chỗ trong Google Sheet.
    Thêm bản mới thì thêm một dòng vào đây rồi chép file này vào thư mục ấy. */
 const BAN = {
-  hq2:     { ten:"Hàn Quốc hồng",       tab:"RSVP",     xh:"ban"   },
-  tech:    { ten:"Love OS công nghệ",   tab:"RSVP",     xh:"ban"   },
-  pte:     { ten:"Love OS hồng",        tab:"RSVP",     xh:"ban"   },
+  nt:      { ten:"Nhà trai",            noi:"tab RSVP của sheet khách mời chung",                    xh:"ban" },
+  ng:      { ten:"Nhà gái",             noi:"file riêng “Xác nhận tham dự — Nhà gái (thiệp hq2)”",   xh:"ban" },
+  tech:    { ten:"Love OS xanh",        noi:"tab RSVP của sheet khách mời chung",                    xh:"ban" },
 };
 const _thuMuc = (location.pathname.match(/\/([^\/]+)\/[^\/]*$/) || [])[1] || "";
 const BAN_NAY = Object.prototype.hasOwnProperty.call(BAN, _thuMuc) ? _thuMuc : "";
@@ -322,16 +322,17 @@ if(location.protocol === "http:" || location.protocol === "https:"){
   }
   nav.hidden = false;
 }
-{
+if(BAN_NAY){
   const b = BAN[BAN_NAY], d = $("#dich");
   d.textContent = "";
-  d.append("Đang tạo link cho: ");
+  d.append("Đang tạo link cho thiệp ");
   const t = document.createElement("b"); t.textContent = b.ten; d.append(t);
-  d.append(" — khách bấm xác nhận sẽ ghi vào tab ");
-  const g = document.createElement("b"); g.textContent = b.tab; d.append(g);
-  d.append(" trong Google Sheet.");
+  d.append(" — khách bấm xác nhận sẽ ghi vào ");
+  const g = document.createElement("b"); g.textContent = b.noi; d.append(g);
+  d.append(".");
   d.hidden = false;
-  if(BAN_NAY) document.title = "Tạo link · " + b.ten;
+  document.title = "Tạo link · " + b.ten;
+  $("#tieude").textContent = "Tạo link thiệp mời · " + b.ten;
   dfEl.value = b.xh;
 }
 
