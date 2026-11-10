@@ -531,6 +531,21 @@
     .mk-gach svg{width:10px;height:9px;fill:#c25467;}
     .mk-du{margin:0;font-size:15px;font-style:italic;color:var(--ruou);line-height:1.6;}
     .le-tai + .ngay3{margin-top:18px;}
+    /* cành hoa neo theo dòng chữ (không theo số px tính từ đầu thiệp) để không đè chữ ở mọi cỡ màn hình */
+    .neo{position:relative;height:0;}
+    .lich .l-canh.tren{left:-42px;top:-34px;}
+    .lich .l-canh.duoi{right:-20px;bottom:-4px;}
+    @media (max-width:340px){ .lich .l-canh{width:80px;} .lich .l-canh.tren{left:-40px;top:-28px;} }
+    /* "Vào hồi 6 giờ 15", "Tại: Tư gia nhà gái" — mỗi ý một dòng, viết hoa như thiệp giấy */
+    .hoi{margin:18px 0 0;font-size:clamp(14.5px,4vw,15.5px);text-transform:uppercase;letter-spacing:.04em;color:var(--ruou);}
+    .hoi b{font-weight:500;font-size:clamp(19.5px,5.6vw,22px);letter-spacing:.02em;color:var(--hong);margin-left:.2em;font-variant-numeric:lining-nums;}
+    .hoi + .ngay3{margin-top:16px;}
+    .tai{margin:26px 0 0;font-size:clamp(14.5px,4vw,15.5px);text-transform:uppercase;letter-spacing:.04em;color:var(--ruou);}
+    .tai b{font-weight:600;color:var(--hong);}
+    .tai + .dc-tiec{margin-top:6px;}
+    .bome.hai-nha{margin-top:30px;align-items:start;}
+    .bome.hai-nha .vach{align-self:stretch;}
+    .nha{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#a9803f;margin:0 0 6px !important;padding-left:.22em;}
     /* ngày dạng  THỨ 7 | 28.11 | NĂM 2026  + dòng âm lịch viết thường trong ngoặc */
     .ngay3.ngay-du{gap:0 clamp(10px,3.6vw,18px);}
     .ngay3.ngay-du span{white-space:nowrap;}
@@ -649,7 +664,6 @@
   </header>
 
   <div class="tam">
-        <div class="deco" style="right:-62px;top:560px;width:120px;height:190px;opacity:.8"><img src="anh/canh-trong.webp" alt="" loading="lazy"></div>
 
     <!-- ============ THÂN MỜI + TÊN KHÁCH ============ -->
     <section class="muc hd moi-khach" aria-label="Lời mời">
@@ -662,34 +676,30 @@
     <!-- ============ BỮA CƠM THÂN MẬT ============ -->
     <section class="muc hd" aria-labelledby="t-com">
       <h2 class="tde" id="t-com">Bữa cơm thân mật</h2>
-      <div class="le-tai"><div class="nhan">Vào lúc</div><div class="gio">16:00</div></div>
+      <p class="hoi">Vào hồi <b>16 giờ</b></p>
       <div class="ngay3 ngay-du"><span>Thứ 7</span><i></i><b>28.11</b><i></i><span>Năm 2026</span></div>
       <div class="am-loi">(Tức ngày 20 tháng 10 năm Bính Ngọ)</div>
-      <div class="le-tai"><div class="nhan">Tại</div><div class="noi-le">Tư gia nhà gái</div></div>
-      <p class="dc-tiec">Đội 9 Hoan Hợp, <span class="nw">Xã Hồng Sơn,</span> <span class="nw">Hà Nội</span></p>
+      <p class="tai">Tại: <b>Tư gia nhà gái</b></p>
+      <p class="dc-tiec">Đội 9, Hoan Hợp, <span class="nw">Xã Hồng Sơn,</span> <span class="nw">Thành phố Hà Nội</span></p>
       <a class="nut-cd" data-map="bride" href="#" target="_blank" rel="noopener" aria-label="Chỉ đường tới tư gia nhà gái trên Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Chỉ đường</a>
+      <div class="neo" aria-hidden="true"><div class="deco" id="canh-com" style="right:-78px;top:-60px;width:120px;height:190px;opacity:.8"><img src="anh/canh-trong.webp" alt="" loading="lazy"></div></div>
     </section>
 
     <!-- ============ LỄ VU QUY ============ -->
     <section class="muc hd" aria-labelledby="t-vq">
-      <div class="deco" style="left:-96px;top:250px;width:150px;height:98px;transform:rotate(-30deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
       <h2 class="tde" id="t-vq">Lễ Vu Quy</h2>
-      <div class="bome">
-        <div><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p>
-          <p class="dc">Đội 9 Hoan Hợp, <span class="nw">Xã Hồng Sơn,</span> <span class="nw">Hà Nội</span></p></div>
-        <i class="vach" aria-hidden="true"></i>
-        <div><p class="ob">Ông Bà</p><p class="bm">Lê Công Bồng</p><p class="bm">Bùi Thị Tuyết</p>
-          <p class="dc">Thôn An Lập, <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></p></div>
-      </div>
-      <p class="ten-lon">Hoàng Thị Hương Giang</p>
-      <div class="vai">Cô dâu</div>
-      <div class="va" aria-hidden="true">&amp;</div>
-      <p class="ten-lon">Lê Ngọc Huy</p>
-      <div class="vai">Chú rể</div>
-      <div class="le-tai"><div class="nhan">Vào lúc</div><div class="gio">07:00</div></div>
+      <p class="hoi">Vào hồi <b>6 giờ 15</b></p>
       <div class="ngay3 ngay-du"><span>Chủ Nhật</span><i></i><b>29.11</b><i></i><span>Năm 2026</span></div>
       <div class="am-loi">(Tức ngày 21 tháng 10 năm Bính Ngọ)</div>
-      <div class="le-tai"><div class="nhan">Tại</div><div class="noi-le">Tư gia nhà gái</div></div>
+      <p class="tai">Tại: <b>Tư gia nhà gái</b></p>
+      <p class="dc-tiec">Đội 9, Hoan Hợp, <span class="nw">Xã Hồng Sơn,</span> <span class="nw">Thành phố Hà Nội</span></p>
+      <div class="bome hai-nha">
+        <div><p class="nha">Nhà gái</p><p class="ob">Ông Bà</p><p class="bm">Hoàng Văn Nguyên</p><p class="bm">Đinh Thị Hương</p></div>
+        <i class="vach" aria-hidden="true"></i>
+        <div><p class="nha">Nhà trai</p><p class="ob">Ông Bà</p><p class="bm">Lê Công Bồng</p><p class="bm">Bùi Thị Tuyết</p>
+          <p class="dc">Thôn An Lập, <span class="nw">Xã Thư Vũ,</span> <span class="nw">Tỉnh Hưng Yên</span></p></div>
+      </div>
+      <div class="neo" aria-hidden="true"><div class="deco" id="la-vq" style="left:-112px;top:-10px;width:150px;height:98px;transform:rotate(-30deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div></div>
       <h3 class="tde nho dem-tde">Cùng đếm ngược</h3>
       <div class="dem" id="dem" aria-live="off">—</div>
       <div class="lich" id="lich" aria-label="Lịch tháng 11 năm 2026: ngày 28 bữa cơm thân mật, ngày 29 Lễ Vu Quy"></div>
@@ -698,15 +708,14 @@
     </section>
 
     <!-- ============ ALBUM ẢNH CƯỚI ============ -->
-    <section class="muc hd" aria-labelledby="t-album">
+    <section class="muc hd" aria-label="Album ảnh cưới">
       <div class="deco" style="right:-98px;top:-80px;width:150px;height:98px;transform:rotate(200deg)"><img src="anh/canh-nho.webp" alt="" loading="lazy"></div>
-      <h2 class="tde" id="t-album">Album ảnh cưới</h2>
       <div class="album" id="album" role="region" aria-roledescription="băng chuyền" aria-label="Album ảnh cưới"></div>
       <div class="cham" id="albumCham"></div>
     </section>
     <!-- ============ XÁC NHẬN THAM DỰ ============ -->
     <section class="muc hd" aria-labelledby="t-rsvp">
-      <div class="deco" style="right:-100px;top:-90px;width:150px;height:98px;transform:rotate(206deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
+      <div class="deco" style="right:-112px;top:-104px;width:150px;height:98px;transform:rotate(206deg)"><img src="anh/canh-dai.webp" alt="" loading="lazy"></div>
       <h2 class="tde" id="t-rsvp">Xác nhận tham dự</h2>
       <form class="form" id="rsvp" novalidate>
         <label class="an" for="rv-name">Họ và tên</label>
@@ -770,7 +779,7 @@ const CONFIG = {
   rsvpToken: "hg-nh-2026",
   rsvpEndpoint: "https://script.google.com/macros/s/AKfycbxbbRGstq2okI7BIeNHPQiAe0QhMHffVDaMgeElHhejvIbLt2fqvKPUMSEY2-0qv5aJ9w/exec",
   nhac: "../nhac.mp3",
-  ngayCuoi: "2026-11-29T07:00:00+07:00",         // đếm ngược tới lễ đầu tiên trong ngày
+  ngayCuoi: "2026-11-29T06:15:00+07:00",         // đếm ngược tới lễ đầu tiên trong ngày
   maps: { groom: "https://maps.app.goo.gl/N93YSFWjoCXKSkg68", bride: "https://maps.app.goo.gl/Vmq1eWTFrRa3SVkY9" },
   /* Ảnh cưới cho album (dọc 2:3, WebP ~800x1200), để chung ở thư mục /album/ ở gốc trang cho mọi bản. */
   album: ["../album/cuoi-1.webp", "../album/cuoi-2.webp", "../album/cuoi-3.webp", "../album/cuoi-4.webp", "../album/cuoi-5.webp"]
@@ -937,9 +946,9 @@ const TUCUON = (function(){
   $("#lich").innerHTML = html + "</div>";
 
   const p = new URLSearchParams({ action: "TEMPLATE", text: "Lễ Vu Quy Hương Giang & Ngọc Huy",
-    dates: "20261129T000000Z/20261129T020000Z",
-    details: "16:00 Thứ Bảy 28/11: Bữa cơm thân mật — tư gia nhà gái\n07:00 Chủ Nhật 29/11: Lễ Vu Quy — tư gia nhà gái\nĐội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội\nThiệp: " + location.origin + location.pathname,
-    location: "Tư gia nhà gái, Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội" });
+    dates: "20261128T231500Z/20261129T011500Z",
+    details: "16:00 Thứ Bảy 28/11: Bữa cơm thân mật — tư gia nhà gái\n06:15 Chủ Nhật 29/11: Lễ Vu Quy — tư gia nhà gái\nĐội 9, Hoan Hợp, Xã Hồng Sơn, Thành phố Hà Nội\nThiệp: " + location.origin + location.pathname,
+    location: "Tư gia nhà gái, Đội 9, Hoan Hợp, Xã Hồng Sơn, Thành phố Hà Nội" });
   $("#themLich").href = "https://calendar.google.com/calendar/render?" + p.toString();
   $$("[data-map]").forEach(a => { a.href = CONFIG.maps[a.dataset.map] || CONFIG.maps.groom; });
 })();
