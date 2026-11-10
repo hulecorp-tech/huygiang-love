@@ -531,6 +531,11 @@
     .mk-gach svg{width:10px;height:9px;fill:#c25467;}
     .mk-du{margin:0;font-size:15px;font-style:italic;color:var(--ruou);line-height:1.6;}
     .le-tai + .ngay3{margin-top:18px;}
+    /* ngày dạng  THỨ 7 | 28.11 | NĂM 2026  + dòng âm lịch viết thường trong ngoặc */
+    .ngay3.ngay-du{gap:0 clamp(10px,3.6vw,18px);}
+    .ngay3.ngay-du span{white-space:nowrap;}
+    .ngay3.ngay-du b{font-size:clamp(24px,7vw,29px);letter-spacing:.01em;}
+    .am-loi{margin-top:12px;font-style:italic;font-size:clamp(14px,4vw,15.5px);color:var(--ruou);text-wrap:balance;}
     .nw{white-space:nowrap;}   /* địa chỉ chỉ xuống dòng sau dấu phẩy */
     .dem-tde{margin-top:40px !important;}
     .chu-lich{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-family:var(--sans);font-size:12px;color:var(--ruou);}
@@ -658,9 +663,8 @@
     <section class="muc hd" aria-labelledby="t-com">
       <h2 class="tde" id="t-com">Bữa cơm thân mật</h2>
       <div class="le-tai"><div class="nhan">Vào lúc</div><div class="gio">16:00</div></div>
-      <div class="ngay3"><span>Thứ Bảy</span><i></i><b>28</b><i></i><span>Tháng 11</span></div>
-      <div class="ngay-so">28/11/2026</div>
-      <div class="am">Tức ngày 20/10/2026 năm Bính Ngọ âm lịch</div>
+      <div class="ngay3 ngay-du"><span>Thứ 7</span><i></i><b>28.11</b><i></i><span>Năm 2026</span></div>
+      <div class="am-loi">(Tức ngày 20 tháng 10 năm Bính Ngọ)</div>
       <div class="le-tai"><div class="nhan">Tại</div><div class="noi-le">Tư gia nhà gái</div></div>
       <p class="dc-tiec">Đội 9 Hoan Hợp, <span class="nw">Xã Hồng Sơn,</span> <span class="nw">Hà Nội</span></p>
       <a class="nut-cd" data-map="bride" href="#" target="_blank" rel="noopener" aria-label="Chỉ đường tới tư gia nhà gái trên Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Chỉ đường</a>
@@ -683,9 +687,8 @@
       <p class="ten-lon">Lê Ngọc Huy</p>
       <div class="vai">Chú rể</div>
       <div class="le-tai"><div class="nhan">Vào lúc</div><div class="gio">07:00</div></div>
-      <div class="ngay3"><span>Chủ Nhật</span><i></i><b>29</b><i></i><span>Tháng 11</span></div>
-      <div class="ngay-so">29/11/2026</div>
-      <div class="am">Tức ngày 21/10/2026 năm Bính Ngọ âm lịch</div>
+      <div class="ngay3 ngay-du"><span>Chủ Nhật</span><i></i><b>29.11</b><i></i><span>Năm 2026</span></div>
+      <div class="am-loi">(Tức ngày 21 tháng 10 năm Bính Ngọ)</div>
       <div class="le-tai"><div class="nhan">Tại</div><div class="noi-le">Tư gia nhà gái</div></div>
       <h3 class="tde nho dem-tde">Cùng đếm ngược</h3>
       <div class="dem" id="dem" aria-live="off">—</div>
