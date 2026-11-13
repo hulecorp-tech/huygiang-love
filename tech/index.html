@@ -334,16 +334,6 @@
     .nut.rong{align-self:stretch;padding:14px;}
     .nut:disabled{opacity:.6;cursor:default;}
 
-    /* lưu bút kiểu khung chat */
-    .ds-loi{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow-y:auto;margin-bottom:14px;padding:4px 2px;text-align:left;overscroll-behavior:contain;}
-    .loi{align-self:flex-start;max-width:88%;padding:10px 14px;border-radius:16px 16px 16px 4px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);}
-    .loi:nth-child(even){align-self:flex-end;border-radius:16px 16px 4px 16px;background:linear-gradient(180deg,rgba(255,143,199,.3),rgba(185,164,255,.25));}
-    .loi header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
-    .loi b{font-size:13.5px;color:#fff;overflow-wrap:anywhere;}
-    .loi time{font-family:var(--mono);font-size:10px;color:var(--mo);white-space:nowrap;}
-    .loi p{margin:4px 0 0;font-size:14.5px;line-height:1.5;overflow-wrap:anywhere;}
-    .loi.trong{align-self:center;text-align:center;font-style:italic;color:var(--mo);}
-
     /* quà */
     .qua-btn{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0 auto;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
     .qua-btn img{width:min(66vw,280px);animation:troi 5s ease-in-out infinite;filter:drop-shadow(0 22px 22px rgba(0,8,70,.55));}
@@ -467,7 +457,7 @@
       <a class="tv" href="#gia-dinh" style="--r:-4deg"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>CÔ DÂU<br>&amp; CHÚ RỂ</span></span></a>
       <a class="tv" href="#le-cuoi" style="--r:5deg;--y:18px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>LỄ<br>CƯỚI</span></span></a>
       <a class="tv" href="#album-muc" style="--r:4deg;--y:-6px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>ALBUM<br>ẢNH</span></span></a>
-      <a class="tv" href="#luu-but" style="--r:-5deg;--y:12px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>GỬI<br>LỜI CHÚC</span></span></a>
+      <a class="tv" href="#hoi-am" style="--r:-5deg;--y:12px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>GỬI<br>LỜI CHÚC</span></span></a>
     </nav>
     <div class="icon-noi" aria-hidden="true">
       <svg class="in1" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.6L10 19z"/></svg>
@@ -554,7 +544,7 @@
   </section>
 
   <!-- ============ XÁC NHẬN THAM DỰ ============ -->
-  <section class="cs hd" aria-labelledby="t-rs">
+  <section class="cs hd" id="hoi-am" aria-labelledby="t-rs">
     <div class="cs-thanh"><i></i><i></i><i></i><span>xac-nhan.form</span></div>
     <div class="cs-than">
       <h2 class="tde" id="t-rs"><span class="tde-chu">Hồi Âm</span><span class="tde-nho">// xác nhận tham dự</span></h2>
@@ -567,27 +557,10 @@
         </div>
         <label class="an" for="rv-count">Số người</label>
         <select id="rv-count"><option>1 người</option><option>2 người</option><option>3 người</option><option>4 người</option><option>5+ người</option></select>
-        <label class="an" for="rv-msg">Lời nhắn</label>
-        <textarea id="rv-msg" placeholder="Lời nhắn (không bắt buộc)" maxlength="1000"></textarea>
+        <label class="an" for="rv-msg">Lời chúc, lời nhắn</label>
+        <textarea id="rv-msg" placeholder="Lời chúc, lời nhắn (không bắt buộc)" maxlength="1000"></textarea>
         <div class="hp" aria-hidden="true"><input id="rv-web" type="text" tabindex="-1" autocomplete="off"></div>
         <button class="nut rong" id="rv-send" type="submit">Gửi xác nhận</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- ============ SỔ LƯU BÚT ============ -->
-  <section class="cs hd" id="luu-but" aria-labelledby="t-lb">
-    <div class="cs-thanh"><i></i><i></i><i></i><span>luu-but.chat</span></div>
-    <div class="cs-than">
-      <h2 class="tde" id="t-lb"><span class="tde-chu">Lời Chúc</span><span class="tde-nho">// sổ lưu bút</span></h2>
-      <div class="ds-loi" id="lbDs" aria-live="polite"><article class="loi trong"><p>Hãy là người đầu tiên gửi lời chúc tới cô dâu chú rể 💌</p></article></div>
-      <form class="form chat" id="luubut" novalidate>
-        <label class="an" for="lb-ten">Tên của bạn</label>
-        <input id="lb-ten" type="text" placeholder="Tên của bạn" maxlength="60">
-        <label class="an" for="lb-loi">Lời chúc của bạn</label>
-        <textarea id="lb-loi" placeholder="Nhập lời chúc…" maxlength="500"></textarea>
-        <div class="hp" aria-hidden="true"><input id="lb-web" type="text" tabindex="-1" autocomplete="off"></div>
-        <button class="nut" id="lb-gui" type="submit">Gửi ➤</button>
       </form>
     </div>
   </section>
@@ -668,7 +641,7 @@ $("#moLoi").textContent = LOI_MOI[(_q.get("x") || "").toLowerCase()] || "Thân m
 if(GUEST){
   $("#moTen").textContent = GUEST;                 // textContent: tên lấy từ địa chỉ trang
   $("#moTen").classList.add(GUEST.length > 30 ? "rat-dai" : GUEST.length > 16 ? "dai" : "ngan");   // tên dài thì chữ nhỏ lại cho vừa màn hình
-  $("#rv-name").value = GUEST; $("#lb-ten").value = GUEST;
+  $("#rv-name").value = GUEST;
   document.title = GUEST + " · Ngọc Huy & Hương Giang";
 }
 if("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -834,47 +807,6 @@ $("#rsvp").addEventListener("submit", async e => {
       count: $("#rv-count").value, msg: $("#rv-msg").value.trim(), hp: $("#rv-web").value });
     btn.textContent = "Đã nhận, cảm ơn bạn!"; toast("Cảm ơn bạn đã xác nhận 💐"); $("#rv-msg").value = "";
   }catch(err){ btn.disabled = false; btn.textContent = cu; toast("Gửi chưa được, bạn thử lại sau nhé 🙏"); }
-});
-
-/* ---------------- sổ lưu bút ---------------- */
-function theLoi(x){
-  const a = document.createElement("article"); a.className = "loi";
-  const h = document.createElement("header"), b = document.createElement("b"), t = document.createElement("time");
-  b.textContent = x.ten; t.textContent = x.luc || ""; h.append(b, t);
-  const p = document.createElement("p"); p.textContent = x.loi;       // textContent: lời chúc do khách gõ
-  a.append(h, p); return a;
-}
-async function taiLuuBut(){
-  if(!CONFIG.rsvpEndpoint) return;
-  try{
-    const ctl = new AbortController(); setTimeout(() => ctl.abort(), 10000);
-    const r = await fetch(CONFIG.rsvpEndpoint + "?luubut=1", { signal: ctl.signal });
-    const d = await r.json();
-    if(d && d.ok && Array.isArray(d.items) && d.items.length){
-      const box = $("#lbDs"); box.textContent = "";
-      d.items.forEach(x => box.appendChild(theLoi({ ten: String(x.ten || ""), loi: String(x.loi || ""), luc: String(x.luc || "") })));
-    }
-  }catch(e){ /* chưa đọc được thì giữ dòng mời viết lời chúc */ }
-}
-(function(){
-  const muc = $("#t-lb");
-  if(!("IntersectionObserver" in window)){ taiLuuBut(); return; }
-  const io = new IntersectionObserver(es => { if(es.some(e => e.isIntersecting)){ io.disconnect(); taiLuuBut(); } }, { rootMargin: "600px 0px" });
-  io.observe(muc);
-})();
-$("#luubut").addEventListener("submit", async e => {
-  e.preventDefault();
-  const btn = $("#lb-gui"), ten = $("#lb-ten").value.trim(), loi = $("#lb-loi").value.trim();
-  if(!ten){ toast("Bạn nhớ điền tên nhé 🌸"); $("#lb-ten").focus(); return; }
-  if(!loi){ toast("Bạn viết đôi lời chúc nhé 💌"); $("#lb-loi").focus(); return; }
-  const cu = btn.textContent; btn.disabled = true; btn.textContent = "Đang gửi…";
-  try{
-    await gui({ ben: "luubut", name: ten, msg: loi, hp: $("#lb-web").value });
-    const box = $("#lbDs"), trong = box.querySelector(".trong"); if(trong) trong.remove();
-    box.prepend(theLoi({ ten, loi, luc: "Vừa xong" })); box.scrollTop = 0;
-    $("#lb-loi").value = ""; toast("Cảm ơn lời chúc của bạn 💕");
-  }catch(err){ toast("Gửi chưa được, bạn thử lại sau nhé 🙏"); }
-  btn.disabled = false; btn.textContent = cu;
 });
 
 /* ---------------- hộp quà mừng -> mã QR ---------------- */
