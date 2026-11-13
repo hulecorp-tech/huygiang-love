@@ -291,7 +291,7 @@ for(const [k, l] of XH){
 }
 dfEl.value = "ban";
 
-/* Cùng một file này được đặt trong từng thư mục nt/, ng/, tech/. Nó nhìn tên
+/* Cùng một file này được đặt trong từng thư mục nt/, ng/, tech/, gr/. Nó nhìn tên
    thư mục đang chứa mình để biết đang tạo link cho bản nào — link trỏ về đúng
    thư mục đó, và vì trang thiệp ở đó tự gửi kèm CONFIG.ben nên xác nhận của
    khách rơi đúng chỗ trong Google Sheet.
@@ -300,6 +300,7 @@ const BAN = {
   nt:      { ten:"Nhà trai",            noi:"tab RSVP của sheet khách mời chung",                    xh:"ban" },
   ng:      { ten:"Nhà gái",             noi:"file riêng “Xác nhận tham dự — Nhà gái (thiệp hq2)”",   xh:"ban" },
   tech:    { ten:"Love OS xanh",        noi:"tab RSVP của sheet khách mời chung",                    xh:"ban" },
+  gr:      { ten:"Love OS gradient",    noi:"tab RSVP của sheet khách mời chung",                    xh:"ban" },
 };
 const _thuMuc = (location.pathname.match(/\/([^\/]+)\/[^\/]*$/) || [])[1] || "";
 const BAN_NAY = Object.prototype.hasOwnProperty.call(BAN, _thuMuc) ? _thuMuc : "";
