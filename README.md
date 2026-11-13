@@ -8,16 +8,19 @@ trữ và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-i
 | Đường dẫn | Nội dung | Xác nhận ghi vào |
 |---|---|---|
 | `/` | chuyển thẳng sang `/tech` (giữ tên khách trong link) | — |
-| `/nt` | thiệp **nhà trai**: Love OS tông hồng (cùng bố cục `/tech`, máy tính, TV, hộp quà vẽ lại tông hồng) | tab RSVP của sheet khách mời (lời chúc vào tab Lưu bút) |
+| `/nt` | thiệp **nhà trai**: Love OS tông hồng (cùng bố cục `/tech`, máy tính, TV, hộp quà vẽ lại tông hồng) | tab RSVP của sheet khách mời |
 | `/ng` | thiệp **nhà gái**, kiểu Hàn Quốc hồng: Thân mời + tên khách, bữa cơm thân mật (16 giờ 28/11), Lễ Vu Quy (6 giờ 15 29/11), album, xác nhận, quà (chỉ QR cô dâu) | file sheet riêng "Xác nhận tham dự — Nhà gái" |
-| `/tech` | phong cách công nghệ Y2K "Love OS" tông xanh | tab RSVP (lời chúc vào tab Lưu bút) |
-| `/gr` | Love OS dải gradient chàm `#384b98` → hồng cánh sen `#c1368d`: cùng bố cục `/tech`, máy tính, TV, hộp quà, ghim, tim, nhẫn, sao vẽ lại theo tông này | tab RSVP (lời chúc vào tab Lưu bút) |
+| `/tech` | phong cách công nghệ Y2K "Love OS" tông xanh | tab RSVP |
+| `/gr` | Love OS dải gradient chàm `#384b98` → hồng cánh sen `#c1368d`: cùng bố cục `/tech`, máy tính, TV, hộp quà, ghim, tim, nhẫn, sao vẽ lại theo tông này | tab RSVP |
 | `/pte`, `/hq2` | tên cũ của `/nt` và `/ng` (đổi ngày 10/11/2026) — chỉ còn trang chuyển tiếp, link cũ đã gửi vẫn mở được | — |
 
 Công cụ tạo link mời riêng từng khách: `/nt/tao-link.html` (nhà trai), `/ng/tao-link.html` (nhà gái),
 `/tech/tao-link.html` và `/gr/tao-link.html` (bốn file giống hệt nhau, tự nhận ra mình đang ở bản nào).
 
 Thiệp nhận tham số `?g=<tên khách>` và `?x=<mức xưng hô>`.
+
+Các bản Love OS (`/tech`, `/nt`, `/gr`) không còn sổ lưu bút (bỏ ngày 13/11/2026): TV "Gửi lời chúc" ở mục lục
+dẫn xuống form Hồi Âm, lời chúc gửi kèm xác nhận ở ô "Lời chúc, lời nhắn".
 
 Nhạc nền: `nhac.mp3` ở gốc trang, dùng chung cho `/tech`, `/nt`, `/ng` và `/gr` (đã hạ âm lượng sẵn trong file).
 
