@@ -12,6 +12,7 @@ trữ và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-i
 | `/ng` | thiệp **nhà gái**, kiểu Hàn Quốc hồng: Thân mời + tên khách, bữa cơm thân mật (16 giờ 28/11), Lễ Vu Quy (6 giờ 15 29/11), album, xác nhận, quà (chỉ QR cô dâu) | file sheet riêng "Xác nhận tham dự — Nhà gái" |
 | `/tech` | phong cách công nghệ Y2K "Love OS" tông xanh | tab RSVP |
 | `/gr` | Love OS dải gradient chàm `#384b98` → hồng cánh sen `#c1368d`: cùng bố cục `/tech`, máy tính, TV, hộp quà, ghim, tim, nhẫn, sao vẽ lại theo tông này | tab RSVP |
+| `/thu` | **bản thử** (15/11/2026): `/nt` + nút "Gửi quà" mở thẳng app ngân hàng của khách (link VietQR, điền sẵn tài khoản chú rể nếu app hỗ trợ) | tab RSVP (nguồn `thu`) |
 | `/pte`, `/hq2` | tên cũ của `/nt` và `/ng` (đổi ngày 10/11/2026) — chỉ còn trang chuyển tiếp, link cũ đã gửi vẫn mở được | — |
 
 Công cụ tạo link mời riêng từng khách: `/nt/tao-link.html` (nhà trai), `/ng/tao-link.html` (nhà gái),
