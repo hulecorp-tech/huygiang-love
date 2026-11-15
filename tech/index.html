@@ -393,6 +393,13 @@
       .bay{display:none;}
       .js .hd,.js .dau > *{opacity:1;transform:none;}
     }
+  
+    /* TV màn hình rộng ở hàng cuối mục lục */
+    .tv.rong{grid-column:1 / -1;justify-self:center;width:min(86%,400px);margin-top:4px;}
+    .tv.rong img{display:block;width:100%;height:auto;}
+    .tv.rong .tv-man{left:6.2%;top:29.4%;width:72.3%;height:51.5%;border-radius:9% / 14%;}
+    .tv.rong .tv-man span{font-size:clamp(15px,4.8vw,21px);letter-spacing:.02em;}
+    .icon-noi .in4{display:none;}   /* biểu tượng trôi này rơi đúng vào màn hình TV rộng */
   </style>
 </head>
 <body>
@@ -455,9 +462,10 @@
     </div>
     <nav class="tv-luoi" aria-label="Mục lục thiệp">
       <a class="tv" href="#gia-dinh" style="--r:-4deg"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>CÔ DÂU<br>&amp; CHÚ RỂ</span></span></a>
-      <a class="tv" href="#le-cuoi" style="--r:5deg;--y:18px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>LỄ<br>CƯỚI</span></span></a>
-      <a class="tv" href="#album-muc" style="--r:4deg;--y:-6px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>ALBUM<br>ẢNH</span></span></a>
-      <a class="tv" href="#hoi-am" style="--r:-5deg;--y:12px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>GỬI<br>LỜI CHÚC</span></span></a>
+      <a class="tv" href="#tiec-than-mat" style="--r:5deg;--y:18px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>TIỆC<br>THÂN MẬT</span></span></a>
+      <a class="tv" href="#le-cuoi" style="--r:4deg;--y:-6px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>LỄ<br>CƯỚI</span></span></a>
+      <a class="tv" href="#album-muc" style="--r:-5deg;--y:12px"><img src="anh/tv.webp" alt="" width="640" height="632"><span class="tv-man"><span>ALBUM<br>ẢNH</span></span></a>
+      <a class="tv rong" href="#hoi-am" style="--r:-2deg;--y:6px"><img src="anh/tv-rong.webp" alt="" width="900" height="654"><span class="tv-man"><span>GỬI LỜI CHÚC</span></span></a>
     </nav>
     <div class="icon-noi" aria-hidden="true">
       <svg class="in1" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.6L10 19z"/></svg>
