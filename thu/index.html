@@ -549,7 +549,6 @@
       <div class="le-ds">
         <div class="le"><span class="le-gio">07:00</span><span class="le-ten">Lễ Vu Quy</span><span class="le-noi">Tư gia nhà gái</span></div>
         <div class="le"><span class="le-gio">10:30</span><span class="le-ten">Lễ Thành Hôn</span><span class="le-noi">Tư gia nhà trai</span></div>
-        <div class="le"><span class="le-gio">11:00</span><span class="le-ten">Khai tiệc</span><span class="le-noi">Tư gia nhà trai</span></div>
       </div>
     </div>
   </section>
@@ -845,7 +844,7 @@ const TUCUON = (function(){
 
   const p = new URLSearchParams({ action: "TEMPLATE", text: "Đám cưới Ngọc Huy & Hương Giang",
     dates: "20261129T000000Z/20261129T060000Z",
-    details: "07:00 Lễ Vu Quy — tư gia nhà gái, Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội\n10:30 Lễ Thành Hôn — tư gia nhà trai\n11:00 Khai tiệc\nThiệp: " + location.origin + location.pathname,
+    details: "07:00 Lễ Vu Quy — tư gia nhà gái, Đội 9 Hoan Hợp, Xã Hồng Sơn, Hà Nội\n10:30 Lễ Thành Hôn — tư gia nhà trai\nThiệp: " + location.origin + location.pathname,
     location: "Tư gia nhà trai, Thôn An Lập, Xã Thư Vũ, Tỉnh Hưng Yên" });
   $("#themLich").href = "https://calendar.google.com/calendar/render?" + p.toString();
   $$("[data-map]").forEach(a => { a.href = CONFIG.maps[a.dataset.map] || CONFIG.maps.groom; });
