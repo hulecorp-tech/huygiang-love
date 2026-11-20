@@ -536,7 +536,7 @@
     .lich .l-canh.tren{left:-42px;top:-34px;}
     .lich .l-canh.duoi{right:-20px;bottom:-4px;}
     @media (max-width:340px){ .lich .l-canh{width:80px;} .lich .l-canh.tren{left:-40px;top:-28px;} }
-    /* "Vào hồi 6 giờ 15", "Tại: Tư gia nhà gái" — mỗi ý một dòng, viết hoa như thiệp giấy */
+    /* "Vào hồi 7 giờ 15", "Tại: Tư gia nhà gái" — mỗi ý một dòng, viết hoa như thiệp giấy */
     .hoi{margin:18px 0 0;font-size:clamp(14.5px,4vw,15.5px);text-transform:uppercase;letter-spacing:.04em;color:var(--ruou);}
     .hoi b{font-weight:500;font-size:clamp(19.5px,5.6vw,22px);letter-spacing:.02em;color:var(--hong);margin-left:.2em;font-variant-numeric:lining-nums;}
     .hoi + .ngay3{margin-top:16px;}
@@ -687,7 +687,7 @@
     <!-- ============ LỄ VU QUY ============ -->
     <section class="muc hd" aria-labelledby="t-vq">
       <h2 class="tde" id="t-vq">Lễ Vu Quy</h2>
-      <p class="hoi">Vào hồi <b>6 giờ 15</b></p>
+      <p class="hoi">Vào hồi <b>7 giờ 15</b></p>
       <div class="ngay3 ngay-du"><span>Chủ Nhật</span><i></i><b>29.11</b><i></i><span>Năm 2026</span></div>
       <div class="am-loi">(Tức ngày 21 tháng 10 năm Bính Ngọ)</div>
       <p class="tai">Tại: <b>Tư gia nhà gái</b></p>
@@ -777,7 +777,7 @@ const CONFIG = {
   rsvpToken: "hg-nh-2026",
   rsvpEndpoint: "https://script.google.com/macros/s/AKfycbxbbRGstq2okI7BIeNHPQiAe0QhMHffVDaMgeElHhejvIbLt2fqvKPUMSEY2-0qv5aJ9w/exec",
   nhac: "../nhac.mp3",
-  ngayCuoi: "2026-11-29T06:15:00+07:00",         // đếm ngược tới lễ đầu tiên trong ngày
+  ngayCuoi: "2026-11-29T07:15:00+07:00",         // đếm ngược tới lễ đầu tiên trong ngày
   maps: { groom: "https://maps.app.goo.gl/N93YSFWjoCXKSkg68", bride: "https://maps.app.goo.gl/Vmq1eWTFrRa3SVkY9" },
   /* Ảnh cưới cho album (dọc 2:3, WebP ~800x1200), để chung ở thư mục /album/ ở gốc trang cho mọi bản. */
   album: ["../album/cuoi-1.webp", "../album/cuoi-2.webp", "../album/cuoi-3.webp", "../album/cuoi-4.webp", "../album/cuoi-5.webp"]
@@ -944,8 +944,8 @@ const TUCUON = (function(){
   $("#lich").innerHTML = html + "</div>";
 
   const p = new URLSearchParams({ action: "TEMPLATE", text: "Lễ Vu Quy Hương Giang & Ngọc Huy",
-    dates: "20261128T231500Z/20261129T011500Z",
-    details: "16:00 Thứ Bảy 28/11: Bữa cơm thân mật — tư gia nhà gái\n06:15 Chủ Nhật 29/11: Lễ Vu Quy — tư gia nhà gái\nĐội 9, Hoan Hợp, Xã Hồng Sơn, Thành phố Hà Nội\nThiệp: " + location.origin + location.pathname,
+    dates: "20261129T001500Z/20261129T021500Z",
+    details: "16:00 Thứ Bảy 28/11: Bữa cơm thân mật — tư gia nhà gái\n07:15 Chủ Nhật 29/11: Lễ Vu Quy — tư gia nhà gái\nĐội 9, Hoan Hợp, Xã Hồng Sơn, Thành phố Hà Nội\nThiệp: " + location.origin + location.pathname,
     location: "Tư gia nhà gái, Đội 9, Hoan Hợp, Xã Hồng Sơn, Thành phố Hà Nội" });
   $("#themLich").href = "https://calendar.google.com/calendar/render?" + p.toString();
   $$("[data-map]").forEach(a => { a.href = CONFIG.maps[a.dataset.map] || CONFIG.maps.groom; });

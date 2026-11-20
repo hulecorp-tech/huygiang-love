@@ -9,7 +9,7 @@ trữ và công cụ sinh mã QR) nằm ở repo riêng `hulecorp-tech/wedding-i
 |---|---|---|
 | `/` | chuyển thẳng sang `/tech` (giữ tên khách trong link) | — |
 | `/nt` | thiệp **nhà trai**: Love OS tông hồng (cùng bố cục `/tech`, máy tính, TV, hộp quà vẽ lại tông hồng) | tab RSVP của sheet khách mời |
-| `/ng` | thiệp **nhà gái**, kiểu Hàn Quốc hồng: Thân mời + tên khách, bữa cơm thân mật (16 giờ 28/11), Lễ Vu Quy (6 giờ 15 29/11), album, xác nhận, quà (chỉ QR cô dâu) | file sheet riêng "Xác nhận tham dự — Nhà gái" |
+| `/ng` | thiệp **nhà gái**, kiểu Hàn Quốc hồng: Thân mời + tên khách, bữa cơm thân mật (16 giờ 28/11), Lễ Vu Quy (7 giờ 15 29/11), album, xác nhận, quà (chỉ QR cô dâu) | file sheet riêng "Xác nhận tham dự — Nhà gái" |
 | `/ng-chung` | bản **mời chung** của `/ng`: không có tên khách (bỏ qua `?g=` trên link), bìa và lời mời ghi "Trân trọng kính mời" — dùng để gửi chung/đăng nhóm | file sheet riêng "Xác nhận tham dự — Nhà gái" (nguồn `ng-chung`) |
 | `/tech` | phong cách công nghệ Y2K "Love OS" tông xanh | tab RSVP |
 | `/midu` | Love OS dải gradient chàm `#384b98` → hồng cánh sen `#c1368d`: cùng bố cục `/tech`, máy tính, TV, hộp quà, ghim, tim, nhẫn, sao vẽ lại theo tông này | tab RSVP |
